@@ -11,24 +11,9 @@ import lombok.Setter;
 
 import java.util.List;
 
-/***
- * @author Yi
- * @since 1.0
- * @version 1.0
- * @see <a href="https://developers.notion.com/reference/block#heading-three-blocks">Heading Three Block</a>
- */
-@Setter(AccessLevel.PRIVATE)
-@Getter
+
 public class HeadingThreeBlock extends AbstractHeadingBlock {
     private final BlockTypeEnum type = BlockTypeEnum.HEADING_3;
-    @JsonProperty("heading_3")
-    private Heading heading;
-
-    private HeadingThreeBlock() {}
-
-    private HeadingThreeBlock(List<AbstractRichText> text, ColorEnum color, Boolean isToggleable) {
-        super(text, color, isToggleable);
-    }
 
     public static class Builder extends TextColorBuilder<Builder, HeadingThreeBlock> {
         private Boolean isToggleable;
@@ -43,8 +28,25 @@ public class HeadingThreeBlock extends AbstractHeadingBlock {
         }
     }
 
-    public Heading getHeading() {
+
+    private HeadingThreeBlock() {}
+
+    private HeadingThreeBlock(List<AbstractRichText> text, ColorEnum color, Boolean isToggleable) {
+        super(text, color, isToggleable);
+    }
+
+    @Override
+    @JsonProperty("heading_3")
+    protected Heading getHeading() {
         return super.heading;
     }
 
+    @Override
+    protected void setHeading(Heading heading) {
+        super.heading = heading;
+    }
+
+    public BlockTypeEnum getType() {
+        return type;
+    }
 }

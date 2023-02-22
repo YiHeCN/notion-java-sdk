@@ -9,24 +9,9 @@ import lombok.*;
 
 import java.util.List;
 
-/***
- * @author Yi
- * @since 1.0
- * @version 1.0
- * @see <a href="https://developers.notion.com/reference/block#heading-two-blocks">Heading Two Block</a>
- */
-@Setter(AccessLevel.PRIVATE)
-@Getter
+
 public class HeadingTwoBlock extends AbstractHeadingBlock {
     private final BlockTypeEnum type = BlockTypeEnum.HEADING_2;
-    @JsonProperty("heading_2")
-    private Heading heading;
-
-    private HeadingTwoBlock() {}
-
-    private HeadingTwoBlock(List<AbstractRichText> text, ColorEnum color, Boolean isToggleable) {
-        super(text, color, isToggleable);
-    }
 
     public static class Builder extends TextColorBuilder<Builder, HeadingTwoBlock> {
         private Boolean isToggleable;
@@ -41,7 +26,24 @@ public class HeadingTwoBlock extends AbstractHeadingBlock {
         }
     }
 
-    public Heading getHeading() {
+    private HeadingTwoBlock() {}
+
+    private HeadingTwoBlock(List<AbstractRichText> text, ColorEnum color, Boolean isToggleable) {
+        super(text, color, isToggleable);
+    }
+
+    @Override
+    @JsonProperty("heading_2")
+    protected Heading getHeading() {
         return super.heading;
+    }
+
+    @Override
+    protected void setHeading(Heading heading) {
+        super.heading = heading;
+    }
+
+    public BlockTypeEnum getType() {
+        return type;
     }
 }

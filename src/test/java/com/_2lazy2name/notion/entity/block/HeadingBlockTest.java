@@ -20,7 +20,7 @@ class HeadingBlockTest extends NotionTest {
 
     private static HeadingOneBlock createHeadingOneBlock() {
         return new HeadingOneBlock.Builder()
-                .text("Test Heading 1")
+                .richText("Test Heading 1")
                 .randomColor()
                 .build();
     }
@@ -34,7 +34,7 @@ class HeadingBlockTest extends NotionTest {
     @Test @SneakyThrows
     public void testCreateHeading2() {
         AbstractHeadingBlock headingTwoBlock = new HeadingTwoBlock.Builder()
-                .text("Heading 2")
+                .richText("Heading 2")
                 .randomColorBackground()
                 .build();
         PaginationResult<AbstractBlock> result =  notion.appendBlockChild(testPageId, headingTwoBlock);
@@ -44,7 +44,7 @@ class HeadingBlockTest extends NotionTest {
     @Test @SneakyThrows
     public void testCreateHeading3() {
         AbstractHeadingBlock headingThreeBlock = new HeadingTwoBlock.Builder()
-                .text("Heading 3")
+                .richText("Heading 3")
                 .randomColor()
                 .build();
         PaginationResult<AbstractBlock> result =  notion.appendBlockChild(testPageId, headingThreeBlock);
@@ -53,7 +53,7 @@ class HeadingBlockTest extends NotionTest {
 
     @Test @SneakyThrows
     public void testArchivedBlock() {
-        HeadingOneBlock headingOneBlock = new HeadingOneBlock.Builder().text("Heading 1").build();
+        HeadingOneBlock headingOneBlock = new HeadingOneBlock.Builder().richText("Heading 1").build();
         PaginationResult<AbstractBlock> result =  notion.appendBlockChild(testPageId, headingOneBlock);
         Thread.sleep(SLEEP_TIME);
         notion.updateBlock(result.getResults().get(0).getId(), true);
@@ -66,7 +66,7 @@ class HeadingBlockTest extends NotionTest {
         Thread.sleep(SLEEP_TIME);
         String blockId = result.getResults().get(0).getId();
         headingOneBlock = (HeadingOneBlock) result.getResults().get(0);
-        headingOneBlock.updateText("Heading 1 updated");
+        headingOneBlock.setRichText("Heading 1 updated");
         notion.updateBlock(blockId, headingOneBlock);
     }
 
@@ -77,7 +77,7 @@ class HeadingBlockTest extends NotionTest {
         Thread.sleep(SLEEP_TIME);
         String blockId = result.getResults().get(0).getId();
         headingOneBlock = (HeadingOneBlock) result.getResults().get(0);
-        headingOneBlock.updateColor(ColorEnum.RED_BACKGROUND);
+        headingOneBlock.setColor(ColorEnum.RED_BACKGROUND);
         notion.updateBlock(blockId, headingOneBlock);
     }
 
@@ -85,7 +85,7 @@ class HeadingBlockTest extends NotionTest {
     public void testCreateToggleableHeading() {
         HeadingOneBlock headingOneBlock = new HeadingOneBlock.Builder()
                 .isToggleable(true)
-                .text("Heading 1")
+                .richText("Heading 1")
                 .build();
         PaginationResult<AbstractBlock> result = notion.appendBlockChild(testPageId, headingOneBlock);
         createdBlock.add(result.getResults().get(0).getId());

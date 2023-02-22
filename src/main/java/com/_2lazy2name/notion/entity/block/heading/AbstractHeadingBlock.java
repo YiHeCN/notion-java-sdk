@@ -3,13 +3,8 @@ package com._2lazy2name.notion.entity.block.heading;
 import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.ToString;
 
 import java.util.List;
@@ -21,12 +16,8 @@ import java.util.List;
         @JsonSubTypes.Type(value = HeadingTwoBlock.class, name = "heading_2"),
         @JsonSubTypes.Type(value = HeadingThreeBlock.class, name = "heading_3")
 })
-@Setter(AccessLevel.PRIVATE)
-@Getter
-@ToString
 public abstract class AbstractHeadingBlock extends AbstractBlock {
     protected List<AbstractBlock> children;
-    @JsonProperty(namespace = "heading_1")
     protected Heading heading;
 
     protected AbstractHeadingBlock() {}
@@ -35,22 +26,57 @@ public abstract class AbstractHeadingBlock extends AbstractBlock {
         this.heading = new Heading(text, color, isToggleable);
     }
 
-
-    public List<AbstractRichText> updateText(List<AbstractRichText> text) {
-        List<AbstractRichText> oldText = this.heading.getRichText();
-        this.heading.setRichText(text);
-        return oldText;
+    public List<AbstractBlock> getChildren() {
+        return children;
     }
 
-    public List<AbstractRichText> updateText(String text) {
-        List<AbstractRichText> oldText = this.heading.getRichText();
-        this.heading.setRichText(List.of(AbstractRichText.buildPlainText(text)));
-        return oldText;
+    private AbstractHeadingBlock setChildren(List<AbstractBlock> children) {
+        this.children = children;
+        return this;
     }
 
-    public ColorEnum updateColor(ColorEnum color) {
-        ColorEnum oldColor = this.heading.getColor();
-        this.heading.setColor(color);
-        return oldColor;
+    @JsonIgnore
+    public List<AbstractRichText> getText() {
+        return heading.getRichText();
+    }
+
+    public AbstractHeadingBlock setRichText(List<AbstractRichText> text) {
+        heading.setRichText(text);
+        return this;
+    }
+    public AbstractHeadingBlock setRichText(AbstractRichText text) {
+        heading.setRichText(List.of(text));
+        return this;
+    }
+    public AbstractHeadingBlock setRichText(String text) {
+        heading.setRichText(List.of(AbstractRichText.buildPlainText(text)));
+        return this;
+    }
+
+    @JsonIgnore
+    public ColorEnum getColor() {
+        return heading.getColor();
+    }
+
+    public AbstractHeadingBlock setColor(ColorEnum color) {
+        heading.setColor(color);
+        return this;
+    }
+
+    @JsonIgnore
+    public Boolean isToggleable() {
+        return heading.getToggleable();
+    }
+
+    public AbstractHeadingBlock setToggleable(Boolean toggleable) {
+        heading.setToggleable(toggleable);
+        return this;
+    }
+
+    protected Heading getHeading() {
+        return this.heading;
+    }
+    protected void setHeading(Heading heading) {
+        this.heading = heading;
     }
 }
