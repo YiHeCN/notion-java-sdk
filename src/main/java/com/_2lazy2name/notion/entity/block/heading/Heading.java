@@ -2,28 +2,50 @@ package com._2lazy2name.notion.entity.block.heading;
 
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@Setter(AccessLevel.MODULE)
-@Getter
-@ToString
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class Heading {
     private List<AbstractRichText> richText;
     private ColorEnum color;
     private Boolean isToggleable;
 
-    public Heading(List<AbstractRichText> richText, ColorEnum color, Boolean isToggleable) {
+    Heading(List<AbstractRichText> richText, ColorEnum color, Boolean isToggleable) {
         this.richText = richText;
         this.color = color;
         this.isToggleable = isToggleable;
     }
 
-    private Heading() {}
+    Heading() {}
+
+    List<AbstractRichText> getRichText() {
+        return richText;
+    }
+
+    Heading setRichText(List<AbstractRichText> richText) {
+        this.richText = richText;
+        return this;
+    }
+
+    ColorEnum getColor() {
+        return color;
+    }
+
+    Heading setColor(ColorEnum color) {
+        this.color = color;
+        return this;
+    }
+
+    Boolean getToggleable() {
+        return isToggleable;
+    }
+
+    Heading setToggleable(Boolean toggleable) {
+        isToggleable = toggleable;
+        return this;
+    }
 }

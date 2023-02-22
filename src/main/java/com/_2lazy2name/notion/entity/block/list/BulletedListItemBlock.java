@@ -5,29 +5,112 @@ import com._2lazy2name.notion.entity.block.builder.impl.TextColorBuilder;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
-@Getter @Setter @ToString
 public class BulletedListItemBlock extends AbstractBlock {
     private final static BlockTypeEnum type = BlockTypeEnum.BULLETED_LIST_ITEM;
-    private List<AbstractRichText> richText;
-    private ColorEnum color;
-    private List<AbstractBlock> children;
-
-    private BulletedListItemBlock() {}
-
-    public BulletedListItemBlock(List<AbstractRichText> richText, ColorEnum color) {
-        this.richText = richText;
-        this.color = color;
-    }
+    private BulletedListItem bulletedListItem;
 
     public static class Builder extends TextColorBuilder<Builder, BulletedListItemBlock> {
         public BulletedListItemBlock build() {
             return new BulletedListItemBlock(richText, color);
         }
+    }
+
+    @JsonIgnore
+    public List<AbstractRichText> getRichText() {
+        return this.bulletedListItem.richText;
+    }
+
+    public BulletedListItemBlock setRichText(List<AbstractRichText> richText) {
+        this.bulletedListItem.richText = richText;
+        return this;
+    }
+    public BulletedListItemBlock setRichText(AbstractRichText richText) {
+        this.bulletedListItem.richText = List.of(richText);
+        return this;
+    }
+    public BulletedListItemBlock setRichText(String text) {
+        this.bulletedListItem.richText = List.of(AbstractRichText.buildPlainText(text));
+        return this;
+    }
+
+    @JsonIgnore
+    public ColorEnum getColor() {
+        return this.bulletedListItem.color;
+    }
+
+    public BulletedListItemBlock setColor(ColorEnum color) {
+        this.bulletedListItem.color = color;
+        return this;
+    }
+
+    @JsonIgnore
+    public List<AbstractBlock> getChildren() {
+        return this.bulletedListItem.children;
+    }
+
+    private BulletedListItemBlock setChildren(List<AbstractBlock> children) {
+        this.bulletedListItem.children = children;
+        return this;
+    }
+
+    public BlockTypeEnum getType() {
+        return type;
+    }
+
+
+    private BulletedListItemBlock() {}
+
+    private BulletedListItemBlock(List<AbstractRichText> richText, ColorEnum color) {
+        this.bulletedListItem = new BulletedListItem();
+        this.bulletedListItem.richText = richText;
+        this.bulletedListItem.color = color;
+    }
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private static class BulletedListItem {
+        private List<AbstractRichText> richText;
+        private ColorEnum color;
+        private List<AbstractBlock> children;
+
+        private List<AbstractRichText> getRichText() {
+            return richText;
+        }
+
+        private BulletedListItem setRichText(List<AbstractRichText> richText) {
+            this.richText = richText;
+            return this;
+        }
+
+        private ColorEnum getColor() {
+            return color;
+        }
+
+        private BulletedListItem setColor(ColorEnum color) {
+            this.color = color;
+            return this;
+        }
+
+        private List<AbstractBlock> getChildren() {
+            return children;
+        }
+
+        private BulletedListItem setChildren(List<AbstractBlock> children) {
+            this.children = children;
+            return this;
+        }
+    }
+
+    private BulletedListItem getBulletedListItem() {
+        return bulletedListItem;
+    }
+
+    private BulletedListItemBlock setBulletedListItem(BulletedListItem bulletedListItem) {
+        this.bulletedListItem = bulletedListItem;
+        return this;
     }
 }

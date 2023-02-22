@@ -15,14 +15,14 @@ public abstract class TextBuilder<S extends TextBuilder<S, T>, T>
     }
 
     @Override
-    public S text(String text) {
-        this.richText = List.of(AbstractRichText.buildPlainText(text));
+    public S richText(String richText) {
+        this.richText = List.of(AbstractRichText.buildPlainText(richText));
         return self();
     }
 
     @Override
-    public S text(List<AbstractRichText> text) {
-        this.richText = text;
+    public S richText(List<AbstractRichText> richText) {
+        this.richText = richText;
         return self();
     }
 
