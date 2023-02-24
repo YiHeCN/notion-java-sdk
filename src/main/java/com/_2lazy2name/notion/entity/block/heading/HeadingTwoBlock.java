@@ -9,7 +9,12 @@ import lombok.*;
 
 import java.util.List;
 
-
+/**
+ * @author Yi
+ * @since 1.0
+ * @version 1.0
+ * @see <a href="https://developers.notion.com/reference/block#heading-two-blocks">Heading Two Block</a>
+ */
 public class HeadingTwoBlock extends AbstractHeadingBlock {
     private final BlockTypeEnum type = BlockTypeEnum.HEADING_2;
 

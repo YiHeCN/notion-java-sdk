@@ -8,6 +8,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
+/**
+ * @author Yi
+ * @since 1.0
+ * @version 1.0
+ * @see <a href="https://developers.notion.com/reference/block#heading-one-blocks">Heading One Block</a>
+ */
 public class HeadingOneBlock extends AbstractHeadingBlock {
     private final BlockTypeEnum type = BlockTypeEnum.HEADING_1;
 

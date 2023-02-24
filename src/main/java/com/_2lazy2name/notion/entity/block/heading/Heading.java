@@ -7,6 +7,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
+/**
+ * @author Chole
+ * @since 1.0
+ * @version 1.0
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 class Heading {

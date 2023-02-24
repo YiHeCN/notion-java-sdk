@@ -9,6 +9,11 @@ import lombok.ToString;
 
 import java.util.List;
 
+/**
+ * @author Chole
+ * @since 1.0
+ * @version 1.0
+ */
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", include = JsonTypeInfo.As.EXISTING_PROPERTY)
 @JsonSubTypes({

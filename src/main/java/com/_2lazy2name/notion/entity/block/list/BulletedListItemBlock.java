@@ -5,11 +5,19 @@ import com._2lazy2name.notion.entity.block.builder.impl.TextColorBuilder;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
+/**
+ * @author Chole
+ * @since 1.0
+ * @version 1.0
+ * @see <a href="https://developers.notion.com/reference/block#bulleted-list-item-blocks">Bulleted List Item Block</a>
+ */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class BulletedListItemBlock extends AbstractBlock {
     private final static BlockTypeEnum type = BlockTypeEnum.BULLETED_LIST_ITEM;
     private BulletedListItem bulletedListItem;
@@ -72,6 +80,7 @@ public class BulletedListItemBlock extends AbstractBlock {
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
     private static class BulletedListItem {
         private List<AbstractRichText> richText;
         private ColorEnum color;
