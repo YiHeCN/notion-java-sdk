@@ -35,8 +35,7 @@ public enum BlockTypeEnum {
     COLUMN_LIST("column_list"),
     LINK_PREVIEW("link_preview"),
     LINK_TO_PAGE("link_to_page"),
-    TABLE_ROW("table_row"),
-    TABLE_CELL("table_cell");
+    TABLE_ROW("table_row");
 
     final String type;
 

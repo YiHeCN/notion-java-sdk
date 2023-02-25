@@ -8,7 +8,6 @@ import com._2lazy2name.notion.entity.block.list.BulletedListItemBlock;
 import com._2lazy2name.notion.entity.block.list.NumberedListItemBlock;
 import com._2lazy2name.notion.entity.block.list.ToDoBlock;
 import com._2lazy2name.notion.entity.block.table.TableBlock;
-import com._2lazy2name.notion.entity.block.table.TableCell;
 import com._2lazy2name.notion.entity.block.table.TableRow;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
@@ -34,7 +33,6 @@ import java.util.Date;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = TableRow.class, name = "table_row"),
-        @JsonSubTypes.Type(value = TableCell.class, name = "table_cell"),
         @JsonSubTypes.Type(value = HeadingOneBlock.class, name = "heading_1"),
         @JsonSubTypes.Type(value = HeadingTwoBlock.class, name = "heading_2"),
         @JsonSubTypes.Type(value = HeadingThreeBlock.class, name = "heading_3"),

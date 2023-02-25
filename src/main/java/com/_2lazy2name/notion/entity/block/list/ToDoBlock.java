@@ -5,11 +5,19 @@ import com._2lazy2name.notion.entity.block.builder.impl.TextColorBuilder;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
+/**
+ * @author Chole
+ * @since 1.0
+ * @version 1.0
+ * @see <a href="https://developers.notion.com/reference/block#to-do-blocks">To Do Block</a>
+ */
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ToDoBlock extends AbstractBlock {
     private final static BlockTypeEnum type = BlockTypeEnum.TO_DO;
     private ToDo toDo;
@@ -84,6 +92,7 @@ public class ToDoBlock extends AbstractBlock {
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
     private static class ToDo {
         private List<AbstractRichText> richText;
         private ColorEnum color;

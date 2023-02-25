@@ -337,10 +337,9 @@ public class Notion {
      */
     @SneakyThrows
     public AbstractBlock updateBlock(String blockId, AbstractBlock block, Boolean archived) {
-        if (block != null) {
-            block.clearUnmodifiableInfo();
-        }
-        String updateBlockUrl = API_URL + "blocks/" + blockId;
+        checkUpdateBlockParam(blockId, block, archived);
+        block.clearUnmodifiableInfo();
+        String updateBlockUrl = API_URL + "blocks/" + (blockId == null ? block.getId() : blockId);
         UpdateBlockBodyParam bodyParams = new UpdateBlockBodyParam();
         bodyParams.setBlock(block).setArchived(archived);
         String body = objectMapper.writeValueAsString(bodyParams);
@@ -352,6 +351,19 @@ public class Notion {
     }
     public AbstractBlock updateBlock(String blockId, AbstractBlock block) {
         return updateBlock(blockId, block, null);
+    }
+    public AbstractBlock updateBlock(AbstractBlock block) {
+        return updateBlock(null, block, null);
+    }
+    private static void checkUpdateBlockParam(String blockId, AbstractBlock block, Boolean archived) {
+        if (block == null && archived == null) {
+            throw new IllegalArgumentException("block and archived cannot be null at the same time");
+        }
+        if (blockId == null) {
+            if (block == null || block.getId() == null) {
+                throw new IllegalArgumentException("blockId and block.id cannot be null at the same time");
+            }
+        }
     }
 
     /**
@@ -406,8 +418,17 @@ public class Notion {
      */
     @SneakyThrows
     public AbstractBlock deleteBlock(String blockId) {
+        if (blockId == null || blockId.isEmpty()) {
+            throw new IllegalArgumentException("blockId cannot be null or empty");
+        }
         String deleteBlockUrl = API_URL + "blocks/" + blockId;
         return objectMapper.readValue(httpUtil.delete(deleteBlockUrl).getBody(), AbstractBlock.class);
+    }
+    public AbstractBlock deleteBlock(AbstractBlock block) {
+        if (block == null) {
+            throw new IllegalArgumentException("block cannot be null");
+        }
+        return deleteBlock(block.getId());
     }
 
     /**
