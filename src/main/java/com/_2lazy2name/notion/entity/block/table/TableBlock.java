@@ -126,7 +126,9 @@ public class TableBlock extends AbstractBlock {
         return type;
     }
 
-    private TableBlock() {}
+    private TableBlock() {
+        this.table = new Table();
+    }
 
     private TableBlock(Integer tableWidth, Boolean hasColumnHeader, Boolean hasRowHeader, List<TableRow> children) {
         this.table = new Table();

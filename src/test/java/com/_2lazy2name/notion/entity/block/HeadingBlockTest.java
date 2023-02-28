@@ -15,8 +15,6 @@ import java.util.ArrayList;
 
 class HeadingBlockTest extends NotionTest {
     private final String testPageId = "bb5580f5ecfc4a379110a0455a7010d3";
-    private static final ArrayList<String> createdBlock = new ArrayList<>();
-    private final static int SLEEP_TIME = 1000;
 
     private static HeadingOneBlock createHeadingOneBlock() {
         return new HeadingOneBlock.Builder()
@@ -57,6 +55,7 @@ class HeadingBlockTest extends NotionTest {
         PaginationResult<AbstractBlock> result =  notion.appendBlockChild(testPageId, headingOneBlock);
         Thread.sleep(SLEEP_TIME);
         notion.updateBlock(result.getResults().get(0).getId(), true);
+        createdBlock.add(result.getResults().get(0).getId());
     }
 
     @Test @SneakyThrows
@@ -68,6 +67,7 @@ class HeadingBlockTest extends NotionTest {
         headingOneBlock = (HeadingOneBlock) result.getResults().get(0);
         headingOneBlock.setRichText("Heading 1 updated");
         notion.updateBlock(blockId, headingOneBlock);
+        createdBlock.add(blockId);
     }
 
     @Test @SneakyThrows
@@ -79,6 +79,7 @@ class HeadingBlockTest extends NotionTest {
         headingOneBlock = (HeadingOneBlock) result.getResults().get(0);
         headingOneBlock.setColor(ColorEnum.RED_BACKGROUND);
         notion.updateBlock(blockId, headingOneBlock);
+        createdBlock.add(blockId);
     }
 
     @Test @SneakyThrows
@@ -92,10 +93,6 @@ class HeadingBlockTest extends NotionTest {
     }
 
 
-    @AfterAll @SneakyThrows
-    public static void deleteAll() {
-        createdBlock.forEach(notion::deleteBlock);
-    }
 
 
 }

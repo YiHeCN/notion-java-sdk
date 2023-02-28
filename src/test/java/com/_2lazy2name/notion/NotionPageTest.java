@@ -21,7 +21,6 @@ class NotionPageTest extends NotionTest {
 
     }
 
-
     @Test @SneakyThrows
     public void createPageWithPageParent() {
         PageParent parent = AbstractParent.buildPageParent(pageId);

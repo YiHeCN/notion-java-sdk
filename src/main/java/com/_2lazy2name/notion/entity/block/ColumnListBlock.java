@@ -1,56 +1,91 @@
 package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-@Getter @Setter @ToString
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ColumnListBlock extends AbstractBlock {
-    private static final BlockTypeEnum type = BlockTypeEnum.COLUMN_LIST;
-    private List<Column> column;
+    public static final BlockTypeEnum type = BlockTypeEnum.COLUMN_LIST;
 
-    @Getter @Setter @ToString
-    private static class Column extends AbstractBlock {
-        private static final BlockTypeEnum type = BlockTypeEnum.COLUMN;
-        private List<AbstractBlock> children;
+    private ColumnList columnList;
+
+    public static ColumnListBlock ofColumns(ColumnBlock... columns) {
+        ColumnListBlock columnListBlock = new ColumnListBlock();
+        columnListBlock.columnList = new ColumnList();
+        columnListBlock.columnList.children = new ArrayList<>();
+        Collections.addAll(columnListBlock.columnList.children, columns);
+        return columnListBlock;
+    }
+
+    public static ColumnListBlock ofColumns(List<ColumnBlock> columns) {
+        ColumnListBlock columnListBlock = new ColumnListBlock();
+        columnListBlock.columnList = new ColumnList();
+        columnListBlock.columnList.children = columns;
+        return columnListBlock;
+    }
+
+    @JsonIgnore
+    public List<ColumnBlock> getColumns() {
+        return columnList.children;
+    }
+
+    public ColumnListBlock setColumns(List<ColumnBlock> columns) {
+        if (this.columnList == null) {
+            this.columnList = new ColumnList();
+        }
+        this.columnList.children = columns;
+        return this;
+    }
+    public ColumnListBlock appendColumns(ColumnBlock... columns) {
+        if (this.columnList == null) {
+            this.columnList = new ColumnList();
+        }
+        if (this.columnList.children == null) {
+            this.columnList.children = new ArrayList<>();
+        }
+        Collections.addAll(this.columnList.children, columns);
+        return this;
+    }
+    public ColumnListBlock appendColumn(ColumnBlock column) {
+        return appendColumns(column);
+    }
+
+
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+    private static class ColumnList {
+        private List<ColumnBlock> children;
+
+        private List<ColumnBlock> getChildren() {
+            return children;
+        }
+
+        private ColumnList setChildren(List<ColumnBlock> children) {
+            this.children = children;
+            return this;
+        }
+    }
+
+    @Override
+    public BlockTypeEnum getType() {
+        return type;
     }
 
     private ColumnListBlock() {}
 
-    private ColumnListBlock(List<Column> column) {
-        this.column = column;
+    @JsonProperty("column_list")
+    private ColumnList getColumnList() {
+        return columnList;
     }
 
-    public static ColumnListBlock ofColumns(List<Column> column) {
-        return new ColumnListBlock(column);
-    }
-
-    public static ColumnListBlock ofColumn(Column column) {
-        return new ColumnListBlock(List.of(column));
-    }
-
-    public static ColumnListBlock ofColumns(Column... column) {
-        return new ColumnListBlock(List.of(column));
-    }
-
-    public static Column ofChildren(List<AbstractBlock> children) {
-        Column column = new Column();
-        column.setChildren(children);
-        return column;
-    }
-
-    public static Column ofChild(AbstractBlock child) {
-        Column column = new Column();
-        column.setChildren(List.of(child));
-        return column;
-    }
-
-    public static Column ofChildren(AbstractBlock... children) {
-        Column column = new Column();
-        column.setChildren(List.of(children));
-        return column;
+    private ColumnListBlock setColumnList(ColumnList columnList) {
+        this.columnList = columnList;
+        return this;
     }
 }

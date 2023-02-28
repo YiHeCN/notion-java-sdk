@@ -15,9 +15,6 @@ import java.util.Objects;
 
 public class TableTest extends NotionTest {
     private final String testPageId = "c168dafdb15d446cbd73e95a1ad5b9c7";
-    private static final ArrayList<String> createdBlock = new ArrayList<>();
-    private final static int SLEEP_TIME = 1000;
-
 
     @Test @SneakyThrows
     public void testCreateTableBlock() {
@@ -102,12 +99,5 @@ public class TableTest extends NotionTest {
         TableRow rowCreated = (TableRow) notion.retrieveBlockChildren(id).getResults().get(0);
         notion.deleteBlock(rowCreated);
         createdBlock.add(id);
-    }
-
-    @AfterAll
-    @SneakyThrows
-    public static void deleteAll() {
-        Thread.sleep(SLEEP_TIME);
-        createdBlock.stream().filter(Objects::nonNull).forEach(notion::deleteBlock);
     }
 }

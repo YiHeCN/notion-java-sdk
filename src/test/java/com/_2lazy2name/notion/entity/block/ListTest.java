@@ -18,7 +18,6 @@ class ListTest extends NotionTest {
     private final String numberedListPageID = "43815111d5814b0f819cc4c37500bffc";
     private final String toDoBlockPageID = "5f0de5fca9644b1780b4d2800789acd5";
 
-    private static final ArrayList<String> createdBlock = new ArrayList<>();
     private final static int SLEEP_TIME = 1000;
 
 

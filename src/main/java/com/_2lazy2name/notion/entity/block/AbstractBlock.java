@@ -1,6 +1,10 @@
 package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.entity.User;
+import com._2lazy2name.notion.entity.block.fileRelated.FileBlock;
+import com._2lazy2name.notion.entity.block.fileRelated.ImageBlock;
+import com._2lazy2name.notion.entity.block.fileRelated.PdfBlock;
+import com._2lazy2name.notion.entity.block.fileRelated.VideoBlock;
 import com._2lazy2name.notion.entity.block.heading.HeadingOneBlock;
 import com._2lazy2name.notion.entity.block.heading.HeadingThreeBlock;
 import com._2lazy2name.notion.entity.block.heading.HeadingTwoBlock;
@@ -12,12 +16,7 @@ import com._2lazy2name.notion.entity.block.table.TableRow;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.*;
 
 import java.util.Date;
 
@@ -28,7 +27,7 @@ import java.util.Date;
  * @since 1.0.0
  * @see <a href="https://developers.notion.com/reference/block">Block object</a>
  */
-@Getter @Setter @ToString
+
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", include = JsonTypeInfo.As.EXISTING_PROPERTY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSubTypes({
@@ -45,6 +44,7 @@ import java.util.Date;
         @JsonSubTypes.Type(value = ChildPageBlock.class, name = "child_page"),
         @JsonSubTypes.Type(value = CodeBlock.class, name = "code"),
         @JsonSubTypes.Type(value = ColumnListBlock.class, name = "column_list"),
+        @JsonSubTypes.Type(value = ColumnBlock.class, name = "column"),
         @JsonSubTypes.Type(value = DividerBlock.class, name = "divider"),
         @JsonSubTypes.Type(value = EquationBlock.class, name = "equation"),
         @JsonSubTypes.Type(value = FileBlock.class, name = "file"),
@@ -60,6 +60,7 @@ import java.util.Date;
         @JsonSubTypes.Type(value = TemplateBlock.class, name = "template"),
         @JsonSubTypes.Type(value = ToggleBlock.class, name = "toggle"),
         @JsonSubTypes.Type(value = VideoBlock.class, name = "video"),
+        @JsonSubTypes.Type(value = EmbedBlock.class, name = "embed"),
 })
 public abstract class AbstractBlock {
     private final ObjectEnum object = ObjectEnum.BLOCK;
@@ -73,12 +74,99 @@ public abstract class AbstractBlock {
     private Boolean archived;
     private Boolean hasChildren;
 
-    public void clearUnmodifiableInfo() {
-        this.createdTime = null;
-        this.createdBy = null;
-        this.lastEditedTime = null;
-        this.lastEditedBy = null;
-        this.hasChildren = null;
+    public static void clearUnmodifiableInfo(AbstractBlock block) {
+        if (block == null) return;
+        block.createdTime = null;
+        block.createdBy = null;
+        block.lastEditedTime = null;
+        block.lastEditedBy = null;
+        block.hasChildren = null;
+    }
+
+    @JsonIgnore
+    public ObjectEnum getObject() {
+        return object;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public AbstractBlock setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public AbstractParent getParent() {
+        return parent;
+    }
+
+    public AbstractBlock setParent(AbstractParent parent) {
+        this.parent = parent;
+        return this;
+    }
+
+    public BlockTypeEnum getType() {
+        return type;
+    }
+
+    public AbstractBlock setType(BlockTypeEnum type) {
+        this.type = type;
+        return this;
+    }
+
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public AbstractBlock setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public AbstractBlock setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public Date getLastEditedTime() {
+        return lastEditedTime;
+    }
+
+    public AbstractBlock setLastEditedTime(Date lastEditedTime) {
+        this.lastEditedTime = lastEditedTime;
+        return this;
+    }
+
+    public User getLastEditedBy() {
+        return lastEditedBy;
+    }
+
+    public AbstractBlock setLastEditedBy(User lastEditedBy) {
+        this.lastEditedBy = lastEditedBy;
+        return this;
+    }
+
+    public Boolean getArchived() {
+        return archived;
+    }
+
+    public AbstractBlock setArchived(Boolean archived) {
+        this.archived = archived;
+        return this;
+    }
+
+    public Boolean getHasChildren() {
+        return hasChildren;
+    }
+
+    public AbstractBlock setHasChildren(Boolean hasChildren) {
+        this.hasChildren = hasChildren;
+        return this;
     }
 }
     

@@ -16,7 +16,7 @@ import java.util.List;
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class TableRow extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.TABLE_ROW;
-    private final Row tableRow = new Row();
+    private final Row tableRow;
 
     public TableRow addCell(List<AbstractRichText> cell) {
         this.tableRow.cells.add(cell);
@@ -53,10 +53,12 @@ public class TableRow extends AbstractBlock {
 
 
     public TableRow() {
+        this.tableRow = new Row();
         this.tableRow.cells = new ArrayList<>();
     }
 
     public TableRow(List<List<AbstractRichText>> cells) {
+        this.tableRow = new Row();
         this.tableRow.cells = cells;
     }
 

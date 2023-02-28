@@ -20,9 +20,14 @@ public class ExternalFile extends AbstractFile {
     private ExternalFile() {
     }
 
+    public ExternalFile(String url) {
+        this.external = new External();
+        this.external.url = url;
+    }
+
     public ExternalFile(String name, String url) {
         this.name = name;
         this.external = new External();
-        this.external.setUrl(url);
+        this.external.url = url;
     }
 }

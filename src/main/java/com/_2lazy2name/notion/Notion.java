@@ -338,7 +338,7 @@ public class Notion {
     @SneakyThrows
     public AbstractBlock updateBlock(String blockId, AbstractBlock block, Boolean archived) {
         checkUpdateBlockParam(blockId, block, archived);
-        block.clearUnmodifiableInfo();
+        AbstractBlock.clearUnmodifiableInfo(block);
         String updateBlockUrl = API_URL + "blocks/" + (blockId == null ? block.getId() : blockId);
         UpdateBlockBodyParam bodyParams = new UpdateBlockBodyParam();
         bodyParams.setBlock(block).setArchived(archived);
@@ -375,8 +375,7 @@ public class Notion {
      * @see <a href="https://developers.notion.com/reference/get-block-children">Retrieve block children</a>
      */
     @SneakyThrows
-    public PaginationResult<AbstractBlock> retrieveBlockChildren(String blockId, int pageSize,
-                                                                 String startCursor) {
+    public PaginationResult<AbstractBlock> retrieveBlockChildren(String blockId, int pageSize, String startCursor) {
         String retrieveBlockChildrenUrl = API_URL + "blocks/" + blockId + "/children";
         PaginationParam queryParams = new PaginationParam();
         queryParams.setPageSize(pageSize).setStartCursor(startCursor);
