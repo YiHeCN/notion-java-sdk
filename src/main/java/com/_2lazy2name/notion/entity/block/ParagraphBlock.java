@@ -5,6 +5,7 @@ import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -22,7 +23,7 @@ public class ParagraphBlock extends AbstractBlock {
     private final BlockTypeEnum type = BlockTypeEnum.PARAGRAPH;
     private Paragraph paragraph;
 
-    private static class Builder extends TextColorBuilder<Builder, ParagraphBlock> {
+    public static class Builder extends TextColorBuilder<Builder, ParagraphBlock> {
         private List<AbstractBlock> children;
 
         public Builder children(List<AbstractBlock> children) {
@@ -33,6 +34,42 @@ public class ParagraphBlock extends AbstractBlock {
         public ParagraphBlock build() {
             return new ParagraphBlock(richText, color, children);
         }
+    }
+
+    @JsonIgnore
+    public List<AbstractRichText> getRichText() {
+        return paragraph.getRichText();
+    }
+
+    public ParagraphBlock setRichText(List<AbstractRichText> richText) {
+        this.paragraph.setRichText(richText);
+        return this;
+    }
+    public ParagraphBlock setRichText(AbstractRichText richText) {
+        return setRichText(List.of(richText));
+    }
+    public ParagraphBlock setRichText(String richText) {
+        return setRichText(List.of(AbstractRichText.buildPlainText(richText)));
+    }
+
+    @JsonIgnore
+    public ColorEnum getColor() {
+        return paragraph.color;
+    }
+
+    public ParagraphBlock setColor(ColorEnum color) {
+        this.paragraph.color = color;
+        return this;
+    }
+
+    @JsonIgnore
+    public List<AbstractBlock> getChildren() {
+        return paragraph.children;
+    }
+
+    private List<AbstractBlock> setChildren(List<AbstractBlock> children) {
+        paragraph.children = children;
+        return children;
     }
 
     @Override
