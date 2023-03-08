@@ -2,11 +2,8 @@ package com._2lazy2name.notion.entity.common.filter.typeSpecific;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
+
 public class MultiselectFilter extends PropertyFilter {
     private final PropertyTypeEnum type = PropertyTypeEnum.SELECT;
     private MultiselectFilterMethodEnum method;
@@ -46,7 +43,6 @@ public class MultiselectFilter extends PropertyFilter {
         return this;
     }
 
-    @Getter
     public enum MultiselectFilterMethodEnum implements IFilterMethod {
         CONTAINS("contains", STRING),
         DOES_NOT_CONTAIN("does_not_contain", STRING),
@@ -60,5 +56,33 @@ public class MultiselectFilter extends PropertyFilter {
             this.method = method;
             this.valueType = valueType;
         }
+
+        @Override
+        public String getMethod() {
+            return method;
+        }
+
+        @Override
+        public int getValueType() {
+            return valueType;
+        }
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    @Override
+    public MultiselectFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public MultiselectFilter setMethod(MultiselectFilterMethodEnum method) {
+        this.method = method;
+        return this;
+    }
+
+    public MultiselectFilter() {
     }
 }

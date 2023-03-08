@@ -1,8 +1,6 @@
 package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.NotionTest;
-import com._2lazy2name.notion.entity.block.heading.HeadingOneBlock;
-import com._2lazy2name.notion.entity.enumeration.LanguageEnum;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 

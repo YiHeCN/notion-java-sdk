@@ -5,9 +5,6 @@ import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.List;
 

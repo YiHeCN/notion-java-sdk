@@ -6,9 +6,6 @@ import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 

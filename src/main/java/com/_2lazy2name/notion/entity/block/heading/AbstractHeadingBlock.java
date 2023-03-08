@@ -4,8 +4,6 @@ import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import com.fasterxml.jackson.annotation.*;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.ToString;
 
 import java.util.List;
 

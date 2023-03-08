@@ -2,9 +2,7 @@ package com._2lazy2name.notion.entity.common.sort;
 
 import com._2lazy2name.notion.entity.enumeration.SortDirectionEnum;
 import com._2lazy2name.notion.entity.enumeration.TimeStampEnum;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 /***
  * @author Yi
@@ -12,7 +10,6 @@ import lombok.ToString;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/post-database-query-sort#entry-timestamp-sort">Entry Timestamp Sort</a>
  */
-@ToString @Getter @Setter
 public class EntryTimestampSort extends AbstractSort {
     private TimeStampEnum timestamp;
 
@@ -23,5 +20,14 @@ public class EntryTimestampSort extends AbstractSort {
         EntryTimestampSort entryTimestampSort = new EntryTimestampSort();
         entryTimestampSort.setTimestamp(timestamp);
         entryTimestampSort.setDirection(direction);
+    }
+
+    public TimeStampEnum getTimestamp() {
+        return timestamp;
+    }
+
+    public EntryTimestampSort setTimestamp(TimeStampEnum timestamp) {
+        this.timestamp = timestamp;
+        return this;
     }
 }

@@ -8,8 +8,7 @@ import lombok.ToString;
 
 import java.util.Date;
 
-@Getter @Setter @ToString
-@NoArgsConstructor
+
 public class NotionFile extends AbstractFile {
     private final FileTypeEnum type = FileTypeEnum.FILE;
     private File file;
@@ -26,5 +25,22 @@ public class NotionFile extends AbstractFile {
         this.file = new File();
         this.file.setUrl(url);
         this.file.setExpiryTime(expiryTime);
+    }
+
+    @Override
+    public FileTypeEnum getType() {
+        return type;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public NotionFile setFile(File file) {
+        this.file = file;
+        return this;
+    }
+
+    public NotionFile() {
     }
 }

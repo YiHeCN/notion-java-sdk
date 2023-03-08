@@ -2,9 +2,7 @@ package com._2lazy2name.notion.entity.common.sort;
 
 import com._2lazy2name.notion.entity.enumeration.SortDirectionEnum;
 import com._2lazy2name.notion.entity.enumeration.TimeStampEnum;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 /***
  * @author Yi
@@ -12,7 +10,6 @@ import lombok.ToString;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/post-database-query-sort">Sort</a>
  */
-@ToString @Getter @Setter
 public abstract class AbstractSort {
     protected SortDirectionEnum direction;
 
@@ -26,4 +23,12 @@ public abstract class AbstractSort {
         return new PropertyValueSort(property, direction);
     }
 
+    public SortDirectionEnum getDirection() {
+        return direction;
+    }
+
+    public AbstractSort setDirection(SortDirectionEnum direction) {
+        this.direction = direction;
+        return this;
+    }
 }

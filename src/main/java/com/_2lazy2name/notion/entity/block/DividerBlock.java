@@ -4,9 +4,6 @@ import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com._2lazy2name.notion.entity.property.NullToEmptyObjectSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class DividerBlock extends AbstractBlock {

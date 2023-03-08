@@ -4,18 +4,16 @@ import com._2lazy2name.notion.entity.common.LinkPreview;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class LinkPreviewBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.LINK_PREVIEW;
     private LinkPreview linkPreview;
 
-    public static LinkPreviewBlock ofUrl(String url) {
+    // The link_preview block can only be returned as part of a response.
+    // The API does not support creating or appending link_preview blocks.
+    // See: https://developers.notion.com/reference/block#link-preview
+    private static LinkPreviewBlock ofUrl(String url) {
         return new LinkPreviewBlock(LinkPreview.ofUrl(url));
     }
 

@@ -26,7 +26,6 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.Getter;
 import lombok.SneakyThrows;
 
 import java.util.*;
@@ -40,7 +39,7 @@ import java.util.*;
  * @since 2023-02-01
  * @see <a href="https://developers.notion.com/reference/intro">Notion API</a>
  */
-@SuppressWarnings({"unused"})
+@SuppressWarnings({"unused", "UnusedReturnValue"})
 public class Notion {
     private final static String API_VERSION = "2022-06-28";
     private final static String API_URL = "https://api.notion.com/v1/";
@@ -554,7 +553,7 @@ public class Notion {
         return createComment(discussionId, richText);
     }
 
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class QueryDatabaseBodyParam {
         private AbstractFilter filter;
         private AbstractSort sorts;
@@ -584,8 +583,16 @@ public class Notion {
             this.pagination.startCursor = startCursor;
             return this;
         }
+
+        public AbstractFilter getFilter() {
+            return filter;
+        }
+
+        public AbstractSort getSorts() {
+            return sorts;
+        }
     }
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class CreateDatabaseBodyParam {
         private AbstractParent parent;
         private List<AbstractRichText> title;
@@ -617,8 +624,20 @@ public class Notion {
             this.properties.putAll(properties);
             return this;
         }
+
+        public AbstractParent getParent() {
+            return parent;
+        }
+
+        public List<AbstractRichText> getTitle() {
+            return title;
+        }
+
+        public Map<String, AbstractDatabaseProperty> getProperties() {
+            return properties;
+        }
     }
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class UpdateDatabaseBodyParam {
         private List<AbstractRichText> title;
         private List<AbstractRichText> description;
@@ -638,6 +657,18 @@ public class Notion {
             this.properties = properties;
             return this;
         }
+
+        public List<AbstractRichText> getTitle() {
+            return title;
+        }
+
+        public List<AbstractRichText> getDescription() {
+            return description;
+        }
+
+        public Map<String, AbstractDatabaseProperty> getProperties() {
+            return properties;
+        }
     }
 
     private static IdentityHashMap<String, String> processRetrievePageQueryParam(List<String> propertiesId) {
@@ -647,7 +678,7 @@ public class Notion {
             }
         }};
     }
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class CreatePageBodyParam {
         private AbstractParent parent;
         private Map<String, AbstractPagePropertyValue> properties;
@@ -679,8 +710,28 @@ public class Notion {
             this.cover = cover;
             return this;
         }
+
+        public AbstractParent getParent() {
+            return parent;
+        }
+
+        public Map<String, AbstractPagePropertyValue> getProperties() {
+            return properties;
+        }
+
+        public List<AbstractBlock> getChildren() {
+            return children;
+        }
+
+        public AbstractIcon getIcon() {
+            return icon;
+        }
+
+        public AbstractFile getCover() {
+            return cover;
+        }
     }
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class UpdatePageBodyParam {
         private Map<String, AbstractPagePropertyValue> properties;
         private Boolean archived;
@@ -706,9 +757,25 @@ public class Notion {
             this.cover = cover;
             return this;
         }
+
+        public Map<String, AbstractPagePropertyValue> getProperties() {
+            return properties;
+        }
+
+        public Boolean getArchived() {
+            return archived;
+        }
+
+        public AbstractIcon getIcon() {
+            return icon;
+        }
+
+        public AbstractFile getCover() {
+            return cover;
+        }
     }
 
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class UpdateBlockBodyParam {
         @JsonUnwrapped
         private AbstractBlock block;
@@ -723,8 +790,17 @@ public class Notion {
             this.archived = archived;
             return this;
         }
+
+        public AbstractBlock getBlock() {
+            return block;
+        }
+
+        public Boolean getArchived() {
+            return archived;
+        }
     }
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class AppendBlockBodyParam {
         private List<AbstractBlock> children;
 
@@ -732,9 +808,13 @@ public class Notion {
             this.children = children;
             return this;
         }
+
+        public List<AbstractBlock> getChildren() {
+            return children;
+        }
     }
 
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class SearchBodyParma {
         private String query;
         private AbstractFilter filter;
@@ -766,9 +846,29 @@ public class Notion {
             this.pageSize = processPageSize(pageSize);
             return this;
         }
+
+        public String getQuery() {
+            return query;
+        }
+
+        public AbstractFilter getFilter() {
+            return filter;
+        }
+
+        public AbstractSort getSort() {
+            return sort;
+        }
+
+        public String getStartCursor() {
+            return startCursor;
+        }
+
+        public Integer getPageSize() {
+            return pageSize;
+        }
     }
 
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class CreateCommentBodyParam {
         private AbstractParent parent;
         private String discussionId;
@@ -790,9 +890,21 @@ public class Notion {
             this.richText = richText;
             return this;
         }
+
+        public AbstractParent getParent() {
+            return parent;
+        }
+
+        public String getDiscussionId() {
+            return discussionId;
+        }
+
+        public List<AbstractRichText> getRichText() {
+            return richText;
+        }
     }
 
-    @Getter @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class PaginationParam {
         private Integer pageSize;
         private String startCursor;
@@ -817,6 +929,14 @@ public class Notion {
                     put("start_cursor", startCursor);
                 }
             }};
+        }
+
+        public Integer getPageSize() {
+            return pageSize;
+        }
+
+        public String getStartCursor() {
+            return startCursor;
         }
     }
 
@@ -850,6 +970,10 @@ public class Notion {
         objectMapper.setDateFormat(Date.DATE_FORMAT);
         objectMapper.configure(SerializationFeature.FAIL_ON_UNWRAPPED_TYPE_IDENTIFIERS, false);
         return objectMapper;
+    }
+
+    public HttpUtil getHttpUtil() {
+        return httpUtil;
     }
 
     static {

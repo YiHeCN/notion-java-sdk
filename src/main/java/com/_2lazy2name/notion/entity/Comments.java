@@ -4,15 +4,12 @@ import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 import java.util.Date;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-@ToString @Getter @Setter
 public class Comments {
     private final static ObjectEnum objectEnum = ObjectEnum.COMMENTS;
     private String id;
@@ -41,5 +38,77 @@ public class Comments {
     public Comments(String discussionId, String text) {
         this.discussionId = discussionId;
         this.richText = List.of(AbstractRichText.buildPlainText(text));
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public Comments setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public AbstractParent getParent() {
+        return parent;
+    }
+
+    public Comments setParent(AbstractParent parent) {
+        this.parent = parent;
+        return this;
+    }
+
+    public String getDiscussionId() {
+        return discussionId;
+    }
+
+    public Comments setDiscussionId(String discussionId) {
+        this.discussionId = discussionId;
+        return this;
+    }
+
+    public Date getCreatedTime() {
+        return createdTime;
+    }
+
+    public Comments setCreatedTime(Date createdTime) {
+        this.createdTime = createdTime;
+        return this;
+    }
+
+    public Date getLastEditedTime() {
+        return lastEditedTime;
+    }
+
+    public Comments setLastEditedTime(Date lastEditedTime) {
+        this.lastEditedTime = lastEditedTime;
+        return this;
+    }
+
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Comments setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public User getLastEditedBy() {
+        return lastEditedBy;
+    }
+
+    public Comments setLastEditedBy(User lastEditedBy) {
+        this.lastEditedBy = lastEditedBy;
+        return this;
+    }
+
+    public List<AbstractRichText> getRichText() {
+        return richText;
+    }
+
+    public Comments setRichText(List<AbstractRichText> richText) {
+        this.richText = richText;
+        return this;
     }
 }

@@ -1,16 +1,9 @@
 package com._2lazy2name.notion.entity.block;
 
-import com._2lazy2name.notion.entity.common.parent.PageParent;
-import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ChildPageBlock extends AbstractBlock {

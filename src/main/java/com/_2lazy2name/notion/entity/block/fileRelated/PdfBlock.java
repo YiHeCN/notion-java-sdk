@@ -4,10 +4,6 @@ import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.Setter;
-import lombok.ToString;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class PdfBlock extends AbstractBlock {
@@ -16,6 +12,10 @@ public class PdfBlock extends AbstractBlock {
 
     public static PdfBlock ofPdf(AbstractFile pdf) {
         return new PdfBlock(pdf);
+    }
+
+    public static PdfBlock ofPdf(String url) {
+        return new PdfBlock(AbstractFile.buildExternalFile(url));
     }
 
     @Override

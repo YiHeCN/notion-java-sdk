@@ -4,9 +4,7 @@ import com._2lazy2name.notion.NotionTest;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-    class BookmarkTest extends NotionTest {
+class BookmarkTest extends NotionTest {
     private final String testPageId = "63e4778008934c61b3f0cf6c07fe7c3e";
     private final static int SLEEP_TIME = 1000;
 

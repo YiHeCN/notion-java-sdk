@@ -15,7 +15,7 @@ public class NotionTest {
     public static final ObjectMapper objectMapper;
     protected final static Notion notion ;
     protected static final ArrayList<String> createdBlock = new ArrayList<>();
-    protected static boolean AUTO_DELETE = true;
+    protected static final boolean AUTO_DELETE = true;
     protected final static int SLEEP_TIME = 2000;
 
 

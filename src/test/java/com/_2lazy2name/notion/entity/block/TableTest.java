@@ -6,12 +6,9 @@ import com._2lazy2name.notion.entity.block.table.TableRow;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class TableTest extends NotionTest {
     private final String testPageId = "c168dafdb15d446cbd73e95a1ad5b9c7";

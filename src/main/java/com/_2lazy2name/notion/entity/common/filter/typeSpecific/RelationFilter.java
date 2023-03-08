@@ -4,7 +4,6 @@ import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
 import lombok.*;
 
-@Getter @Setter @NoArgsConstructor
 public class RelationFilter extends PropertyFilter {
     private final PropertyTypeEnum type = PropertyTypeEnum.RELATION;
     private RelationFilterMethodEnum method;
@@ -44,7 +43,7 @@ public class RelationFilter extends PropertyFilter {
         return this;
     }
 
-    @Getter
+
     public enum RelationFilterMethodEnum implements IFilterMethod {
         CONTAINS("contains", STRING),
         DOES_NOT_CONTAIN("does_not_contain", STRING),
@@ -58,5 +57,33 @@ public class RelationFilter extends PropertyFilter {
             this.method = method;
             this.valueType = valueType;
         }
+
+        @Override
+        public String getMethod() {
+            return method;
+        }
+
+        @Override
+        public int getValueType() {
+            return valueType;
+        }
+    }
+
+    public RelationFilter() {
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    @Override
+    public RelationFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public RelationFilter setMethod(RelationFilterMethodEnum method) {
+        this.method = method;
+        return this;
     }
 }

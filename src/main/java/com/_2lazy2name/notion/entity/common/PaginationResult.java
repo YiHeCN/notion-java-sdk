@@ -1,6 +1,5 @@
 package com._2lazy2name.notion.entity.common;
 
-import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -8,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**

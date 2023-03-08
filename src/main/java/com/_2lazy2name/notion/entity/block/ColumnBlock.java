@@ -2,6 +2,7 @@ package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -25,6 +26,7 @@ public class ColumnBlock extends AbstractBlock {
         return ofChildren(List.of(child));
     }
 
+    @JsonIgnore
     public List<AbstractBlock> getChildren() {
         return this.column.children;
     }

@@ -5,9 +5,6 @@ import com._2lazy2name.notion.entity.enumeration.type.FileTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -22,7 +19,6 @@ import java.util.List;
  * @since 2023-02-01
  * @see <a href="https://developers.notion.com/reference/file-object">File object</a>
  */
-@Getter @Setter @ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type", visible = true)
 @JsonSubTypes({
@@ -46,5 +42,32 @@ public abstract class AbstractFile {
 
     public static ExternalFile buildExternalFile(String url) {
         return new ExternalFile(url);
+    }
+
+    public FileTypeEnum getType() {
+        return type;
+    }
+
+    public AbstractFile setType(FileTypeEnum type) {
+        this.type = type;
+        return this;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public AbstractFile setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public List<AbstractRichText> getCaption() {
+        return caption;
+    }
+
+    public AbstractFile setCaption(List<AbstractRichText> caption) {
+        this.caption = caption;
+        return this;
     }
 }

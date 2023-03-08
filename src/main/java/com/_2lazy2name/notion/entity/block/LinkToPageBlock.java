@@ -3,9 +3,6 @@ package com._2lazy2name.notion.entity.block;
 import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class LinkToPageBlock extends AbstractBlock {
@@ -16,7 +13,7 @@ public class LinkToPageBlock extends AbstractBlock {
         LinkToPageBlock linkToPageBlock = new LinkToPageBlock();
         linkToPageBlock.linkToPage = new LinkToPage();
         linkToPageBlock.linkToPage.type = "page_id";
-        linkToPageBlock.linkToPage.databaseId = pageId;
+        linkToPageBlock.linkToPage.pageId = pageId;
         return linkToPageBlock;
     }
     public static LinkToPageBlock toDatabase(String databaseId) {

@@ -8,10 +8,7 @@ import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import lombok.SneakyThrows;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 class HeadingBlockTest extends NotionTest {
     private final String testPageId = "bb5580f5ecfc4a379110a0455a7010d3";

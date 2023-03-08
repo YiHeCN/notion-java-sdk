@@ -5,11 +5,9 @@ import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.property.AbstractProperty;
 import com.fasterxml.jackson.annotation.*;
-import lombok.Getter;
 
 import java.util.List;
 
-@Getter
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSubTypes({
@@ -121,4 +119,15 @@ public abstract class AbstractDatabaseProperty extends AbstractProperty {
         return UrlConfiguration.getInstance();
     }
 
+    public ObjectEnum getObject() {
+        return object;
+    }
+
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

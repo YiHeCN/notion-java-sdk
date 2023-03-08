@@ -1,8 +1,6 @@
 package com._2lazy2name.notion.entity.common;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 import java.text.SimpleDateFormat;
 
@@ -13,7 +11,6 @@ import java.text.SimpleDateFormat;
  * @since 2023-02-01
  * @see <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO_8601</a>
  */
-@Getter @Setter @ToString
 public class Date {
     private String start;
     private String end;
@@ -33,5 +30,40 @@ public class Date {
         this.start = DATE_FORMAT.format(start);
         this.end = DATE_FORMAT.format(end);
         this.timeZone = timeZone;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public Date setStart(String start) {
+        this.start = start;
+        return this;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public Date setEnd(String end) {
+        this.end = end;
+        return this;
+    }
+
+    public String getTimeZone() {
+        return timeZone;
+    }
+
+    public Date setTimeZone(String timeZone) {
+        this.timeZone = timeZone;
+        return this;
+    }
+
+    public static SimpleDateFormat getDateFormat() {
+        return DATE_FORMAT;
+    }
+
+    public static void setDateFormat(SimpleDateFormat dateFormat) {
+        DATE_FORMAT = dateFormat;
     }
 }

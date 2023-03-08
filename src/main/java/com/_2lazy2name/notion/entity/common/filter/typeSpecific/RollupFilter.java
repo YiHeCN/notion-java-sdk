@@ -4,7 +4,6 @@ import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
 import lombok.*;
 
-@Getter @Setter @NoArgsConstructor
 public class RollupFilter extends PropertyFilter {
     private final PropertyTypeEnum type = PropertyTypeEnum.ROLLUP;
     private RollupFilterMethodEnum method;
@@ -47,7 +46,7 @@ public class RollupFilter extends PropertyFilter {
         return this;
     }
 
-    @Getter
+
     public enum RollupFilterMethodEnum implements IFilterMethod {
         ANY("any", FILTER_OBJECT),
         EVERY("every", FILTER_OBJECT),
@@ -62,5 +61,30 @@ public class RollupFilter extends PropertyFilter {
             this.method = method;
             this.valueType = valueType;
         }
+
+        @Override
+        public String getMethod() {
+            return method;
+        }
+
+        @Override
+        public int getValueType() {
+            return valueType;
+        }
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    @Override
+    public RollupFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public RollupFilter setMethod(RollupFilterMethodEnum method) {
+        this.method = method;
+        return this;
     }
 }

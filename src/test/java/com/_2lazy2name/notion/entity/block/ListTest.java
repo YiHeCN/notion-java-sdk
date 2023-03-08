@@ -7,10 +7,9 @@ import com._2lazy2name.notion.entity.block.list.ToDoBlock;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import lombok.SneakyThrows;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 class ListTest extends NotionTest {
