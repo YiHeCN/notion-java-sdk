@@ -1,5 +1,8 @@
 package com._2lazy2name.util;
 
+import com._2lazy2name.notion.exception.NotionException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
@@ -27,6 +30,7 @@ import java.util.Map;
 public class HttpUtil {
     private final Map<String, String> defaultHeaders = new HashMap<>();
     private static final CloseableHttpClient httpClient;
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     static {
         httpClient = createHttpClient();
@@ -80,7 +84,6 @@ public class HttpUtil {
         return execute(Method.PATCH, url, params, null, null);
     }
 
-
     public Response delete(String url) throws IOException {
         return execute(Method.DELETE, url, null, null, null);
     }
@@ -133,6 +136,7 @@ public class HttpUtil {
 
         ClassicHttpResponse res = httpClient.execute(request);
         Response response = new Response(res.getCode(), new String(res.getEntity().getContent().readAllBytes()));
+        checkAndWrapHttpError(response);
         res.getEntity().getContent().close();
         res.getEntity().close();
         res.close();
@@ -150,6 +154,20 @@ public class HttpUtil {
                 .evictIdleConnections(TimeValue.ofMinutes(1))
                 .disableAutomaticRetries()
                 .build();
+    }
+
+    private static void checkAndWrapHttpError(Response response) throws NotionException {
+        if (!(response.getStatusCode() >= 400)) {
+            return;
+        }
+
+        String message = response.getBody();
+
+        try {
+            throw objectMapper.readValue(message, NotionException.class);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static SSLConnectionSocketFactory createSSLFactory()  {
@@ -232,6 +250,5 @@ public class HttpUtil {
                     '}';
         }
     }
-
 
 }

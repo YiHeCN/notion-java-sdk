@@ -2,7 +2,6 @@ package com._2lazy2name.notion.entity.common.file;
 
 import com._2lazy2name.notion.entity.enumeration.type.FileTypeEnum;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

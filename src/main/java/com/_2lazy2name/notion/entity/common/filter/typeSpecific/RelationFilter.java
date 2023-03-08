@@ -2,7 +2,6 @@ package com._2lazy2name.notion.entity.common.filter.typeSpecific;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
-import lombok.*;
 
 public class RelationFilter extends PropertyFilter {
     private final PropertyTypeEnum type = PropertyTypeEnum.RELATION;

@@ -26,8 +26,8 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import lombok.SneakyThrows;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -58,9 +58,8 @@ public class Notion {
      * @return PaginationResult contains next cursor and pages.
      * @see <a href="https://developers.notion.com/reference/post-database-query">Query a database</a>
      */
-    @SneakyThrows
     public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, AbstractSort sorts,
-                                                int pageSize, String startCursor) {
+                                                int pageSize, String startCursor) throws IOException {
         String queryDatabaseUrl = API_URL + "databases/" + databaseId + "/query";
         QueryDatabaseBodyParam bodyParams = new QueryDatabaseBodyParam();
         bodyParams.setFilter(filter).setSorts(sorts).setPageSize(pageSize).setStartCursor(startCursor);
@@ -68,25 +67,25 @@ public class Notion {
         String response = httpUtil.post(queryDatabaseUrl, body).getBody();
         return objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(PaginationResult.class, Page.class));
     }
-    public PaginationResult<Page> queryDatabase(String databaseId) {
+    public PaginationResult<Page> queryDatabase(String databaseId) throws IOException {
         return queryDatabase(databaseId, null, null, -1, null);
     }
-    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter) {
+    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter) throws IOException {
         return queryDatabase(databaseId, filter, null, -1, null);
     }
-    public PaginationResult<Page> queryDatabase(String databaseId, AbstractSort sorts) {
+    public PaginationResult<Page> queryDatabase(String databaseId, AbstractSort sorts) throws IOException {
         return queryDatabase(databaseId, null, sorts, -1, null);
     }
-    public PaginationResult<Page> queryDatabase(String databaseId, int pageSize, String startCursor) {
+    public PaginationResult<Page> queryDatabase(String databaseId, int pageSize, String startCursor) throws IOException {
         return queryDatabase(databaseId, null, null, pageSize, startCursor);
     }
-    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, AbstractSort sorts) {
+    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, AbstractSort sorts) throws IOException {
         return queryDatabase(databaseId, filter, sorts, -1, null);
     }
-    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, int pageSize, String startCursor) {
+    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, int pageSize, String startCursor) throws IOException {
         return queryDatabase(databaseId, filter, null, pageSize, startCursor);
     }
-    public PaginationResult<Page> queryDatabase(String databaseId, AbstractSort sorts, int pageSize, String startCursor) {
+    public PaginationResult<Page> queryDatabase(String databaseId, AbstractSort sorts, int pageSize, String startCursor) throws IOException {
         return queryDatabase(databaseId, null, sorts, pageSize, startCursor);
     }
 
@@ -100,11 +99,10 @@ public class Notion {
      * @return database you created.
      * @see <a href="https://developers.notion.com/reference/create-a-database">Create a database</a>
      */
-    @SneakyThrows
     public Database createDatabase(AbstractParent parent,
                                    String titlePropertyName,
                                    List<AbstractRichText> dataBaseTitle,
-                                   Map<String, AbstractDatabaseProperty> properties) {
+                                   Map<String, AbstractDatabaseProperty> properties) throws IOException {
         String createDatabaseUrl = API_URL + "databases";
         CreateDatabaseBodyParam bodyParams = new CreateDatabaseBodyParam();
         bodyParams.setParent(parent).setTitlePropertyName(titlePropertyName).setTitle(dataBaseTitle).setProperties(properties);
@@ -116,7 +114,7 @@ public class Notion {
     public Database createDatabase(AbstractParent parent,
                                    String titlePropertyName,
                                    String dataBaseTitle,
-                                   Map<String, AbstractDatabaseProperty> properties) {
+                                   Map<String, AbstractDatabaseProperty> properties) throws IOException {
         return createDatabase(parent, titlePropertyName, List.of(AbstractRichText.buildPlainText(dataBaseTitle)), properties);
     }
 
@@ -132,11 +130,11 @@ public class Notion {
      * @see <a href="https://developers.notion.com/reference/update-a-databasee">Update a database</a>
      * @see <a href="https://developers.notion.com/reference/update-property-schema-object">Update property schema object</a>
      */
-    @SneakyThrows
+
     public Database updateDatabase(String databaseId,
                                    List<AbstractRichText> title,
                                    List<AbstractRichText> description,
-                                   Map<String, AbstractDatabaseProperty> properties) {
+                                   Map<String, AbstractDatabaseProperty> properties) throws IOException {
         String patchDatabaseUrl = API_URL + "databases/" + databaseId;
         UpdateDatabaseBodyParam bodyParams = new UpdateDatabaseBodyParam();
         bodyParams.setTitle(title).setDescription(description).setProperties(properties);
@@ -144,27 +142,27 @@ public class Notion {
         String response = httpUtil.patch(patchDatabaseUrl, body).getBody();
         return objectMapper.readValue(response, Database.class);
     }
-    public Database updateDatabaseTitle(String databaseId, List<AbstractRichText> title) {
+    public Database updateDatabaseTitle(String databaseId, List<AbstractRichText> title) throws IOException {
         return updateDatabase(databaseId, title, null, null);
     }
-    public Database updateDatabaseTitle(String databaseId, String title) {
+    public Database updateDatabaseTitle(String databaseId, String title) throws IOException {
         return updateDatabase(databaseId, List.of(AbstractRichText.buildPlainText(title)), null, null);
     }
-    public Database updateDatabaseDescription(String databaseId, List<AbstractRichText> description) {
+    public Database updateDatabaseDescription(String databaseId, List<AbstractRichText> description) throws IOException {
         return updateDatabase(databaseId, null, description, null);
     }
-    public Database updateDatabaseDescription(String databaseId, String description) {
+    public Database updateDatabaseDescription(String databaseId, String description) throws IOException {
         return updateDatabase(databaseId, null, List.of(AbstractRichText.buildPlainText(description)), null);
     }
-    public Database updateDatabaseProperties(String databaseId, Map<String, AbstractDatabaseProperty> properties) {
+    public Database updateDatabaseProperties(String databaseId, Map<String, AbstractDatabaseProperty> properties) throws IOException {
         return updateDatabase(databaseId, null, null, properties);
     }
-    public Database removeDatabaseProperty(String databaseId, String propertyIdOrName) {
+    public Database removeDatabaseProperty(String databaseId, String propertyIdOrName) throws IOException {
         Map<String, AbstractDatabaseProperty> properties = new HashMap<>();
         properties.put(propertyIdOrName, null);
         return updateDatabase(databaseId, null, null, properties);
     }
-    public Database renameDatabaseProperty(String databaseId, String oldNameOrId, String newName) {
+    public Database renameDatabaseProperty(String databaseId, String oldNameOrId, String newName) throws IOException {
         Map<String, AbstractDatabaseProperty> properties = new HashMap<>();
         properties.put(oldNameOrId, AbstractDatabaseProperty.buildOnlyNamePropertyForRenaming(newName));
         return updateDatabase(databaseId, null, null, properties);
@@ -176,8 +174,8 @@ public class Notion {
      * @return database.
      * @see <a href="https://developers.notion.com/reference/retrieve-a-database">Retrieve a database</a>
      */
-    @SneakyThrows
-    public Database retrieveDatabase(String databaseId) {
+
+    public Database retrieveDatabase(String databaseId) throws IOException {
         String retrieveDatabaseUrl = API_URL + "databases/" + databaseId;
         String response = httpUtil.get(retrieveDatabaseUrl).getBody();
         return objectMapper.readValue(response, Database.class);
@@ -189,8 +187,8 @@ public class Notion {
      * @return page.
      * @see <a href="https://developers.notion.com/reference/retrieve-a-page">Retrieve a page</a>
      */
-    @SneakyThrows
-    public Page retrievePage(String pageId, List<String> propertiesId) {
+
+    public Page retrievePage(String pageId, List<String> propertiesId) throws IOException {
         String retrievePageUrl = API_URL + "pages/" + pageId;
         Map<String, String> queryParams = processRetrievePageQueryParam(propertiesId);
         String response = httpUtil.get(retrievePageUrl, queryParams).getBody();
@@ -210,11 +208,11 @@ public class Notion {
      * @see #checkIfSchemaMatch(Map, Map)
      * @see <a href="https://developers.notion.com/reference/post-page">Create a page</a>
      */
-    @SneakyThrows
+
     public Page createPage(DatabaseParent parent,
                            Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children,
                            AbstractIcon icon, AbstractFile cover
-    ) {
+    ) throws IOException {
         String createPageUrl = API_URL + "pages";
         CreatePageBodyParam bodyParams = new CreatePageBodyParam();
         bodyParams.setParent(parent).setProperties(properties).setChildren(children).setIcon(icon).setCover(cover);
@@ -222,11 +220,11 @@ public class Notion {
         String response = httpUtil.post(createPageUrl, body).getBody();
         return objectMapper.readValue(response, Page.class);
     }
-    public Page createPage(DatabaseParent parent, Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children) {
+    public Page createPage(DatabaseParent parent, Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children) throws IOException {
         return createPage(parent, properties, children, null, null);
     }
-    @SneakyThrows
-    public Page createPage(PageParent parent, String pageTitle, List<AbstractBlock> children, AbstractIcon icon, AbstractFile cover) {
+
+    public Page createPage(PageParent parent, String pageTitle, List<AbstractBlock> children, AbstractIcon icon, AbstractFile cover) throws IOException {
         Map<String, AbstractPagePropertyValue> properties = new HashMap<>() {{
             put("title", AbstractPagePropertyValue.buildTitleValue(pageTitle));
         }};
@@ -236,7 +234,7 @@ public class Notion {
         String response = httpUtil.post(API_URL + "pages", body).getBody();
         return objectMapper.readValue(response, Page.class);
     }
-    public Page createPage(PageParent parent, String pageTitle, List<AbstractBlock> children) {
+    public Page createPage(PageParent parent, String pageTitle, List<AbstractBlock> children) throws IOException {
         return createPage(parent, pageTitle, children, null, null);
     }
 
@@ -247,7 +245,7 @@ public class Notion {
      * @param propertyValues The page properties you want to check.
      * @return true if matched, false if not.
      */
-    @SneakyThrows
+
     public static boolean checkIfSchemaMatch(Map<String, AbstractDatabaseProperty> property,
                                              Map<String, AbstractDatabaseProperty> propertyValues) {
         for (Map.Entry<String, AbstractDatabaseProperty> entry : property.entrySet()) {
@@ -271,12 +269,12 @@ public class Notion {
      * @return page.
      * @see <a href="https://developers.notion.com/reference/patch-page">Update a page</a>
      */
-    @SneakyThrows
+
     public Page updatePage(String pageId,
                            Map<String, AbstractPagePropertyValue> properties,
                            Boolean archived,
                            AbstractIcon icon, AbstractFile cover
-    ) {
+    ) throws IOException {
         String updatePageUrl = API_URL + "pages/" + pageId;
         UpdatePageBodyParam bodyParams = new UpdatePageBodyParam();
         bodyParams.setProperties(properties).setArchived(archived).setIcon(icon).setCover(cover);
@@ -284,16 +282,16 @@ public class Notion {
         String response = httpUtil.patch(updatePageUrl, body).getBody();
         return objectMapper.readValue(response, Page.class);
     }
-    public Page updatePageProperties(String pageId, Map<String, AbstractPagePropertyValue> properties) {
+    public Page updatePageProperties(String pageId, Map<String, AbstractPagePropertyValue> properties) throws IOException {
         return updatePage(pageId, properties, null, null, null);
     }
-    public Page updatePageArchived(String pageId, Boolean archived) {
+    public Page updatePageArchived(String pageId, Boolean archived) throws IOException {
         return updatePage(pageId, null, archived, null, null);
     }
-    public Page updatePageIcon(String pageId, AbstractIcon icon) {
+    public Page updatePageIcon(String pageId, AbstractIcon icon) throws IOException {
         return updatePage(pageId, null, null, icon, null);
     }
-    public Page updatePageCover(String pageId, AbstractFile cover) {
+    public Page updatePageCover(String pageId, AbstractFile cover) throws IOException {
         return updatePage(pageId, null, null, null, cover);
     }
 
@@ -305,8 +303,8 @@ public class Notion {
      * @return page property.
      * @see <a href="https://developers.notion.com/reference/retrieve-a-page-property">Retrieve a page property</a>
      */
-    @SneakyThrows
-    public AbstractPagePropertyValue retrievePageProperty(String pageId, String propertyId) {
+
+    public AbstractPagePropertyValue retrievePageProperty(String pageId, String propertyId) throws IOException {
         String retrievePagePropertyUrl = API_URL + "pages/" + pageId + "/properties/" + propertyId;
         String response = httpUtil.get(retrievePagePropertyUrl).getBody();
         return objectMapper.readValue(response, AbstractPagePropertyValue.class);
@@ -318,8 +316,8 @@ public class Notion {
      * @return block.
      * @see <a href="https://developers.notion.com/reference/retrieve-a-block">Retrieve a block</a>
      */
-    @SneakyThrows
-    public AbstractBlock retrieveBlock(String blockId) {
+
+    public AbstractBlock retrieveBlock(String blockId) throws IOException {
         String retrieveBlockUrl = API_URL + "blocks/" + blockId;
         return objectMapper.readValue(httpUtil.get(retrieveBlockUrl).getBody(), AbstractBlock.class);
     }
@@ -334,8 +332,8 @@ public class Notion {
      * @return block.
      * @see <a href="https://developers.notion.com/reference/update-a-block">Update a block</a>
      */
-    @SneakyThrows
-    public AbstractBlock updateBlock(String blockId, AbstractBlock block, Boolean archived) {
+
+    public AbstractBlock updateBlock(String blockId, AbstractBlock block, Boolean archived) throws IOException {
         checkUpdateBlockParam(blockId, block, archived);
         AbstractBlock.clearUnmodifiableInfo(block);
         String updateBlockUrl = API_URL + "blocks/" + (blockId == null ? block.getId() : blockId);
@@ -345,13 +343,13 @@ public class Notion {
         String response = httpUtil.patch(updateBlockUrl, body).getBody();
         return objectMapper.readValue(response, AbstractBlock.class);
     }
-    public AbstractBlock updateBlock(String blockId, Boolean archived) {
+    public AbstractBlock updateBlock(String blockId, Boolean archived) throws IOException {
         return updateBlock(blockId, null, archived);
     }
-    public AbstractBlock updateBlock(String blockId, AbstractBlock block) {
+    public AbstractBlock updateBlock(String blockId, AbstractBlock block) throws IOException {
         return updateBlock(blockId, block, null);
     }
-    public AbstractBlock updateBlock(AbstractBlock block) {
+    public AbstractBlock updateBlock(AbstractBlock block) throws IOException {
         return updateBlock(null, block, null);
     }
     private static void checkUpdateBlockParam(String blockId, AbstractBlock block, Boolean archived) {
@@ -373,15 +371,15 @@ public class Notion {
      * @return block children list.
      * @see <a href="https://developers.notion.com/reference/get-block-children">Retrieve block children</a>
      */
-    @SneakyThrows
-    public PaginationResult<AbstractBlock> retrieveBlockChildren(String blockId, int pageSize, String startCursor) {
+
+    public PaginationResult<AbstractBlock> retrieveBlockChildren(String blockId, int pageSize, String startCursor) throws IOException {
         String retrieveBlockChildrenUrl = API_URL + "blocks/" + blockId + "/children";
         PaginationParam queryParams = new PaginationParam();
         queryParams.setPageSize(pageSize).setStartCursor(startCursor);
         String response = httpUtil.get(retrieveBlockChildrenUrl, queryParams.getQueryParams()).getBody();
         return objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(PaginationResult.class, AbstractBlock.class));
     }
-    public PaginationResult<AbstractBlock> retrieveBlockChildren(String blockId) {
+    public PaginationResult<AbstractBlock> retrieveBlockChildren(String blockId) throws IOException {
         return retrieveBlockChildren(blockId, -1, null);
     }
 
@@ -392,8 +390,8 @@ public class Notion {
      * @return block children list.
      * @see <a href="https://developers.notion.com/reference/append-block-children">Append block children</a>
      */
-    @SneakyThrows
-    public PaginationResult<AbstractBlock> appendBlockChildren(String blockId, List<AbstractBlock> children) {
+
+    public PaginationResult<AbstractBlock> appendBlockChildren(String blockId, List<AbstractBlock> children) throws IOException {
         String appendBlockChildrenUrl = API_URL + "blocks/" + blockId + "/children";
         AppendBlockBodyParam params = new AppendBlockBodyParam();
         params.setChildren(children);
@@ -402,7 +400,7 @@ public class Notion {
         return objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(PaginationResult.class, AbstractBlock.class));
     }
 
-    public PaginationResult<AbstractBlock> appendBlockChild(String blockId, AbstractBlock child) {
+    public PaginationResult<AbstractBlock> appendBlockChild(String blockId, AbstractBlock child) throws IOException {
         return appendBlockChildren(blockId, Collections.singletonList(child));
     }
 
@@ -414,15 +412,15 @@ public class Notion {
      * @return block.
      * @see <a href="https://developers.notion.com/reference/delete-a-block">Delete a block</a>
      */
-    @SneakyThrows
-    public AbstractBlock deleteBlock(String blockId) {
+
+    public AbstractBlock deleteBlock(String blockId) throws IOException {
         if (blockId == null || blockId.isEmpty()) {
             throw new IllegalArgumentException("blockId cannot be null or empty");
         }
         String deleteBlockUrl = API_URL + "blocks/" + blockId;
         return objectMapper.readValue(httpUtil.delete(deleteBlockUrl).getBody(), AbstractBlock.class);
     }
-    public AbstractBlock deleteBlock(AbstractBlock block) {
+    public AbstractBlock deleteBlock(AbstractBlock block) throws IOException {
         if (block == null) {
             throw new IllegalArgumentException("block cannot be null");
         }
@@ -435,8 +433,8 @@ public class Notion {
      * @return The user object.
      * @see <a href="https://developers.notion.com/reference/get-user">Retrieve a user</a>
      */
-    @SneakyThrows
-    public User retrieveUser(String userId) {
+
+    public User retrieveUser(String userId) throws IOException {
         String retrieveUserUrl = API_URL + "users/" + userId;
         String response = httpUtil.get(retrieveUserUrl).getBody();
         return objectMapper.readValue(response, User.class);
@@ -446,7 +444,7 @@ public class Notion {
      * List all users.
      * @return The list of user objects.
      */
-    public List<User> listAllUsers() {
+    public List<User> listAllUsers() throws IOException {
         return listAllUsers(-1, null).getResults();
     }
 
@@ -457,8 +455,8 @@ public class Notion {
      * @return The pagination result of user objects.
      * @see <a href="https://developers.notion.com/reference/get-users">List all users</a>
      */
-    @SneakyThrows
-    public PaginationResult<User> listAllUsers(int pageSize, String startCursor) {
+
+    public PaginationResult<User> listAllUsers(int pageSize, String startCursor) throws IOException {
         String listAllUsersUrl = API_URL + "users";
         PaginationParam paginationParams = new PaginationParam();
         paginationParams.setPageSize(pageSize).setStartCursor(startCursor);
@@ -471,8 +469,8 @@ public class Notion {
      * @return bot.
      * @see <a href="https://developers.notion.com/reference/get-self">Retrieve your token's bot user</a>
      */
-    @SneakyThrows
-    public User retrieveBotInfo() {
+
+    public User retrieveBotInfo() throws IOException {
         String retrieveBotInfoUrl = API_URL + "users/me";
         String response = httpUtil.get(retrieveBotInfoUrl).getBody();
         return objectMapper.readValue(response, User.class);
@@ -486,8 +484,8 @@ public class Notion {
      * @param filter The filter to apply to the search.
      * @param sort The sort to apply to the search.
      */
-    @SneakyThrows
-    public PaginationResult<PageOrDatabase> search(String query, int pageSize, String startCursor, AbstractFilter filter, AbstractSort sort) {
+
+    public PaginationResult<PageOrDatabase> search(String query, int pageSize, String startCursor, AbstractFilter filter, AbstractSort sort) throws IOException {
         String searchUrl = API_URL + "search";
         SearchBodyParma searchParam = new SearchBodyParma();
         searchParam.setQuery(query).setPageSize(pageSize).setStartCursor(startCursor).setFilter(filter).setSort(sort);
@@ -503,8 +501,8 @@ public class Notion {
      * @return comments list.
      * @see <a href="https://developers.notion.com/reference/retrieve-a-comment">Retrieve comments</a>
      */
-    @SneakyThrows
-    public PaginationResult<Comments> retrieveComments(String blockId, int pageSize, String startCursor) {
+
+    public PaginationResult<Comments> retrieveComments(String blockId, int pageSize, String startCursor) throws IOException {
         String retrieveCommentsUrl = API_URL + "comments/";
         PaginationParam paginationParams = new PaginationParam();
         paginationParams.setPageSize(pageSize).setStartCursor(startCursor);
@@ -513,7 +511,7 @@ public class Notion {
         String response = httpUtil.get(retrieveCommentsUrl, params).getBody();
         return objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(PaginationResult.class, Comments.class));
     }
-    public PaginationResult<Comments> retrieveComments(String blockId) {
+    public PaginationResult<Comments> retrieveComments(String blockId) throws IOException {
         return retrieveComments(blockId, -1, null);
     }
 
@@ -524,8 +522,8 @@ public class Notion {
      * @return comment created.
      * @see <a href="https://developers.notion.com/reference/create-a-comment">Create comment</a>
      */
-    @SneakyThrows
-    public Comments createComment(AbstractParent parent, List<AbstractRichText> richText) {
+
+    public Comments createComment(AbstractParent parent, List<AbstractRichText> richText) throws IOException {
         String createCommentUrl = API_URL + "comments";
         CreateCommentBodyParam params = new CreateCommentBodyParam();
         params.setParent(parent).setRichText(richText);
@@ -533,13 +531,13 @@ public class Notion {
         String response = httpUtil.post(createCommentUrl, body).getBody();
         return objectMapper.readValue(response, Comments.class);
     }
-    public Comments createComment(AbstractParent parent, String text) {
+    public Comments createComment(AbstractParent parent, String text) throws IOException {
         List<AbstractRichText> richText = new ArrayList<>();
         richText.add(AbstractRichText.buildPlainText(text));
         return createComment(parent, richText);
     }
-    @SneakyThrows
-    public Comments createComment(String discussionId, List<AbstractRichText> richText) {
+
+    public Comments createComment(String discussionId, List<AbstractRichText> richText) throws IOException {
         String createCommentUrl = API_URL + "comments";
         CreateCommentBodyParam params = new CreateCommentBodyParam();
         params.setDiscussionId(discussionId).setRichText(richText);
@@ -547,7 +545,7 @@ public class Notion {
         String response = httpUtil.post(createCommentUrl, body).getBody();
         return objectMapper.readValue(response, Comments.class);
     }
-    public Comments createComment(String discussionId, String text) {
+    public Comments createComment(String discussionId, String text) throws IOException {
         List<AbstractRichText> richText = new ArrayList<>();
         richText.add(AbstractRichText.buildPlainText(text));
         return createComment(discussionId, richText);
