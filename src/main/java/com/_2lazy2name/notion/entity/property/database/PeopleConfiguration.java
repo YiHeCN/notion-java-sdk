@@ -4,9 +4,7 @@ import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.property.NullToEmptyObjectSerializer;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 /***
  * @author Yi
@@ -14,9 +12,6 @@ import lombok.ToString;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/property-object#people-configuration">People configuration</a>
  */
-@Getter
-@Setter
-@ToString
 public class PeopleConfiguration extends AbstractDatabaseProperty{
     private final PropertyTypeEnum type = PropertyTypeEnum.PEOPLE;
     @JsonSerialize(nullsUsing = NullToEmptyObjectSerializer.class)
@@ -29,5 +24,14 @@ public class PeopleConfiguration extends AbstractDatabaseProperty{
 
     public static PeopleConfiguration getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    public Object getPeople() {
+        return people;
     }
 }

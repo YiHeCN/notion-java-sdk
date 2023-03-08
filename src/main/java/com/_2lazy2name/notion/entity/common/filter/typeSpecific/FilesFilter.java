@@ -2,11 +2,7 @@ package com._2lazy2name.notion.entity.common.filter.typeSpecific;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
 public class FilesFilter extends PropertyFilter {
     private final PropertyTypeEnum type = PropertyTypeEnum.FILES;
     private FilesFilterMethodEnum method;
@@ -34,7 +30,6 @@ public class FilesFilter extends PropertyFilter {
         return this;
     }
 
-    @Getter
     public enum FilesFilterMethodEnum implements IFilterMethod {
         IS_EMPTY("is_empty", BOOLEAN_ONLY_TRUE),
         IS_NOT_EMPTY("is_not_empty", BOOLEAN_ONLY_TRUE);
@@ -46,5 +41,33 @@ public class FilesFilter extends PropertyFilter {
             this.method = method;
             this.valueType = valueType;
         }
+
+        @Override
+        public String getMethod() {
+            return method;
+        }
+
+        @Override
+        public int getValueType() {
+            return valueType;
+        }
+    }
+
+    public FilesFilter() {
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    @Override
+    public FilesFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public FilesFilter setMethod(FilesFilterMethodEnum method) {
+        this.method = method;
+        return this;
     }
 }

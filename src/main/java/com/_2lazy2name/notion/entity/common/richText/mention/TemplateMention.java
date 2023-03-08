@@ -4,11 +4,7 @@ import com._2lazy2name.notion.entity.enumeration.TemplateMentionEnum;
 import com._2lazy2name.notion.entity.enumeration.TemplateMentionValueEnum;
 import com._2lazy2name.notion.entity.enumeration.type.MentionTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@Getter @Setter @ToString
 public class TemplateMention extends AbstractMention {
     private final MentionTypeEnum type = MentionTypeEnum.TEMPLATE_MENTION;
     private TemplateMentionDetail templateMention;
@@ -32,12 +28,50 @@ public class TemplateMention extends AbstractMention {
 
 
 
-    @Getter @Setter @ToString
     @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class TemplateMentionDetail {
         private TemplateMentionEnum type;
         private TemplateMentionValueEnum templateMentionDate;
         private TemplateMentionValueEnum templateMentionUser;
+
+        public TemplateMentionEnum getType() {
+            return type;
+        }
+
+        public TemplateMentionDetail setType(TemplateMentionEnum type) {
+            this.type = type;
+            return this;
+        }
+
+        public TemplateMentionValueEnum getTemplateMentionDate() {
+            return templateMentionDate;
+        }
+
+        public TemplateMentionDetail setTemplateMentionDate(TemplateMentionValueEnum templateMentionDate) {
+            this.templateMentionDate = templateMentionDate;
+            return this;
+        }
+
+        public TemplateMentionValueEnum getTemplateMentionUser() {
+            return templateMentionUser;
+        }
+
+        public TemplateMentionDetail setTemplateMentionUser(TemplateMentionValueEnum templateMentionUser) {
+            this.templateMentionUser = templateMentionUser;
+            return this;
+        }
     }
 
+    public MentionTypeEnum getType() {
+        return type;
+    }
+
+    public TemplateMentionDetail getTemplateMention() {
+        return templateMention;
+    }
+
+    public TemplateMention setTemplateMention(TemplateMentionDetail templateMention) {
+        this.templateMention = templateMention;
+        return this;
+    }
 }

@@ -2,9 +2,6 @@ package com._2lazy2name.notion.entity.property.database;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -14,16 +11,21 @@ import java.util.List;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/property-object#multi-select-configuration">Multiselect Configuration</a>
  */
-@Getter
-@Setter
-@ToString
 public class MultiSelectConfiguration extends AbstractDatabaseProperty {
     private PropertyTypeEnum type = PropertyTypeEnum.MULTI_SELECT;
     private Multiselect multiSelect;
     
-    @Getter @Setter
     private static class Multiselect {
         private List<SelectOption> options;
+
+        public List<SelectOption> getOptions() {
+            return options;
+        }
+
+        public Multiselect setOptions(List<SelectOption> options) {
+            this.options = options;
+            return this;
+        }
     }
 
     private MultiSelectConfiguration() {
@@ -43,5 +45,22 @@ public class MultiSelectConfiguration extends AbstractDatabaseProperty {
         this.multiSelect.setOptions(options);
     }
 
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
 
+    public MultiSelectConfiguration setType(PropertyTypeEnum type) {
+        this.type = type;
+        return this;
+    }
+
+    public Multiselect getMultiSelect() {
+        return multiSelect;
+    }
+
+    public MultiSelectConfiguration setMultiSelect(Multiselect multiSelect) {
+        this.multiSelect = multiSelect;
+        return this;
+    }
 }

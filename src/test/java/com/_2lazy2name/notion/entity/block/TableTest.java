@@ -5,16 +5,16 @@ import com._2lazy2name.notion.entity.block.table.TableBlock;
 import com._2lazy2name.notion.entity.block.table.TableRow;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 public class TableTest extends NotionTest {
     private final String testPageId = "c168dafdb15d446cbd73e95a1ad5b9c7";
 
-    @Test @SneakyThrows
-    public void testCreateTableBlock() {
+    @Test
+    public void testCreateTableBlock() throws IOException  {
         TableRow tableRow = new TableRow().addCell("Test").addCell("Test2");
         TableBlock tableBlock = new TableBlock.Builder()
                 .tableWidth(2)
@@ -26,8 +26,8 @@ public class TableTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testAppendRow() {
+    @Test
+    public void testAppendRow() throws IOException {
         TableRow tableRow = new TableRow().addCell("Test").addCell("Test2");
         TableBlock tableBlock = new TableBlock.Builder()
                 .tableWidth(2)
@@ -43,8 +43,8 @@ public class TableTest extends NotionTest {
         notion.appendBlockChild(id, tableRow2);
     }
 
-    @Test @SneakyThrows
-    public void testUpdateRowContent() {
+    @Test
+    public void testUpdateRowContent() throws IOException {
         TableRow tableRow = new TableRow().addCell("Test").addCell("Test2");
         TableBlock tableBlock = new TableBlock.Builder()
                 .tableWidth(2)
@@ -61,8 +61,8 @@ public class TableTest extends NotionTest {
         createdBlock.add(id);
     }
 
-    @Test @SneakyThrows
-    public void testUpdateRowHeaders() {
+    @Test
+    public void testUpdateRowHeaders() throws IOException {
         TableRow tableRow = new TableRow().addCell("Test").addCell("Test2");
         TableBlock tableBlock = new TableBlock.Builder()
                 .tableWidth(2)
@@ -81,8 +81,8 @@ public class TableTest extends NotionTest {
         createdBlock.add(id);
     }
 
-    @Test @SneakyThrows
-    public void testDeleteRow() {
+    @Test
+    public void testDeleteRow() throws IOException {
         TableRow tableRow = new TableRow().addCell("Test").addCell("Test2");
         TableBlock tableBlock = new TableBlock.Builder()
                 .tableWidth(2)

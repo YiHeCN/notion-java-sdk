@@ -8,9 +8,6 @@ import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.property.AbstractProperty;
 import com._2lazy2name.notion.entity.property.database.SelectOption;
 import com.fasterxml.jackson.annotation.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.List;
 
@@ -45,7 +42,6 @@ import java.util.List;
 })
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-@Getter @Setter @ToString
 public class AbstractPagePropertyValue extends AbstractProperty {
     private String id;
     protected PropertyTypeEnum type;
@@ -135,5 +131,25 @@ public class AbstractPagePropertyValue extends AbstractProperty {
 
     public static UrlValue buildUrlValue(String url) {
         return new UrlValue(url);
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    public AbstractPagePropertyValue setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    public AbstractPagePropertyValue setType(PropertyTypeEnum type) {
+        this.type = type;
+        return this;
     }
 }

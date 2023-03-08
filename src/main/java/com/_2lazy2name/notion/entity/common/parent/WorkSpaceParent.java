@@ -1,13 +1,7 @@
 package com._2lazy2name.notion.entity.common.parent;
 
 import com._2lazy2name.notion.entity.enumeration.type.ParentTypeEnum;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@ToString
-@Getter
-@Setter
 public class WorkSpaceParent extends AbstractParent {
     private final ParentTypeEnum type = ParentTypeEnum.WORKSPACE;
     private final boolean workspace = true;
@@ -18,5 +12,14 @@ public class WorkSpaceParent extends AbstractParent {
 
     public static WorkSpaceParent getInstance() {
         return INSTANCE;
+    }
+
+    @Override
+    public ParentTypeEnum getType() {
+        return type;
+    }
+
+    public boolean isWorkspace() {
+        return workspace;
     }
 }

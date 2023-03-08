@@ -5,9 +5,6 @@ import com._2lazy2name.notion.entity.enumeration.type.TextTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type")
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -16,14 +13,14 @@ import lombok.ToString;
         @JsonSubTypes.Type(value = EquationText.class, name = "equation"),
         @JsonSubTypes.Type(value = MentionText.class, name = "mention")
 })
-@ToString @Getter @Setter
+
 public abstract class AbstractRichText {
     protected TextTypeEnum type;
     private Annotation annotations;
     private String plainText;
     private String href;
 
-    @ToString @Getter @Setter
+
     public static class Annotation {
         private Boolean bold;
         private Boolean italic;
@@ -31,6 +28,60 @@ public abstract class AbstractRichText {
         private Boolean underline;
         private Boolean code;
         private ColorEnum color;
+
+        public Boolean getBold() {
+            return bold;
+        }
+
+        public Annotation setBold(Boolean bold) {
+            this.bold = bold;
+            return this;
+        }
+
+        public Boolean getItalic() {
+            return italic;
+        }
+
+        public Annotation setItalic(Boolean italic) {
+            this.italic = italic;
+            return this;
+        }
+
+        public Boolean getStrikethrough() {
+            return strikethrough;
+        }
+
+        public Annotation setStrikethrough(Boolean strikethrough) {
+            this.strikethrough = strikethrough;
+            return this;
+        }
+
+        public Boolean getUnderline() {
+            return underline;
+        }
+
+        public Annotation setUnderline(Boolean underline) {
+            this.underline = underline;
+            return this;
+        }
+
+        public Boolean getCode() {
+            return code;
+        }
+
+        public Annotation setCode(Boolean code) {
+            this.code = code;
+            return this;
+        }
+
+        public ColorEnum getColor() {
+            return color;
+        }
+
+        public Annotation setColor(ColorEnum color) {
+            this.color = color;
+            return this;
+        }
     }
 
     public static TextText buildPlainText(String content) {
@@ -51,25 +102,7 @@ public abstract class AbstractRichText {
         return text;
     }
 
-//    public static MentionText buildUserMentionText(String userId) {
-//        MentionText mention = new MentionText();
-//        UserMention _mention = new UserMention();
-//        User user = new User();
-//        user.setId(userId);
-//        _mention.setUser(user);
-//        mention.setMention(_mention);
-//        return mention;
-//    }
-//    public static MentionText buildPageMentionText(String pageId) {
-//        MentionText mention = new MentionText();
-//        PageMention _mention = new PageMention();
-//        Page page = new Page();
-//        page.setId(pageId);
-//        _mention.setPage(page);
-//        mention.setMention(_mention);
-//        mention.setHref("https://www.notion.so/" + pageId);
-//        return mention;
-//    }
+    // TODO: Add builder for User and Page Mention Text
    
     public static EquationText buildEquationText(String expression) {
         EquationText equation = new EquationText();
@@ -113,6 +146,42 @@ public abstract class AbstractRichText {
     public AbstractRichText setColor(ColorEnum color) {
         ifNullThenCreateAnnotations();
         annotations.setColor(color);
+        return this;
+    }
+
+    public TextTypeEnum getType() {
+        return type;
+    }
+
+    public AbstractRichText setType(TextTypeEnum type) {
+        this.type = type;
+        return this;
+    }
+
+    public Annotation getAnnotations() {
+        return annotations;
+    }
+
+    public AbstractRichText setAnnotations(Annotation annotations) {
+        this.annotations = annotations;
+        return this;
+    }
+
+    public String getPlainText() {
+        return plainText;
+    }
+
+    public AbstractRichText setPlainText(String plainText) {
+        this.plainText = plainText;
+        return this;
+    }
+
+    public String getHref() {
+        return href;
+    }
+
+    public AbstractRichText setHref(String href) {
+        this.href = href;
         return this;
     }
 }

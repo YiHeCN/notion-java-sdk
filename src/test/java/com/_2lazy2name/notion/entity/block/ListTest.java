@@ -6,11 +6,9 @@ import com._2lazy2name.notion.entity.block.list.NumberedListItemBlock;
 import com._2lazy2name.notion.entity.block.list.ToDoBlock;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterAll;
 
-import java.util.Objects;
+import java.io.IOException;
 
 class ListTest extends NotionTest {
     private final String bulletedListPageID = "a2e216757f804f419b1ae78c033e429c";
@@ -20,8 +18,8 @@ class ListTest extends NotionTest {
     private final static int SLEEP_TIME = 1000;
 
 
-    @Test @SneakyThrows
-    public void testCreateBulletedList() {
+    @Test
+    public void testCreateBulletedList() throws IOException {
         BulletedListItemBlock bulletedListItemBlock = new BulletedListItemBlock.Builder()
                 .richText("Bulleted List")
                 .build();
@@ -29,8 +27,8 @@ class ListTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testUpdatingBulletedListText() {
+    @Test
+    public void testUpdatingBulletedListText() throws IOException {
         BulletedListItemBlock bulletedListItemBlock = new BulletedListItemBlock.Builder()
                 .richText("Bulleted List")
                 .build();
@@ -39,8 +37,8 @@ class ListTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testUpdateBulletedListColor() {
+    @Test
+    public void testUpdateBulletedListColor() throws IOException {
          BulletedListItemBlock bulletedListItemBlock = new BulletedListItemBlock.Builder()
                 .richText("Bulleted List")
                 .build();
@@ -50,8 +48,8 @@ class ListTest extends NotionTest {
     }
 
 
-    @Test @SneakyThrows
-    public void testCreateNumberedList() {
+    @Test
+    public void testCreateNumberedList() throws IOException {
         NumberedListItemBlock bulletedListItemBlock = new NumberedListItemBlock.Builder()
                 .richText("Numbered List")
                 .build();
@@ -60,8 +58,8 @@ class ListTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testUpdateNumberedListColor() {
+    @Test
+    public void testUpdateNumberedListColor() throws IOException {
         NumberedListItemBlock bulletedListItemBlock = new NumberedListItemBlock.Builder()
                 .richText("Numbered List")
                 .build();
@@ -70,8 +68,8 @@ class ListTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testUpdateNumberedListText() {
+    @Test
+    public void testUpdateNumberedListText() throws IOException {
         NumberedListItemBlock bulletedListItemBlock = new NumberedListItemBlock.Builder()
                 .richText("Numbered List")
                 .build();
@@ -81,8 +79,8 @@ class ListTest extends NotionTest {
     }
 
 
-    @Test @SneakyThrows
-    public void testCreateToDoBlock() {
+    @Test
+    public void testCreateToDoBlock() throws IOException {
         ToDoBlock toDoBlock = new ToDoBlock.Builder()
                 .richText("To Do Block")
                 .checked(true)
@@ -92,8 +90,8 @@ class ListTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testUpdateToDoBlockText() {
+    @Test
+    public void testUpdateToDoBlockText() throws IOException {
         ToDoBlock toDoBlock = new ToDoBlock.Builder()
                 .richText("To Do Block")
                 .checked(true)
@@ -104,8 +102,8 @@ class ListTest extends NotionTest {
         createdBlock.add(toDoBlock.getId());
     }
 
-    @Test @SneakyThrows
-    public void testUpdateToDoBlockCheck() {
+    @Test
+    public void testUpdateToDoBlockCheck() throws IOException {
         ToDoBlock toDoBlock = new ToDoBlock.Builder()
                 .richText("To Do Block")
                 .checked(false)
@@ -116,8 +114,8 @@ class ListTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testUpdateToDoBlockColor() {
+    @Test
+    public void testUpdateToDoBlockColor() throws IOException {
         ToDoBlock toDoBlock = new ToDoBlock.Builder()
                 .richText("To Do Block")
                 .checked(true)
@@ -128,11 +126,4 @@ class ListTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-
-    @AfterAll
-    @SneakyThrows
-    public static void deleteAll() {
-        Thread.sleep(SLEEP_TIME);
-        createdBlock.stream().filter(Objects::nonNull).forEach(notion::deleteBlock);
-    }
 }

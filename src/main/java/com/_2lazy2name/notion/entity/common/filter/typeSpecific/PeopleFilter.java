@@ -2,11 +2,7 @@ package com._2lazy2name.notion.entity.common.filter.typeSpecific;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
 public class PeopleFilter extends PropertyFilter {
     private PeopleFilterMethodEnum method;
 
@@ -62,7 +58,6 @@ public class PeopleFilter extends PropertyFilter {
         return this;
     }
 
-    @Getter
     public enum PeopleFilterMethodEnum implements IFilterMethod {
         CONTAINS("contains", STRING),
         DOES_NOT_CONTAIN("does_not_contain", STRING),
@@ -76,5 +71,28 @@ public class PeopleFilter extends PropertyFilter {
             this.method = method;
             this.valueType = valueType;
         }
+
+        @Override
+        public String getMethod() {
+            return method;
+        }
+
+        @Override
+        public int getValueType() {
+            return valueType;
+        }
+    }
+
+    public PeopleFilter() {
+    }
+
+    @Override
+    public PeopleFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public PeopleFilter setMethod(PeopleFilterMethodEnum method) {
+        this.method = method;
+        return this;
     }
 }

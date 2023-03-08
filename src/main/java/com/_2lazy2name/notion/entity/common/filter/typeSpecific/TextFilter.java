@@ -2,9 +2,7 @@ package com._2lazy2name.notion.entity.common.filter.typeSpecific;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
-import lombok.*;
 
-@Getter @Setter @NoArgsConstructor
 public class TextFilter extends PropertyFilter {
     private TextFilterMethodEnum method;
 
@@ -84,7 +82,6 @@ public class TextFilter extends PropertyFilter {
         return this;
     }
 
-    @Getter
     public enum TextFilterMethodEnum implements IFilterMethod {
         EQUALS("equals", STRING),
         DOES_NOT_EQUAL("does_not_equal", STRING),
@@ -102,5 +99,28 @@ public class TextFilter extends PropertyFilter {
             this.method = method;
             this.valueType = valueType;
         }
+
+        @Override
+        public String getMethod() {
+            return method;
+        }
+
+        @Override
+        public int getValueType() {
+            return valueType;
+        }
+    }
+
+    public TextFilter() {
+    }
+
+    @Override
+    public TextFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public TextFilter setMethod(TextFilterMethodEnum method) {
+        this.method = method;
+        return this;
     }
 }

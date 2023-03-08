@@ -1,9 +1,8 @@
 package com._2lazy2name.notion.entity.enumeration;
 
 import com._2lazy2name.notion.entity.common.filter.typeSpecific.IFilterMethod;
-import lombok.Getter;
 
-@Getter
+
 public enum DateFilterMethodEnum implements IFilterMethod {
     EQUALS("equals", DATE),
     BEFORE("before", DATE),
@@ -26,5 +25,15 @@ public enum DateFilterMethodEnum implements IFilterMethod {
     DateFilterMethodEnum(String method, int valueType) {
         this.method = method;
         this.valueType = valueType;
+    }
+
+    @Override
+    public String getMethod() {
+        return method;
+    }
+
+    @Override
+    public int getValueType() {
+        return valueType;
     }
 }

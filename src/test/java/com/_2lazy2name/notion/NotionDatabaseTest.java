@@ -10,9 +10,9 @@ import com._2lazy2name.notion.entity.common.filter.typeSpecific.TextFilter;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.property.database.AbstractDatabaseProperty;
 import com._2lazy2name.notion.entity.property.database.SelectOption;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
 
+import java.io.IOException;
 import java.util.*;
 
 class NotionDatabaseTest extends NotionTest {
@@ -20,22 +20,22 @@ class NotionDatabaseTest extends NotionTest {
     private final static String databaseId = "c302f709af294024b8c4aeba6641913b";
     private final static String pageId = "dbe879bb458844f5b8bfa17ca5374dfc";
 
-    @Test @SneakyThrows
-    void queryDatabase() {
+    @Test
+    void queryDatabase() throws IOException {
         PaginationResult<Page> result = notion.queryDatabase(databaseId);
         System.out.println(result);
     }
 
-    @Test @SneakyThrows
-    void queryDatabaseWithFilter() {
+    @Test
+    void queryDatabaseWithFilter() throws IOException {
         TextFilter filter = new TextFilter();
         filter.on(PropertyTypeEnum.TITLE, "title").contains("test");
         PaginationResult<Page> result = notion.queryDatabase(databaseId, filter);
         System.out.println(result);
     }
 
-    @Test @SneakyThrows
-    void queryDatabaseWithPagination() {
+    @Test
+    void queryDatabaseWithPagination() throws IOException {
         PaginationResult<Page> result;
         String nextCursor = null;
         int pageSize = 1;
@@ -47,8 +47,8 @@ class NotionDatabaseTest extends NotionTest {
     }
 
 
-    @Test @SneakyThrows
-    public void createDatabase() {
+    @Test
+    public void createDatabase() throws IOException {
         AbstractRichText text = AbstractRichText.buildPlainText("test");
         Map<String, AbstractDatabaseProperty> properties = new HashMap<>();
         properties.put("testUrl", AbstractDatabaseProperty.buildUrlProperty());
@@ -63,33 +63,33 @@ class NotionDatabaseTest extends NotionTest {
         notion.createDatabase(parent, "title", List.of(text), properties);
     }
 
-    @Test @SneakyThrows
-    public void updateDatabaseTitle() {
+    @Test
+    public void updateDatabaseTitle() throws IOException {
         notion.updateDatabaseTitle(databaseId, "new title");
     }
 
-    @Test @SneakyThrows
-    public void updateDatabaseDescription() {
+    @Test
+    public void updateDatabaseDescription() throws IOException {
         notion.updateDatabaseDescription(databaseId, "new description");
     }
 
-    @Test @SneakyThrows
-    public void updateDatabaseProperties() {
+    @Test
+    public void updateDatabaseProperties() throws IOException {
         notion.updateDatabaseProperties(databaseId, Map.of("testTwootherUrl", AbstractDatabaseProperty.buildUrlProperty()));
     }
 
-    @Test @SneakyThrows
-    public void removeDatabaseProperty() {
+    @Test
+    public void removeDatabaseProperty() throws IOException {
         notion.removeDatabaseProperty(databaseId, "testTwootherUrl");
     }
 
-    @Test @SneakyThrows
-    public void renameDatabaseProperty() {
+    @Test
+    public void renameDatabaseProperty() throws IOException {
         notion.renameDatabaseProperty(databaseId, "url", "url");
     }
 
-    @Test @SneakyThrows
-    public void retrieveDatabase() {
+    @Test
+    public void retrieveDatabase() throws IOException {
         Database database = notion.retrieveDatabase(databaseId);
         System.out.println(database);
     }

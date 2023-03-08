@@ -6,28 +6,29 @@ import com._2lazy2name.notion.entity.block.heading.HeadingOneBlock;
 import com._2lazy2name.notion.entity.block.heading.HeadingTwoBlock;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
-import lombok.SneakyThrows;
 
 import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
 
 class HeadingBlockTest extends NotionTest {
     private final String testPageId = "bb5580f5ecfc4a379110a0455a7010d3";
 
-    private static HeadingOneBlock createHeadingOneBlock() {
+    private static HeadingOneBlock createHeadingOneBlock() throws IOException {
         return new HeadingOneBlock.Builder()
                 .richText("Test Heading 1")
                 .randomColor()
                 .build();
     }
 
-    @Test @SneakyThrows
-    public void testCreateHeading1() {
+    @Test
+    public void testCreateHeading1() throws IOException {
         PaginationResult<AbstractBlock> result = notion.appendBlockChild(testPageId, createHeadingOneBlock());
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testCreateHeading2() {
+    @Test
+    public void testCreateHeading2() throws IOException {
         AbstractHeadingBlock headingTwoBlock = new HeadingTwoBlock.Builder()
                 .richText("Heading 2")
                 .randomColorBackground()
@@ -36,8 +37,8 @@ class HeadingBlockTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testCreateHeading3() {
+    @Test
+    public void testCreateHeading3() throws IOException {
         AbstractHeadingBlock headingThreeBlock = new HeadingTwoBlock.Builder()
                 .richText("Heading 3")
                 .randomColor()
@@ -46,8 +47,8 @@ class HeadingBlockTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testArchivedBlock() {
+    @Test
+    public void testArchivedBlock() throws IOException, InterruptedException {
         HeadingOneBlock headingOneBlock = new HeadingOneBlock.Builder().richText("Heading 1").build();
         PaginationResult<AbstractBlock> result =  notion.appendBlockChild(testPageId, headingOneBlock);
         Thread.sleep(SLEEP_TIME);
@@ -55,8 +56,8 @@ class HeadingBlockTest extends NotionTest {
         createdBlock.add(result.getResults().get(0).getId());
     }
 
-    @Test @SneakyThrows
-    public void testUpdateHeadingText() {
+    @Test
+    public void testUpdateHeadingText() throws IOException, InterruptedException {
         HeadingOneBlock headingOneBlock = createHeadingOneBlock();
         PaginationResult<AbstractBlock> result = notion.appendBlockChild(testPageId, headingOneBlock);
         Thread.sleep(SLEEP_TIME);
@@ -67,8 +68,8 @@ class HeadingBlockTest extends NotionTest {
         createdBlock.add(blockId);
     }
 
-    @Test @SneakyThrows
-    public void testUpdateHeadingColor() {
+    @Test
+    public void testUpdateHeadingColor() throws IOException, InterruptedException {
         HeadingOneBlock headingOneBlock = createHeadingOneBlock();
         PaginationResult<AbstractBlock> result = notion.appendBlockChild(testPageId, headingOneBlock);
         Thread.sleep(SLEEP_TIME);
@@ -79,8 +80,8 @@ class HeadingBlockTest extends NotionTest {
         createdBlock.add(blockId);
     }
 
-    @Test @SneakyThrows
-    public void testCreateToggleableHeading() {
+    @Test
+    public void testCreateToggleableHeading() throws IOException  {
         HeadingOneBlock headingOneBlock = new HeadingOneBlock.Builder()
                 .isToggleable(true)
                 .richText("Heading 1")

@@ -4,11 +4,6 @@ import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.entity.enumeration.type.IconTypeEnum;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-
-@ToString @Getter @Setter
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = EmojiIcon.class, name = "emoji"),
@@ -28,4 +23,12 @@ public abstract class AbstractIcon {
         return new FileIcon(file);
     }
 
+    public IconTypeEnum getType() {
+        return type;
+    }
+
+    public AbstractIcon setType(IconTypeEnum type) {
+        this.type = type;
+        return this;
+    }
 }

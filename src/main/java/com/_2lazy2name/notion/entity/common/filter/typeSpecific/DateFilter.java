@@ -5,11 +5,6 @@ import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
 import java.util.Date;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter @Setter @NoArgsConstructor
 public class DateFilter extends PropertyFilter {
     private DateFilterMethodEnum method;
 
@@ -118,5 +113,16 @@ public class DateFilter extends PropertyFilter {
         return this;
     }
 
+    public DateFilter() {
+    }
 
+    @Override
+    public DateFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public DateFilter setMethod(DateFilterMethodEnum method) {
+        this.method = method;
+        return this;
+    }
 }

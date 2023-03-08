@@ -2,9 +2,6 @@ package com._2lazy2name.notion.entity.property.page;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.property.database.SelectOption;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 /**
  * @author Yi
@@ -12,9 +9,6 @@ import lombok.ToString;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/page-property-values#select">Select</a>
  */
-@Getter
-@Setter
-@ToString
 public class SelectValue extends AbstractPagePropertyValue {
     private final PropertyTypeEnum type = PropertyTypeEnum.SELECT;
     private SelectOption select;
@@ -24,5 +18,19 @@ public class SelectValue extends AbstractPagePropertyValue {
 
     public SelectValue(SelectOption select) {
         this.select = select;
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    public SelectOption getSelect() {
+        return select;
+    }
+
+    public SelectValue setSelect(SelectOption select) {
+        this.select = select;
+        return this;
     }
 }

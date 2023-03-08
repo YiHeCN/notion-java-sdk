@@ -2,11 +2,7 @@ package com._2lazy2name.notion.entity.common.filter.typeSpecific;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter @Setter @NoArgsConstructor
 public class FormulaFilter extends PropertyFilter {
     private final PropertyTypeEnum type = PropertyTypeEnum.FORMULA;
     private FormulaFilterMethodEnum method;
@@ -46,7 +42,6 @@ public class FormulaFilter extends PropertyFilter {
         return this;
     }
 
-    @Getter
     public enum FormulaFilterMethodEnum implements IFilterMethod {
         STRING("string", FILTER_OBJECT),
         CHECKBOX("checkbox", FILTER_OBJECT),
@@ -61,5 +56,33 @@ public class FormulaFilter extends PropertyFilter {
             this.method = method;
             this.valueType = valueType;
         }
+
+        @Override
+        public String getMethod() {
+            return method;
+        }
+
+        @Override
+        public int getValueType() {
+            return valueType;
+        }
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    @Override
+    public FormulaFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public FormulaFilter setMethod(FormulaFilterMethodEnum method) {
+        this.method = method;
+        return this;
+    }
+
+    public FormulaFilter() {
     }
 }

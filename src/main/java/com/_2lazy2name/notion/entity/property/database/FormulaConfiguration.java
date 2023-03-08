@@ -2,9 +2,6 @@ package com._2lazy2name.notion.entity.property.database;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
 /***
  * TODO: Not work
@@ -13,16 +10,22 @@ import lombok.ToString;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/property-object#formula-configuration">Formula Configuration</a>
  */
-@Getter
-@Setter
-@ToString
 public class FormulaConfiguration extends AbstractDatabaseProperty {
     private final PropertyTypeEnum type = PropertyTypeEnum.FORMULA;
     private Formula formula;
 
-    @Getter @Setter
+
     private static class Formula {
         private String expression;
+
+        public String getExpression() {
+            return expression;
+        }
+
+        public Formula setExpression(String expression) {
+            this.expression = expression;
+            return this;
+        }
     }
 
     private FormulaConfiguration() {
@@ -40,5 +43,19 @@ public class FormulaConfiguration extends AbstractDatabaseProperty {
 
     public void setExpression(String expression) {
         this.formula.setExpression(expression);
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    public Formula getFormula() {
+        return formula;
+    }
+
+    public FormulaConfiguration setFormula(Formula formula) {
+        this.formula = formula;
+        return this;
     }
 }

@@ -2,9 +2,7 @@ package com._2lazy2name.notion.entity.property.page;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.property.database.SelectOption;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 import java.util.List;
 
@@ -16,9 +14,6 @@ import java.util.List;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/page-property-values#multi-select">Multi-select</a>
  */
-@Getter
-@Setter
-@ToString
 public class MultiselectValue extends AbstractPagePropertyValue {
     private final PropertyTypeEnum type = PropertyTypeEnum.MULTI_SELECT;
     private List<SelectOption> multiSelect;
@@ -28,5 +23,19 @@ public class MultiselectValue extends AbstractPagePropertyValue {
 
     public MultiselectValue(List<SelectOption> multiSelect) {
         this.multiSelect = multiSelect;
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    public List<SelectOption> getMultiSelect() {
+        return multiSelect;
+    }
+
+    public MultiselectValue setMultiSelect(List<SelectOption> multiSelect) {
+        this.multiSelect = multiSelect;
+        return this;
     }
 }

@@ -2,7 +2,6 @@ package com._2lazy2name.notion;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import lombok.SneakyThrows;
 import org.junit.jupiter.api.AfterAll;
 
 import java.io.IOException;
@@ -34,11 +33,15 @@ public class NotionTest {
     }
 
     @AfterAll
-    @SneakyThrows
-    public static void deleteAll() {
+    public static void deleteAll() throws InterruptedException, IOException {
         Thread.sleep(SLEEP_TIME);
-        if (AUTO_DELETE)
-            createdBlock.stream().filter(Objects::nonNull).forEach(notion::deleteBlock);
+        if (AUTO_DELETE) {
+            for (String s : createdBlock) {
+                if (s != null) {
+                    notion.deleteBlock(s);
+                }
+            }
+        }
         createdBlock.clear();
     }
 }

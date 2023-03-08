@@ -3,13 +3,7 @@ package com._2lazy2name.notion.entity.common.parent;
 import com._2lazy2name.notion.entity.enumeration.type.ParentTypeEnum;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@ToString
-@Getter
-@Setter
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type")
 @JsonSubTypes(
     {
@@ -42,5 +36,14 @@ public abstract class AbstractParent {
 
     public static WorkSpaceParent buildWorkSpaceParent() {
         return WorkSpaceParent.getInstance();
+    }
+
+    public ParentTypeEnum getType() {
+        return type;
+    }
+
+    public AbstractParent setType(ParentTypeEnum type) {
+        this.type = type;
+        return this;
     }
 }

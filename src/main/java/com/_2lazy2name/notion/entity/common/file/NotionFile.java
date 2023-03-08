@@ -1,9 +1,7 @@
 package com._2lazy2name.notion.entity.common.file;
 
 import com._2lazy2name.notion.entity.enumeration.type.FileTypeEnum;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 import java.util.Date;
 
@@ -12,10 +10,28 @@ public class NotionFile extends AbstractFile {
     private final FileTypeEnum type = FileTypeEnum.FILE;
     private File file;
 
-    @ToString @Getter @Setter
+
     public static class File {
         private String url;
         private Date expiryTime;
+
+        public String getUrl() {
+            return url;
+        }
+
+        public File setUrl(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public Date getExpiryTime() {
+            return expiryTime;
+        }
+
+        public File setExpiryTime(Date expiryTime) {
+            this.expiryTime = expiryTime;
+            return this;
+        }
     }
 
     public NotionFile(String name, String url, Date expiryTime) {

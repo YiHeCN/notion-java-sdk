@@ -2,9 +2,7 @@ package com._2lazy2name.notion.entity.property.database;
 
 import com._2lazy2name.notion.entity.enumeration.ColorEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 
 /***
@@ -13,9 +11,6 @@ import lombok.ToString;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/property-object#select-options">Select Options</a>
  */
-@Getter
-@Setter
-@ToString
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class SelectOption {
     private String name;
@@ -34,5 +29,30 @@ public class SelectOption {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public SelectOption setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public SelectOption setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public ColorEnum getColor() {
+        return color;
+    }
+
+    public SelectOption setColor(ColorEnum color) {
+        this.color = color;
+        return this;
+    }
 }

@@ -3,14 +3,9 @@ package com._2lazy2name.notion.entity.common.filter;
 import com._2lazy2name.notion.entity.enumeration.DateFilterMethodEnum;
 import com._2lazy2name.notion.entity.enumeration.TimeStampEnum;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
 
 import java.util.Date;
 
-@ToString @Getter @Setter @NoArgsConstructor
 @JsonSerialize(using = FilterSerializer.class)
 public class TimestampFilter implements AbstractFilter {
     private TimeStampEnum timestamp;
@@ -109,6 +104,36 @@ public class TimestampFilter implements AbstractFilter {
     public TimestampFilter nextYear() {
         this.method = DateFilterMethodEnum.NEXT_YEAR;
         this.value = null;
+        return this;
+    }
+
+    public TimestampFilter() {
+    }
+
+    public TimeStampEnum getTimestamp() {
+        return timestamp;
+    }
+
+    public TimestampFilter setTimestamp(TimeStampEnum timestamp) {
+        this.timestamp = timestamp;
+        return this;
+    }
+
+    public DateFilterMethodEnum getMethod() {
+        return method;
+    }
+
+    public TimestampFilter setMethod(DateFilterMethodEnum method) {
+        this.method = method;
+        return this;
+    }
+
+    public Object getValue() {
+        return value;
+    }
+
+    public TimestampFilter setValue(Object value) {
+        this.value = value;
         return this;
     }
 }

@@ -3,9 +3,7 @@ package com._2lazy2name.notion.entity.property.database.relation;
 import com._2lazy2name.notion.entity.enumeration.type.RelationTypeEnum;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 /***
  * TODO: Implement this class.
@@ -15,9 +13,6 @@ import lombok.ToString;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/changes-by-version">Changes by version</a>
  */
-@Getter
-@Setter
-@ToString
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = SinglePropertyRelation.class, name = "single_property"),
@@ -26,4 +21,12 @@ import lombok.ToString;
 public abstract class AbstractRelation {
     protected RelationTypeEnum type;
     private String databaseId;
+
+    public RelationTypeEnum getType() {
+        return type;
+    }
+
+    public String getDatabaseId() {
+        return databaseId;
+    }
 }

@@ -2,9 +2,7 @@ package com._2lazy2name.notion.entity.property.database;
 
 import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +13,22 @@ import java.util.List;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/property-object#select-configuration">Select Configuration</a>
  */
-@Getter @Setter @ToString
 public class SelectConfiguration extends AbstractDatabaseProperty {
     private final PropertyTypeEnum type = PropertyTypeEnum.SELECT;
     private Select select;
 
-    @Getter @Setter @ToString
+
     private static class Select {
         private List<SelectOption> options = new ArrayList<>();
+
+        public List<SelectOption> getOptions() {
+            return options;
+        }
+
+        public Select setOptions(List<SelectOption> options) {
+            this.options = options;
+            return this;
+        }
     }
 
     private SelectConfiguration() {
@@ -40,5 +46,19 @@ public class SelectConfiguration extends AbstractDatabaseProperty {
 
     public void setOptions(List<SelectOption> options) {
         this.select.setOptions(options);
+    }
+
+    @Override
+    public PropertyTypeEnum getType() {
+        return type;
+    }
+
+    public Select getSelect() {
+        return select;
+    }
+
+    public SelectConfiguration setSelect(Select select) {
+        this.select = select;
+        return this;
     }
 }

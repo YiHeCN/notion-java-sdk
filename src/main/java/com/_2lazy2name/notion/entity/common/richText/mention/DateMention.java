@@ -2,11 +2,7 @@ package com._2lazy2name.notion.entity.common.richText.mention;
 
 import com._2lazy2name.notion.entity.common.Date;
 import com._2lazy2name.notion.entity.enumeration.type.MentionTypeEnum;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
 
-@ToString @Getter @Setter
 public class DateMention extends AbstractMention {
     private final MentionTypeEnum type = MentionTypeEnum.DATE;
     private Date date;
@@ -16,5 +12,18 @@ public class DateMention extends AbstractMention {
 
     public DateMention(Date date) {
         this.date = date;
+    }
+
+    public MentionTypeEnum getType() {
+        return type;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public DateMention setDate(Date date) {
+        this.date = date;
+        return this;
     }
 }
