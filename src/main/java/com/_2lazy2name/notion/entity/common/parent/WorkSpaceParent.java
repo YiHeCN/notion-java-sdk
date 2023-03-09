@@ -1,6 +1,6 @@
 package com._2lazy2name.notion.entity.common.parent;
 
-import com._2lazy2name.notion.entity.enumeration.type.ParentTypeEnum;
+import com._2lazy2name.notion.enumeration.type.ParentTypeEnum;
 
 public class WorkSpaceParent extends AbstractParent {
     private final ParentTypeEnum type = ParentTypeEnum.WORKSPACE;

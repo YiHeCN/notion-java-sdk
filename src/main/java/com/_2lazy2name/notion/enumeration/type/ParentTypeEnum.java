@@ -1,4 +1,4 @@
-package com._2lazy2name.notion.entity.enumeration.type;
+package com._2lazy2name.notion.enumeration.type;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
