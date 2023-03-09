@@ -1,6 +1,7 @@
 package com._2lazy2name.notion.property.page;
 
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 
 import java.util.List;
@@ -20,6 +21,14 @@ public class TitleValue extends AbstractPagePropertyValue {
 
     public TitleValue(List<AbstractRichText> title) {
         this.title = title;
+    }
+
+    public TitleValue(String title) {
+        this.title = List.of(new TextText(title));
+    }
+
+    public TitleValue(AbstractRichText title) {
+        this.title = List.of(title);
     }
 
     @Override

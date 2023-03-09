@@ -2,6 +2,7 @@ package com._2lazy2name.notion.entity.block.table;
 
 import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -24,7 +25,7 @@ public class TableRow extends AbstractBlock {
         return this;
     }
     public TableRow addCell(String cell) {
-        this.tableRow.cells.add(List.of(AbstractRichText.buildPlainText(cell)));
+        this.tableRow.cells.add(List.of(new TextText(cell)));
         return this;
     }
     public TableRow addCells(List<List<AbstractRichText>> cells) {

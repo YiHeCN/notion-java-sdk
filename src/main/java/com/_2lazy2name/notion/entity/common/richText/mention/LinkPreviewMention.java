@@ -14,6 +14,7 @@ public class LinkPreviewMention extends AbstractMention {
         this.linkPreview = linkPreview;
     }
 
+    @Override
     public MentionTypeEnum getType() {
         return type;
     }

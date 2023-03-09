@@ -10,25 +10,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = FileIcon.class, name = "external"),
 })
 public abstract class AbstractIcon {
-    private IconTypeEnum type;
+    protected IconTypeEnum type;
 
     protected AbstractIcon() {
     }
 
-    public static EmojiIcon buildEmojiIcon(char emoji) {
-        return new EmojiIcon(emoji);
-    }
-
-    public static FileIcon buildFileIcon(AbstractFile file) {
-        return new FileIcon(file);
-    }
-
-    public IconTypeEnum getType() {
-        return type;
-    }
-
-    public AbstractIcon setType(IconTypeEnum type) {
-        this.type = type;
-        return this;
-    }
+    public abstract IconTypeEnum getType();
 }

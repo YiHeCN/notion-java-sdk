@@ -16,11 +16,5 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 public abstract class AbstractParent {
     protected ParentTypeEnum type;
 
-    public static WorkSpaceParent buildWorkSpaceParent() {
-        return WorkSpaceParent.getInstance();
-    }
-
-    protected ParentTypeEnum getType() {
-        return type;
-    }
+    public abstract ParentTypeEnum getType();
 }

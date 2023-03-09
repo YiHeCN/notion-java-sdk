@@ -2,6 +2,7 @@ package com._2lazy2name.notion.entity.block.heading;
 
 import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.ColorEnum;
 import com.fasterxml.jackson.annotation.*;
 
@@ -52,7 +53,7 @@ public abstract class AbstractHeadingBlock extends AbstractBlock {
         return this;
     }
     public AbstractHeadingBlock setRichText(String text) {
-        heading.setRichText(List.of(AbstractRichText.buildPlainText(text)));
+        heading.setRichText(List.of(new TextText(text)));
         return this;
     }
 

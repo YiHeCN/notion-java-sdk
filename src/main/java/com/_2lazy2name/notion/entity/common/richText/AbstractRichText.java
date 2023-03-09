@@ -84,23 +84,6 @@ public abstract class AbstractRichText {
         }
     }
 
-    public static TextText buildPlainText(String content) {
-        return buildPlainText(content, null);
-    }
-
-    public static TextText buildPlainText(String content, String url) {
-        TextText text = new TextText();
-        TextText.Text _text = new TextText.Text();
-        _text.setContent(content);
-        if (url != null) {
-            TextText.Link link = new TextText.Link();
-            link.setUrl(url);
-            _text.setLink(link);
-            text.setHref(url);
-        }
-        text.setText(_text);
-        return text;
-    }
 
     // TODO: Add builder for User and Page Mention Text
    

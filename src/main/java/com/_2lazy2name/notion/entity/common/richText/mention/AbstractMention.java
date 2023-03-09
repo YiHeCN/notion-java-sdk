@@ -15,4 +15,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 })
 public abstract class AbstractMention {
     protected MentionTypeEnum type;
+
+    public abstract MentionTypeEnum getType();
 }

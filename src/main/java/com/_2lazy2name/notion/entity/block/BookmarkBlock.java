@@ -1,6 +1,7 @@
 package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -29,7 +30,7 @@ public class BookmarkBlock extends AbstractBlock {
         }
 
         public Builder caption(String caption) {
-            this.caption = List.of(AbstractRichText.buildPlainText(caption));
+            this.caption = List.of(new TextText(caption));
             return this;
         }
 
@@ -61,7 +62,7 @@ public class BookmarkBlock extends AbstractBlock {
         return this;
     }
     public BookmarkBlock setCaption(String caption) {
-        this.bookmark.caption = List.of(AbstractRichText.buildPlainText(caption));
+        this.bookmark.caption = List.of(new TextText(caption));
         return this;
     }
 

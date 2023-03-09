@@ -3,6 +3,7 @@ package com._2lazy2name.notion.entity.block.list;
 import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.block.builder.impl.TextColorBuilder;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.ColorEnum;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -42,7 +43,7 @@ public class BulletedListItemBlock extends AbstractBlock {
         return this;
     }
     public BulletedListItemBlock setRichText(String text) {
-        this.bulletedListItem.richText = List.of(AbstractRichText.buildPlainText(text));
+        this.bulletedListItem.richText = List.of(new TextText(text));
         return this;
     }
 

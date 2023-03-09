@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
-import com._2lazy2name.notion.property.NullToEmptyObjectSerializer;
+import com._2lazy2name.notion.serializer.NullToEmptyObjectSerializer;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 

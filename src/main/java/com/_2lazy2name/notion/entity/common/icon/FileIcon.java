@@ -9,8 +9,7 @@ public class FileIcon extends AbstractIcon {
     @JsonUnwrapped
     private AbstractFile file;
 
-    private FileIcon() {
-    }
+    private FileIcon() {}
 
     public FileIcon(AbstractFile file) {
         this.file = file;
@@ -18,7 +17,7 @@ public class FileIcon extends AbstractIcon {
 
     @Override
     public IconTypeEnum getType() {
-        return type;
+        return this.type;
     }
 
     public AbstractFile getFile() {

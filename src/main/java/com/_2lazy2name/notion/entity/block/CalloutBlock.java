@@ -3,6 +3,7 @@ package com._2lazy2name.notion.entity.block;
 import com._2lazy2name.notion.entity.block.builder.impl.TextColorBuilder;
 import com._2lazy2name.notion.entity.common.icon.AbstractIcon;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.ColorEnum;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -59,7 +60,7 @@ public class CalloutBlock extends AbstractBlock {
         return this;
     }
     public CalloutBlock setRichText(String text) {
-        this.callout.richText = List.of(AbstractRichText.buildPlainText(text));
+        this.callout.richText = List.of(new TextText(text));
         return this;
     }
 

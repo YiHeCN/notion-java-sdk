@@ -4,6 +4,7 @@ import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.common.parent.DatabaseParent;
 import com._2lazy2name.notion.entity.common.parent.PageParent;
 import com._2lazy2name.notion.property.page.AbstractPagePropertyValue;
+import com._2lazy2name.notion.property.page.CheckboxValue;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -24,15 +25,14 @@ class NotionPageTest extends NotionTest {
     @Test
     public void createPageWithPageParent() throws IOException  {
         PageParent parent = new PageParent(createdPageId);
-        System.out.println(notion.createPage(parent, "Test Page", null, null, null));
+        System.out.println(notion.createPage(parent, "Test Page"));
     }
 
     @Test
     public void createPageWithDatabaseParent() throws IOException {
         DatabaseParent parent = new DatabaseParent(databaseId);
-        AbstractPagePropertyValue title = AbstractPagePropertyValue.buildTitleValue("Test Page");
-        AbstractPagePropertyValue select = AbstractPagePropertyValue.buildCheckboxValue(true);
-        System.out.println(notion.createPage(parent, Map.of("Name", title, "Tags", select), null, null, null));
+        AbstractPagePropertyValue select = new CheckboxValue(true);
+        System.out.println(notion.createPage(parent, "Test Page", Map.of("Tags", select), null, null, null));
     }
 
     @Test

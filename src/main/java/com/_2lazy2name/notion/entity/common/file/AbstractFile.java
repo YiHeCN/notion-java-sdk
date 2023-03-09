@@ -9,10 +9,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.List;
 
 /**
- * {@link NotionFile} objects contain data about a file that is uploaded to Notion.
+ * {@link NotionHostedFile} objects contain data about a file that is uploaded to Notion.
  * {@link ExternalFile} file that is linked to in Notion.
  * Official Notion API does not provide a way to upload a file to Notion. i.e. Only External file is allowed to build.
- * However, you can still use the #{@link NotionFile} from results of other API calls.
+ * However, you can still use the #{@link NotionHostedFile} from results of other API calls.
  * "It remains one of the files", according to Notion API.
  * TODO: Add a way to upload a file to Notion.
  * @version 1.0
@@ -23,26 +23,14 @@ import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = ExternalFile.class, name = "external"),
-        @JsonSubTypes.Type(value = NotionFile.class, name = "file"),
+        @JsonSubTypes.Type(value = NotionHostedFile.class, name = "file"),
 })
 public abstract class AbstractFile {
     protected FileTypeEnum type;
     protected String name;
     protected List<AbstractRichText> caption;
 
-    public static ExternalFile buildExternalFile(List<AbstractRichText> caption, String url) {
-        ExternalFile externalFile = new ExternalFile(url);
-        externalFile.setCaption(caption);
-        return externalFile;
-    }
-
-    public static ExternalFile buildExternalFile(String name, String url) {
-        return new ExternalFile(name, url);
-    }
-
-    public static ExternalFile buildExternalFile(String url) {
-        return new ExternalFile(url);
-    }
+    public abstract String getUrl();
 
     public FileTypeEnum getType() {
         return type;

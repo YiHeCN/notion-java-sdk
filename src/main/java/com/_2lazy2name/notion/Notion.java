@@ -14,11 +14,14 @@ import com._2lazy2name.notion.entity.common.parent.PageParent;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.common.filter.AbstractFilter;
 import com._2lazy2name.notion.entity.common.PaginationResult;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.property.database.AbstractDatabaseProperty;
+import com._2lazy2name.notion.property.database.RenamingProperty;
 import com._2lazy2name.notion.property.database.TitleConfiguration;
 import com._2lazy2name.notion.property.page.AbstractPagePropertyValue;
 import com._2lazy2name.notion.entity.common.sort.AbstractSort;
 import com._2lazy2name.notion.entity.common.icon.AbstractIcon;
+import com._2lazy2name.notion.property.page.TitleValue;
 import com._2lazy2name.util.HttpUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -115,7 +118,7 @@ public class Notion {
                                    String titlePropertyName,
                                    String dataBaseTitle,
                                    Map<String, AbstractDatabaseProperty> properties) throws IOException {
-        return createDatabase(parent, titlePropertyName, List.of(AbstractRichText.buildPlainText(dataBaseTitle)), properties);
+        return createDatabase(parent, titlePropertyName, List.of(new TextText(dataBaseTitle)), properties);
     }
 
     /**
@@ -146,13 +149,13 @@ public class Notion {
         return updateDatabase(databaseId, title, null, null);
     }
     public Database updateDatabaseTitle(String databaseId, String title) throws IOException {
-        return updateDatabase(databaseId, List.of(AbstractRichText.buildPlainText(title)), null, null);
+        return updateDatabase(databaseId, List.of(new TextText(title)), null, null);
     }
     public Database updateDatabaseDescription(String databaseId, List<AbstractRichText> description) throws IOException {
         return updateDatabase(databaseId, null, description, null);
     }
     public Database updateDatabaseDescription(String databaseId, String description) throws IOException {
-        return updateDatabase(databaseId, null, List.of(AbstractRichText.buildPlainText(description)), null);
+        return updateDatabase(databaseId, null, List.of(new TextText(description)), null);
     }
     public Database updateDatabaseProperties(String databaseId, Map<String, AbstractDatabaseProperty> properties) throws IOException {
         return updateDatabase(databaseId, null, null, properties);
@@ -164,7 +167,7 @@ public class Notion {
     }
     public Database renameDatabaseProperty(String databaseId, String oldNameOrId, String newName) throws IOException {
         Map<String, AbstractDatabaseProperty> properties = new HashMap<>();
-        properties.put(oldNameOrId, AbstractDatabaseProperty.buildOnlyNamePropertyForRenaming(newName));
+        properties.put(oldNameOrId, new RenamingProperty(newName));
         return updateDatabase(databaseId, null, null, properties);
     }
 
@@ -209,33 +212,34 @@ public class Notion {
      * @see <a href="https://developers.notion.com/reference/post-page">Create a page</a>
      */
 
-    public Page createPage(DatabaseParent parent,
+    public Page createPage(AbstractParent parent, String pageTitle,
                            Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children,
                            AbstractIcon icon, AbstractFile cover
     ) throws IOException {
+        if (pageTitle == null) {
+            pageTitle = "Untitled";
+        }
+        Map<String, AbstractPagePropertyValue> _properties = new HashMap<>();
+        _properties.put("title", new TitleValue(pageTitle));
+        if (properties != null) {
+            _properties.putAll(properties);
+        }
         String createPageUrl = API_URL + "pages";
         CreatePageBodyParam bodyParams = new CreatePageBodyParam();
-        bodyParams.setParent(parent).setProperties(properties).setChildren(children).setIcon(icon).setCover(cover);
+        bodyParams.setParent(parent).setProperties(_properties).setChildren(children).setIcon(icon).setCover(cover);
         String body = objectMapper.writeValueAsString(bodyParams);
         String response = httpUtil.post(createPageUrl, body).getBody();
         return objectMapper.readValue(response, Page.class);
     }
-    public Page createPage(DatabaseParent parent, Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children) throws IOException {
-        return createPage(parent, properties, children, null, null);
-    }
 
-    public Page createPage(PageParent parent, String pageTitle, List<AbstractBlock> children, AbstractIcon icon, AbstractFile cover) throws IOException {
-        Map<String, AbstractPagePropertyValue> properties = new HashMap<>() {{
-            put("title", AbstractPagePropertyValue.buildTitleValue(pageTitle));
-        }};
-        CreatePageBodyParam bodyParams = new CreatePageBodyParam();
-        bodyParams.setParent(parent).setProperties(properties).setChildren(children).setIcon(icon).setCover(cover);
-        String body = objectMapper.writeValueAsString(bodyParams);
-        String response = httpUtil.post(API_URL + "pages", body).getBody();
-        return objectMapper.readValue(response, Page.class);
+    public Page createPage(AbstractParent parent, String pageTitle, Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children) throws IOException {
+        return createPage(parent, pageTitle, properties, children, null, null);
     }
-    public Page createPage(PageParent parent, String pageTitle, List<AbstractBlock> children) throws IOException {
-        return createPage(parent, pageTitle, children, null, null);
+    public Page createPage(AbstractParent parent, String pageTitle, Map<String, AbstractPagePropertyValue> properties) throws IOException {
+        return createPage(parent, pageTitle, properties, null, null, null);
+    }
+    public Page createPage(AbstractParent parent, String pageTitle) throws IOException {
+        return createPage(parent, pageTitle, null, null, null, null);
     }
 
     /**
@@ -533,7 +537,7 @@ public class Notion {
     }
     public Comments createComment(AbstractParent parent, String text) throws IOException {
         List<AbstractRichText> richText = new ArrayList<>();
-        richText.add(AbstractRichText.buildPlainText(text));
+        richText.add(new TextText(text));
         return createComment(parent, richText);
     }
 
@@ -547,7 +551,7 @@ public class Notion {
     }
     public Comments createComment(String discussionId, String text) throws IOException {
         List<AbstractRichText> richText = new ArrayList<>();
-        richText.add(AbstractRichText.buildPlainText(text));
+        richText.add(new TextText(text));
         return createComment(discussionId, richText);
     }
 
@@ -600,7 +604,7 @@ public class Notion {
             if (this.properties == null) {
                 this.properties = new HashMap<>();
             }
-            TitleConfiguration title = AbstractDatabaseProperty.buildTitleProperty();
+            TitleConfiguration title = TitleConfiguration.getInstance();
             properties.put(titlePropertyName, title);
             return this;
         }

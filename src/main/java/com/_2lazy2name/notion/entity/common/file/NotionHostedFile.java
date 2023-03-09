@@ -1,17 +1,32 @@
 package com._2lazy2name.notion.entity.common.file;
 
 import com._2lazy2name.notion.enumeration.type.FileTypeEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 import java.util.Date;
 
-
-public class NotionFile extends AbstractFile {
+/**
+ * @author Chole
+ * @since 1.0
+ * @version 1.0
+ * @see <a href="https://developers.notion.com/reference/file-object#notion-hosted-files">NotionFile</a>
+ */
+public class NotionHostedFile extends AbstractFile {
     private final FileTypeEnum type = FileTypeEnum.FILE;
     private File file;
 
+    @JsonIgnore
+    public Date getExpiryTime() {
+        return this.file.getExpiryTime();
+    }
 
-    public static class File {
+    @JsonIgnore
+    public String getUrl() {
+        return this.file.getUrl();
+    }
+
+    private static class File {
         private String url;
         private Date expiryTime;
 
@@ -34,7 +49,7 @@ public class NotionFile extends AbstractFile {
         }
     }
 
-    public NotionFile(String name, String url, Date expiryTime) {
+    private NotionHostedFile(String name, String url, Date expiryTime) {
         super();
         this.name = name;
         this.file = new File();
@@ -47,15 +62,15 @@ public class NotionFile extends AbstractFile {
         return type;
     }
 
-    public File getFile() {
+    private File getFile() {
         return file;
     }
 
-    public NotionFile setFile(File file) {
+    private NotionHostedFile setFile(File file) {
         this.file = file;
         return this;
     }
 
-    public NotionFile() {
+    private NotionHostedFile() {
     }
 }

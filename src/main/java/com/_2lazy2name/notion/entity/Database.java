@@ -44,7 +44,7 @@ public class Database extends PageOrDatabase {
         return id;
     }
 
-    public Database setId(String id) {
+    private Database setId(String id) {
         this.id = id;
         return this;
     }
@@ -53,7 +53,7 @@ public class Database extends PageOrDatabase {
         return createdTime;
     }
 
-    public Database setCreatedTime(Date createdTime) {
+    private Database setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
         return this;
     }
@@ -62,7 +62,7 @@ public class Database extends PageOrDatabase {
         return createdBy;
     }
 
-    public Database setCreatedBy(User createdBy) {
+    private Database setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -71,7 +71,7 @@ public class Database extends PageOrDatabase {
         return lastEditedTime;
     }
 
-    public Database setLastEditedTime(Date lastEditedTime) {
+    private Database setLastEditedTime(Date lastEditedTime) {
         this.lastEditedTime = lastEditedTime;
         return this;
     }
@@ -80,7 +80,7 @@ public class Database extends PageOrDatabase {
         return lastEditedBy;
     }
 
-    public Database setLastEditedBy(User lastEditedBy) {
+    private Database setLastEditedBy(User lastEditedBy) {
         this.lastEditedBy = lastEditedBy;
         return this;
     }
@@ -89,7 +89,7 @@ public class Database extends PageOrDatabase {
         return title;
     }
 
-    public Database setTitle(List<AbstractRichText> title) {
+    private Database setTitle(List<AbstractRichText> title) {
         this.title = title;
         return this;
     }
@@ -98,7 +98,7 @@ public class Database extends PageOrDatabase {
         return description;
     }
 
-    public Database setDescription(List<AbstractRichText> description) {
+    private Database setDescription(List<AbstractRichText> description) {
         this.description = description;
         return this;
     }
@@ -107,7 +107,7 @@ public class Database extends PageOrDatabase {
         return icon;
     }
 
-    public Database setIcon(AbstractIcon icon) {
+    private Database setIcon(AbstractIcon icon) {
         this.icon = icon;
         return this;
     }
@@ -116,7 +116,7 @@ public class Database extends PageOrDatabase {
         return cover;
     }
 
-    public Database setCover(AbstractFile cover) {
+    private Database setCover(AbstractFile cover) {
         this.cover = cover;
         return this;
     }
@@ -125,7 +125,7 @@ public class Database extends PageOrDatabase {
         return properties;
     }
 
-    public Database setProperties(LinkedHashMap<String, AbstractDatabaseProperty> properties) {
+    private Database setProperties(LinkedHashMap<String, AbstractDatabaseProperty> properties) {
         this.properties = properties;
         return this;
     }
@@ -134,7 +134,7 @@ public class Database extends PageOrDatabase {
         return parent;
     }
 
-    public Database setParent(AbstractParent parent) {
+    private Database setParent(AbstractParent parent) {
         this.parent = parent;
         return this;
     }
@@ -143,7 +143,7 @@ public class Database extends PageOrDatabase {
         return url;
     }
 
-    public Database setUrl(String url) {
+    private Database setUrl(String url) {
         this.url = url;
         return this;
     }
@@ -152,7 +152,7 @@ public class Database extends PageOrDatabase {
         return archived;
     }
 
-    public Database setArchived(Boolean archived) {
+    private Database setArchived(Boolean archived) {
         this.archived = archived;
         return this;
     }
@@ -161,7 +161,7 @@ public class Database extends PageOrDatabase {
         return isInline;
     }
 
-    public Database setInline(Boolean inline) {
+    private Database setInline(Boolean inline) {
         isInline = inline;
         return this;
     }
@@ -170,7 +170,7 @@ public class Database extends PageOrDatabase {
         return nextCursor;
     }
 
-    public Database setNextCursor(String nextCursor) {
+    private Database setNextCursor(String nextCursor) {
         this.nextCursor = nextCursor;
         return this;
     }
@@ -179,7 +179,7 @@ public class Database extends PageOrDatabase {
         return hasMore;
     }
 
-    public Database setHasMore(Boolean hasMore) {
+    private Database setHasMore(Boolean hasMore) {
         this.hasMore = hasMore;
         return this;
     }

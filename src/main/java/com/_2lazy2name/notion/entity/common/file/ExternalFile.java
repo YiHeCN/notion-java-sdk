@@ -1,12 +1,19 @@
 package com._2lazy2name.notion.entity.common.file;
 
+import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.enumeration.type.FileTypeEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
+import java.util.List;
 
 public class ExternalFile extends AbstractFile {
     private FileTypeEnum type = FileTypeEnum.EXTERNAL;
     private External external;
+
+    @JsonIgnore
+    public String getUrl() {
+        return this.external.url;
+    }
 
     private static class External {
         private String url;
@@ -33,6 +40,12 @@ public class ExternalFile extends AbstractFile {
         this.name = name;
         this.external = new External();
         this.external.url = url;
+    }
+
+    public ExternalFile(List<AbstractRichText> caption, String url) {
+        this.external = new External();
+        this.external.url = url;
+        this.caption = caption;
     }
 
     @Override

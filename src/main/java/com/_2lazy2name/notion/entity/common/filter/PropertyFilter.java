@@ -2,6 +2,7 @@ package com._2lazy2name.notion.entity.common.filter;
 
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.typeSpecific.IFilterMethod;
+import com._2lazy2name.notion.serializer.FilterSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @JsonSerialize(using = FilterSerializer.class)

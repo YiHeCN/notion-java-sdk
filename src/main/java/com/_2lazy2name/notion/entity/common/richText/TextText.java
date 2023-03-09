@@ -1,11 +1,53 @@
 package com._2lazy2name.notion.entity.common.richText;
 
 import com._2lazy2name.notion.enumeration.type.TextTypeEnum;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class TextText extends AbstractRichText {
     private final TextTypeEnum type = TextTypeEnum.TEXT;
     private Text text;
+
+    private TextText() {
+    }
+    public TextText(String content) {
+        this.text = new Text().setContent(content);
+    }
+    public TextText(String content, String url) {
+        this.text = new Text().setContent(content).setLink(new Link().setUrl(url));
+    }
+
+    @JsonIgnore
+    public String getContent() {
+        return text.getContent();
+    }
+
+    public String setContent(String content) {
+        text.setContent(content);
+        return content;
+    }
+
+
+    @JsonIgnore
+    public String getUrl() {
+        if (text.getLink() == null) {
+            return null;
+        }
+        return text.getLink().getUrl();
+    }
+
+
+    public String setUrl(String url) {
+        if (text.getLink() == null) {
+            text.setLink(new Link().setUrl(url));
+        } else {
+            text.getLink().setUrl(url);
+        }
+        return url;
+    }
 
     public static class Link {
         private String url;
@@ -21,24 +63,25 @@ public class TextText extends AbstractRichText {
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
     public static class Text {
         private String content;
         private Link link;
 
-        public String getContent() {
+        private String getContent() {
             return content;
         }
 
-        public Text setContent(String content) {
+        private Text setContent(String content) {
             this.content = content;
             return this;
         }
 
-        public Link getLink() {
+        private Link getLink() {
             return link;
         }
 
-        public Text setLink(Link link) {
+        private Text setLink(Link link) {
             this.link = link;
             return this;
         }
@@ -46,14 +89,14 @@ public class TextText extends AbstractRichText {
 
     @Override
     public TextTypeEnum getType() {
-        return type;
+        return this.type;
     }
 
-    public Text getText() {
+    private Text getText() {
         return text;
     }
 
-    public TextText setText(Text text) {
+    private TextText setText(Text text) {
         this.text = text;
         return this;
     }

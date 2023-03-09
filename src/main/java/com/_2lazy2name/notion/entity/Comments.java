@@ -2,6 +2,7 @@ package com._2lazy2name.notion.entity;
 
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.ObjectEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -22,13 +23,14 @@ public class Comments {
     private List<AbstractRichText> richText;
 
     private Comments() {}
+
     public Comments(AbstractParent parent, List<AbstractRichText> richText) {
         this.parent = parent;
         this.richText = richText;
     }
     public Comments(AbstractParent parent, String text) {
         this.parent = parent;
-        this.richText = List.of(AbstractRichText.buildPlainText(text));
+        this.richText = List.of(new TextText(text));
     }
 
     public Comments(String discussionId, List<AbstractRichText> richText) {
@@ -37,14 +39,14 @@ public class Comments {
     }
     public Comments(String discussionId, String text) {
         this.discussionId = discussionId;
-        this.richText = List.of(AbstractRichText.buildPlainText(text));
+        this.richText = List.of(new TextText(text));
     }
 
     public String getId() {
         return id;
     }
 
-    public Comments setId(String id) {
+    private Comments setId(String id) {
         this.id = id;
         return this;
     }
@@ -53,7 +55,7 @@ public class Comments {
         return parent;
     }
 
-    public Comments setParent(AbstractParent parent) {
+    private Comments setParent(AbstractParent parent) {
         this.parent = parent;
         return this;
     }
@@ -62,7 +64,7 @@ public class Comments {
         return discussionId;
     }
 
-    public Comments setDiscussionId(String discussionId) {
+    private Comments setDiscussionId(String discussionId) {
         this.discussionId = discussionId;
         return this;
     }
@@ -71,7 +73,7 @@ public class Comments {
         return createdTime;
     }
 
-    public Comments setCreatedTime(Date createdTime) {
+    private Comments setCreatedTime(Date createdTime) {
         this.createdTime = createdTime;
         return this;
     }
@@ -80,7 +82,7 @@ public class Comments {
         return lastEditedTime;
     }
 
-    public Comments setLastEditedTime(Date lastEditedTime) {
+    private Comments setLastEditedTime(Date lastEditedTime) {
         this.lastEditedTime = lastEditedTime;
         return this;
     }
@@ -89,7 +91,7 @@ public class Comments {
         return createdBy;
     }
 
-    public Comments setCreatedBy(User createdBy) {
+    private Comments setCreatedBy(User createdBy) {
         this.createdBy = createdBy;
         return this;
     }
@@ -98,7 +100,7 @@ public class Comments {
         return lastEditedBy;
     }
 
-    public Comments setLastEditedBy(User lastEditedBy) {
+    private Comments setLastEditedBy(User lastEditedBy) {
         this.lastEditedBy = lastEditedBy;
         return this;
     }
@@ -107,7 +109,7 @@ public class Comments {
         return richText;
     }
 
-    public Comments setRichText(List<AbstractRichText> richText) {
+    private Comments setRichText(List<AbstractRichText> richText) {
         this.richText = richText;
         return this;
     }

@@ -2,6 +2,7 @@ package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.entity.block.builder.impl.TextColorBuilder;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.ColorEnum;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -46,7 +47,7 @@ public class ParagraphBlock extends AbstractBlock {
         return setRichText(List.of(richText));
     }
     public ParagraphBlock setRichText(String richText) {
-        return setRichText(List.of(AbstractRichText.buildPlainText(richText)));
+        return setRichText(List.of(new TextText(richText)));
     }
 
     @JsonIgnore

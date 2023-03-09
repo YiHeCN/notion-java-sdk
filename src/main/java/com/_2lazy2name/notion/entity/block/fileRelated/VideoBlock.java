@@ -10,10 +10,6 @@ public class VideoBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.VIDEO;
     private AbstractFile video;
 
-    public static VideoBlock ofVideo(AbstractFile video) {
-        return new VideoBlock(video);
-    }
-
     @Override
     public BlockTypeEnum getType() {
         return type;
@@ -21,7 +17,7 @@ public class VideoBlock extends AbstractBlock {
 
     private VideoBlock() {}
 
-    private VideoBlock(AbstractFile video) {
+    public VideoBlock(AbstractFile video) {
         this.video = video;
     }
 

@@ -1,5 +1,8 @@
-package com._2lazy2name.notion.entity.common.filter;
+package com._2lazy2name.notion.serializer;
 
+import com._2lazy2name.notion.entity.common.filter.AbstractFilter;
+import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
+import com._2lazy2name.notion.entity.common.filter.TimestampFilter;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;

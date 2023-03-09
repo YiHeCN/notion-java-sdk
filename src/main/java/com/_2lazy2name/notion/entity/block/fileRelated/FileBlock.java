@@ -5,14 +5,16 @@ import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+/**
+ * @author Chole
+ * @since 1.0
+ * @version 1.0
+ * @see <a href="https://developers.notion.com/reference/block#file">File</a>
+ */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class FileBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.FILE;
     private AbstractFile file;
-
-    public static FileBlock ofFile(AbstractFile file) {
-        return new FileBlock(file);
-    }
 
     @Override
     public BlockTypeEnum getType() {
@@ -21,7 +23,7 @@ public class FileBlock extends AbstractBlock {
 
     private FileBlock() {}
 
-    private FileBlock(AbstractFile file) {
+    public FileBlock(AbstractFile file) {
         this.file = file;
     }
 

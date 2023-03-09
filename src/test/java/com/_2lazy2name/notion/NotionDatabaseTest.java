@@ -3,13 +3,14 @@ package com._2lazy2name.notion;
 import com._2lazy2name.notion.entity.Database;
 import com._2lazy2name.notion.entity.Page;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
+import com._2lazy2name.notion.entity.common.parent.PageParent;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.ColorEnum;
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.typeSpecific.TextFilter;
 import com._2lazy2name.notion.entity.common.PaginationResult;
-import com._2lazy2name.notion.property.database.AbstractDatabaseProperty;
-import com._2lazy2name.notion.property.database.SelectOption;
+import com._2lazy2name.notion.property.database.*;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -49,17 +50,17 @@ class NotionDatabaseTest extends NotionTest {
 
     @Test
     public void createDatabase() throws IOException {
-        AbstractRichText text = AbstractRichText.buildPlainText("test");
+        AbstractRichText text = new TextText("test");
         Map<String, AbstractDatabaseProperty> properties = new HashMap<>();
-        properties.put("testUrl", AbstractDatabaseProperty.buildUrlProperty());
-        properties.put("testFormula", AbstractDatabaseProperty.buildFormulaProperty("1+1"));
-        properties.put("testCheckbox", AbstractDatabaseProperty.buildCheckboxProperty());
+        properties.put("testUrl", UrlConfiguration.getInstance());
+        properties.put("testFormula", new FormulaConfiguration("1+1"));
+        properties.put("testCheckbox", CheckboxConfiguration.getInstance());
         List<SelectOption> options = new ArrayList<>() {{
             add(new SelectOption("test", ColorEnum.getRandomColor()));
             add(new SelectOption("test2", ColorEnum.getRandomColor()));
         }};
-        properties.put("testSelect", AbstractDatabaseProperty.buildSelectProperty(options));
-        AbstractParent parent = AbstractParent.buildPageParent(pageId);
+        properties.put("testSelect", new SelectConfiguration(options));
+        AbstractParent parent = new PageParent(pageId);
         notion.createDatabase(parent, "title", List.of(text), properties);
     }
 
@@ -75,7 +76,7 @@ class NotionDatabaseTest extends NotionTest {
 
     @Test
     public void updateDatabaseProperties() throws IOException {
-        notion.updateDatabaseProperties(databaseId, Map.of("testTwootherUrl", AbstractDatabaseProperty.buildUrlProperty()));
+        notion.updateDatabaseProperties(databaseId, Map.of("testTwootherUrl", UrlConfiguration.getInstance()));
     }
 
     @Test

@@ -5,6 +5,7 @@ import com._2lazy2name.notion.entity.block.table.TableBlock;
 import com._2lazy2name.notion.entity.block.table.TableRow;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -56,7 +57,7 @@ public class TableTest extends NotionTest {
         String id = result.getResults().get(0).getId();
 
         TableRow rowCreated = (TableRow) notion.retrieveBlockChildren(id).getResults().get(0);
-        rowCreated.getCells().get(0).set(0, AbstractRichText.buildPlainText("Replaced"));
+        rowCreated.getCells().get(0).set(0, new TextText("Replaced"));
         notion.updateBlock(rowCreated);
         createdBlock.add(id);
     }

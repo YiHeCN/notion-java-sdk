@@ -5,14 +5,17 @@ import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
+/**
+ * TODO: Add validation in the constructor. The image must be a valid image link.
+ * @author Chole
+ * @since 1.0
+ * @version 1.0
+ * @see <a href="https://developers.notion.com/reference/block#image">Image</a>
+ */
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ImageBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.IMAGE;
     private AbstractFile image;
-
-    public static ImageBlock ofImage(AbstractFile image) {
-        return new ImageBlock(image);
-    }
 
     @Override
     public BlockTypeEnum getType() {
@@ -21,7 +24,7 @@ public class ImageBlock extends AbstractBlock {
 
     private ImageBlock() {}
 
-    private ImageBlock(AbstractFile image) {
+    public ImageBlock(AbstractFile image) {
         this.image = image;
     }
 

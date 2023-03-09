@@ -2,6 +2,7 @@ package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.entity.block.builder.impl.TextBuilder;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.LanguageEnum;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -31,7 +32,7 @@ public class CodeBlock extends AbstractBlock {
         }
 
         public Builder caption(String caption) {
-            this.caption = List.of(AbstractRichText.buildPlainText(caption));
+            this.caption = List.of(new TextText(caption));
             return this;
         }
 
@@ -61,8 +62,8 @@ public class CodeBlock extends AbstractBlock {
         this.code.richText = List.of(richText);
         return this;
     }
-    public CodeBlock setRichText(String richText) {
-        this.code.richText = List.of(AbstractRichText.buildPlainText(richText));
+    public CodeBlock setRichText(String text) {
+        this.code.richText = List.of(new TextText(text));
         return this;
     }
 

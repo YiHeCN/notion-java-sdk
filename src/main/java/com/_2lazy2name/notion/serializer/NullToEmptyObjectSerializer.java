@@ -1,4 +1,4 @@
-package com._2lazy2name.notion.property;
+package com._2lazy2name.notion.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
