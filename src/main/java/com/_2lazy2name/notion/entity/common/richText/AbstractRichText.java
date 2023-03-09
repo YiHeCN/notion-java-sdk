@@ -20,7 +20,6 @@ public abstract class AbstractRichText {
     private String plainText;
     private String href;
 
-
     public static class Annotation {
         private Boolean bold;
         private Boolean italic;
@@ -84,17 +83,6 @@ public abstract class AbstractRichText {
         }
     }
 
-
-    // TODO: Add builder for User and Page Mention Text
-   
-    public static EquationText buildEquationText(String expression) {
-        EquationText equation = new EquationText();
-        EquationText.Equation _equation = new EquationText.Equation();
-        _equation.setExpression(expression);
-        equation.setEquation(_equation);
-        return equation;
-    }
-
     private void ifNullThenCreateAnnotations() {
         if (annotations == null) {
             annotations = new Annotation();
@@ -132,11 +120,9 @@ public abstract class AbstractRichText {
         return this;
     }
 
-    public TextTypeEnum getType() {
-        return type;
-    }
+    public abstract TextTypeEnum getType();
 
-    public AbstractRichText setType(TextTypeEnum type) {
+    private AbstractRichText setType(TextTypeEnum type) {
         this.type = type;
         return this;
     }
@@ -145,7 +131,7 @@ public abstract class AbstractRichText {
         return annotations;
     }
 
-    public AbstractRichText setAnnotations(Annotation annotations) {
+    private AbstractRichText setAnnotations(Annotation annotations) {
         this.annotations = annotations;
         return this;
     }

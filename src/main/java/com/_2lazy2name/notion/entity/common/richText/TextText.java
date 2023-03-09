@@ -30,7 +30,6 @@ public class TextText extends AbstractRichText {
         return content;
     }
 
-
     @JsonIgnore
     public String getUrl() {
         if (text.getLink() == null) {
@@ -38,7 +37,6 @@ public class TextText extends AbstractRichText {
         }
         return text.getLink().getUrl();
     }
-
 
     public String setUrl(String url) {
         if (text.getLink() == null) {

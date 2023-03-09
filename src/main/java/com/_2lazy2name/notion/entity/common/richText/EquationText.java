@@ -1,32 +1,50 @@
 package com._2lazy2name.notion.entity.common.richText;
 
 import com._2lazy2name.notion.enumeration.type.TextTypeEnum;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class EquationText extends AbstractRichText {
     private final static TextTypeEnum type = TextTypeEnum.EQUATION;
     private Equation equation;
 
-    public static class Equation {
+    @JsonIgnore
+    public String getExpression() {
+        return equation.getExpression();
+    }
+
+    public EquationText setExpression(String expression) {
+        equation.setExpression(expression);
+        return this;
+    }
+
+    @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+    private static class Equation {
         private String expression;
 
-        public String getExpression() {
+        private String getExpression() {
             return expression;
         }
 
-        public Equation setExpression(String expression) {
+        private Equation setExpression(String expression) {
             this.expression = expression;
             return this;
         }
     }
 
-    public Equation getEquation() {
+    @Override
+    public TextTypeEnum getType() {
+        return type;
+    }
+
+    private Equation getEquation() {
         return equation;
     }
 
-    public EquationText setEquation(Equation equation) {
+    private EquationText setEquation(Equation equation) {
         this.equation = equation;
         return this;
     }
-
 
 }
