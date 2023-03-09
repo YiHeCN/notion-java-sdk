@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.common.icon;
 
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
-import com._2lazy2name.notion.entity.enumeration.type.IconTypeEnum;
+import com._2lazy2name.notion.enumeration.type.IconTypeEnum;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 public class FileIcon extends AbstractIcon {

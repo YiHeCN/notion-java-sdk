@@ -1,6 +1,6 @@
 package com._2lazy2name.notion.entity.common.richText;
 
-import com._2lazy2name.notion.entity.enumeration.type.TextTypeEnum;
+import com._2lazy2name.notion.enumeration.type.TextTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class TextText extends AbstractRichText {

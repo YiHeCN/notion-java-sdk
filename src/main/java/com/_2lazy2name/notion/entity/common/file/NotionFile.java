@@ -1,6 +1,6 @@
 package com._2lazy2name.notion.entity.common.file;
 
-import com._2lazy2name.notion.entity.enumeration.type.FileTypeEnum;
+import com._2lazy2name.notion.enumeration.type.FileTypeEnum;
 
 
 import java.util.Date;

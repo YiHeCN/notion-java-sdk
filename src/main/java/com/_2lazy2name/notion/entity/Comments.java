@@ -2,7 +2,7 @@ package com._2lazy2name.notion.entity;
 
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
-import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
+import com._2lazy2name.notion.enumeration.ObjectEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 

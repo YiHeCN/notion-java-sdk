@@ -2,7 +2,7 @@ package com._2lazy2name.notion.entity.common;
 
 import com._2lazy2name.notion.entity.Database;
 import com._2lazy2name.notion.entity.Page;
-import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
+import com._2lazy2name.notion.enumeration.ObjectEnum;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 /**

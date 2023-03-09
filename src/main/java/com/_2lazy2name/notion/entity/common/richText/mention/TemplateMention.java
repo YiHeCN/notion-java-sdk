@@ -1,8 +1,8 @@
 package com._2lazy2name.notion.entity.common.richText.mention;
 
-import com._2lazy2name.notion.entity.enumeration.TemplateMentionEnum;
-import com._2lazy2name.notion.entity.enumeration.TemplateMentionValueEnum;
-import com._2lazy2name.notion.entity.enumeration.type.MentionTypeEnum;
+import com._2lazy2name.notion.enumeration.TemplateMentionEnum;
+import com._2lazy2name.notion.enumeration.TemplateMentionValueEnum;
+import com._2lazy2name.notion.enumeration.type.MentionTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 public class TemplateMention extends AbstractMention {

@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.common.file;
 
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
-import com._2lazy2name.notion.entity.enumeration.type.FileTypeEnum;
+import com._2lazy2name.notion.enumeration.type.FileTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

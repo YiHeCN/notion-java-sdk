@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.common.filter;
 
-import com._2lazy2name.notion.entity.enumeration.DateFilterMethodEnum;
-import com._2lazy2name.notion.entity.enumeration.TimeStampEnum;
+import com._2lazy2name.notion.enumeration.DateFilterMethodEnum;
+import com._2lazy2name.notion.enumeration.TimeStampEnum;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Date;

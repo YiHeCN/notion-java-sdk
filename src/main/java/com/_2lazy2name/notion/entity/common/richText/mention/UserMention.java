@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.common.richText.mention;
 
 import com._2lazy2name.notion.entity.User;
-import com._2lazy2name.notion.entity.enumeration.type.MentionTypeEnum;
+import com._2lazy2name.notion.enumeration.type.MentionTypeEnum;
 
 public class UserMention extends AbstractMention {
     private final MentionTypeEnum type = MentionTypeEnum.USER;

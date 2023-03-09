@@ -4,12 +4,12 @@ import com._2lazy2name.notion.entity.Database;
 import com._2lazy2name.notion.entity.Page;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
-import com._2lazy2name.notion.entity.enumeration.ColorEnum;
-import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
+import com._2lazy2name.notion.enumeration.ColorEnum;
+import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.typeSpecific.TextFilter;
 import com._2lazy2name.notion.entity.common.PaginationResult;
-import com._2lazy2name.notion.entity.property.database.AbstractDatabaseProperty;
-import com._2lazy2name.notion.entity.property.database.SelectOption;
+import com._2lazy2name.notion.property.database.AbstractDatabaseProperty;
+import com._2lazy2name.notion.property.database.SelectOption;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity;
 
-import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
-import com._2lazy2name.notion.entity.enumeration.type.UserTypeEnum;
+import com._2lazy2name.notion.enumeration.ObjectEnum;
+import com._2lazy2name.notion.enumeration.type.UserTypeEnum;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 

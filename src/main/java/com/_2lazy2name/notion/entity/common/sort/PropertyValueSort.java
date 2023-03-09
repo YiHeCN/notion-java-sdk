@@ -1,6 +1,6 @@
 package com._2lazy2name.notion.entity.common.sort;
 
-import com._2lazy2name.notion.entity.enumeration.SortDirectionEnum;
+import com._2lazy2name.notion.enumeration.SortDirectionEnum;
 
 /***
  * @author Yi

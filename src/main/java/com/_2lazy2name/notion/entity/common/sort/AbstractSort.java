@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.common.sort;
 
-import com._2lazy2name.notion.entity.enumeration.SortDirectionEnum;
-import com._2lazy2name.notion.entity.enumeration.TimeStampEnum;
+import com._2lazy2name.notion.enumeration.SortDirectionEnum;
+import com._2lazy2name.notion.enumeration.TimeStampEnum;
 
 
 /***

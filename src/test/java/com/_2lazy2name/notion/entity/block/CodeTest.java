@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.NotionTest;
-import com._2lazy2name.notion.entity.enumeration.LanguageEnum;
+import com._2lazy2name.notion.enumeration.LanguageEnum;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;

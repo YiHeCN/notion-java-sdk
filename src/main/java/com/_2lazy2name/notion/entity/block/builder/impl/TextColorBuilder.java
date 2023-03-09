@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.block.builder.impl;
 
 import com._2lazy2name.notion.entity.block.builder.IColorBuilder;
-import com._2lazy2name.notion.entity.enumeration.ColorEnum;
+import com._2lazy2name.notion.enumeration.ColorEnum;
 
 public abstract class TextColorBuilder<S extends TextColorBuilder<S, T>, T>
         extends TextBuilder<S, T>

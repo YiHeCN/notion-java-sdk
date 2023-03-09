@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.common.filter.typeSpecific;
 
-import com._2lazy2name.notion.entity.enumeration.DateFilterMethodEnum;
-import com._2lazy2name.notion.entity.enumeration.type.PropertyTypeEnum;
+import com._2lazy2name.notion.enumeration.DateFilterMethodEnum;
+import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.entity.common.filter.PropertyFilter;
 import java.util.Date;
 

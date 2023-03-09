@@ -5,7 +5,7 @@ import com._2lazy2name.notion.entity.block.list.BulletedListItemBlock;
 import com._2lazy2name.notion.entity.block.list.NumberedListItemBlock;
 import com._2lazy2name.notion.entity.block.list.ToDoBlock;
 import com._2lazy2name.notion.entity.common.PaginationResult;
-import com._2lazy2name.notion.entity.enumeration.ColorEnum;
+import com._2lazy2name.notion.enumeration.ColorEnum;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -46,7 +46,6 @@ class ListTest extends NotionTest {
          notion.updateBlock(result.getResults().get(0).getId(), bulletedListItemBlock.setColor(ColorEnum.getRandomColor()));
          createdBlock.add(result.getResults().get(0).getId());
     }
-
 
     @Test
     public void testCreateNumberedList() throws IOException {

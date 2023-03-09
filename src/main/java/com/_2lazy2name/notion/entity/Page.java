@@ -4,8 +4,8 @@ import com._2lazy2name.notion.entity.common.PageOrDatabase;
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.entity.common.icon.AbstractIcon;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
-import com._2lazy2name.notion.entity.property.page.AbstractPagePropertyValue;
-import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
+import com._2lazy2name.notion.property.page.AbstractPagePropertyValue;
+import com._2lazy2name.notion.enumeration.ObjectEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 

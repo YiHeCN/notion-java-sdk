@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.entity.common.richText;
 
-import com._2lazy2name.notion.entity.enumeration.ColorEnum;
-import com._2lazy2name.notion.entity.enumeration.type.TextTypeEnum;
+import com._2lazy2name.notion.enumeration.ColorEnum;
+import com._2lazy2name.notion.enumeration.type.TextTypeEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

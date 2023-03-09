@@ -14,8 +14,8 @@ import com._2lazy2name.notion.entity.block.list.ToDoBlock;
 import com._2lazy2name.notion.entity.block.table.TableBlock;
 import com._2lazy2name.notion.entity.block.table.TableRow;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
-import com._2lazy2name.notion.entity.enumeration.ObjectEnum;
-import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
+import com._2lazy2name.notion.enumeration.ObjectEnum;
+import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.*;
 
 import java.util.Date;

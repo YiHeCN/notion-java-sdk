@@ -2,7 +2,7 @@ package com._2lazy2name.notion.entity.block.fileRelated;
 
 import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
-import com._2lazy2name.notion.entity.enumeration.type.BlockTypeEnum;
+import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

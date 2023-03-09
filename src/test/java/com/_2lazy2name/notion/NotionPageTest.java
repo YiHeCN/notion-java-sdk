@@ -3,7 +3,7 @@ package com._2lazy2name.notion;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.common.parent.DatabaseParent;
 import com._2lazy2name.notion.entity.common.parent.PageParent;
-import com._2lazy2name.notion.entity.property.page.AbstractPagePropertyValue;
+import com._2lazy2name.notion.property.page.AbstractPagePropertyValue;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -23,13 +23,13 @@ class NotionPageTest extends NotionTest {
 
     @Test
     public void createPageWithPageParent() throws IOException  {
-        PageParent parent = AbstractParent.buildPageParent(pageId);
+        PageParent parent = new PageParent(createdPageId);
         System.out.println(notion.createPage(parent, "Test Page", null, null, null));
     }
 
     @Test
     public void createPageWithDatabaseParent() throws IOException {
-        DatabaseParent parent = AbstractParent.buildDatabaseParent(createdPageId);
+        DatabaseParent parent = new DatabaseParent(databaseId);
         AbstractPagePropertyValue title = AbstractPagePropertyValue.buildTitleValue("Test Page");
         AbstractPagePropertyValue select = AbstractPagePropertyValue.buildCheckboxValue(true);
         System.out.println(notion.createPage(parent, Map.of("Name", title, "Tags", select), null, null, null));

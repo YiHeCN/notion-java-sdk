@@ -5,7 +5,7 @@ import com._2lazy2name.notion.entity.block.heading.AbstractHeadingBlock;
 import com._2lazy2name.notion.entity.block.heading.HeadingOneBlock;
 import com._2lazy2name.notion.entity.block.heading.HeadingTwoBlock;
 import com._2lazy2name.notion.entity.common.PaginationResult;
-import com._2lazy2name.notion.entity.enumeration.ColorEnum;
+import com._2lazy2name.notion.enumeration.ColorEnum;
 
 import org.junit.jupiter.api.Test;
 
