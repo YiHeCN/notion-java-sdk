@@ -9,8 +9,6 @@ import com._2lazy2name.notion.entity.common.Date;
 import com._2lazy2name.notion.entity.common.PageOrDatabase;
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
-import com._2lazy2name.notion.entity.common.parent.DatabaseParent;
-import com._2lazy2name.notion.entity.common.parent.PageParent;
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.common.filter.AbstractFilter;
 import com._2lazy2name.notion.entity.common.PaginationResult;

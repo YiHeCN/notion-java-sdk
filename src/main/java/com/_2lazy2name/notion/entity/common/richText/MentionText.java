@@ -7,9 +7,11 @@ public class MentionText extends AbstractRichText {
     private final TextTypeEnum type = TextTypeEnum.MENTION;
     private AbstractMention mention;
 
-    @Override
-    public TextTypeEnum getType() {
-        return type;
+    private MentionText() {
+    }
+
+    public MentionText(AbstractMention mention) {
+        this.mention = mention;
     }
 
     public AbstractMention getMention() {
@@ -19,5 +21,10 @@ public class MentionText extends AbstractRichText {
     public MentionText setMention(AbstractMention mention) {
         this.mention = mention;
         return this;
+    }
+
+    @Override
+    public TextTypeEnum getType() {
+        return type;
     }
 }

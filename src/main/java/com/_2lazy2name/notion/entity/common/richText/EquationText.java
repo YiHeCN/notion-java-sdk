@@ -9,6 +9,14 @@ public class EquationText extends AbstractRichText {
     private final static TextTypeEnum type = TextTypeEnum.EQUATION;
     private Equation equation;
 
+    private EquationText() {
+    }
+
+    public EquationText(String equation) {
+        this.equation = new Equation();
+        this.equation.setExpression(equation);
+    }
+
     @JsonIgnore
     public String getExpression() {
         return equation.getExpression();
@@ -46,5 +54,4 @@ public class EquationText extends AbstractRichText {
         this.equation = equation;
         return this;
     }
-
 }

@@ -13,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = EquationText.class, name = "equation"),
         @JsonSubTypes.Type(value = MentionText.class, name = "mention")
 })
-
 public abstract class AbstractRichText {
     protected TextTypeEnum type;
     private Annotation annotations;
@@ -83,39 +82,57 @@ public abstract class AbstractRichText {
         }
     }
 
-    private void ifNullThenCreateAnnotations() {
-        if (annotations == null) {
-            annotations = new Annotation();
-        }
-        annotations.setColor(ColorEnum.DEFAULT);
-    }
     public AbstractRichText toggleBold() {
-        ifNullThenCreateAnnotations();
+        if (annotations == null || annotations.getBold() == null) {
+            this.annotations = new Annotation();
+            this.annotations.setBold(true);
+            return this;
+        }
         annotations.setBold(!annotations.getBold());
         return this;
     }
     public AbstractRichText toggleItalic() {
-        ifNullThenCreateAnnotations();
+        if (annotations == null || annotations.getItalic() == null) {
+            this.annotations = new Annotation();
+            this.annotations.setItalic(true);
+            return this;
+        }
         annotations.setItalic(!annotations.getItalic());
         return this;
     }
     public AbstractRichText toggleStrikethrough() {
-        ifNullThenCreateAnnotations();
+        if (annotations == null || annotations.getStrikethrough() == null) {
+            this.annotations = new Annotation();
+            this.annotations.setStrikethrough(true);
+            return this;
+        }
         annotations.setStrikethrough(!annotations.getStrikethrough());
         return this;
     }
     public AbstractRichText toggleUnderline() {
-        ifNullThenCreateAnnotations();
+        if (annotations == null) {
+            this.annotations = new Annotation();
+            this.annotations.setUnderline(true);
+            return this;
+        }
         annotations.setUnderline(!annotations.getUnderline());
         return this;
     }
     public AbstractRichText toggleCode() {
-        ifNullThenCreateAnnotations();
+        if (annotations == null) {
+            this.annotations = new Annotation();
+            this.annotations.setCode(true);
+            return this;
+        }
         annotations.setCode(!annotations.getCode());
         return this;
     }
     public AbstractRichText setColor(ColorEnum color) {
-        ifNullThenCreateAnnotations();
+        if (annotations == null) {
+            this.annotations = new Annotation();
+            this.annotations.setColor(color);
+            return this;
+        }
         annotations.setColor(color);
         return this;
     }
@@ -140,7 +157,7 @@ public abstract class AbstractRichText {
         return plainText;
     }
 
-    public AbstractRichText setPlainText(String plainText) {
+    private AbstractRichText setPlainText(String plainText) {
         this.plainText = plainText;
         return this;
     }

@@ -26,11 +26,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class HttpUtil {
     private final Map<String, String> defaultHeaders = new HashMap<>();
     private static final CloseableHttpClient httpClient;
     private static final ObjectMapper objectMapper = new ObjectMapper();
+    private static final Logger log = Logger.getLogger(HttpUtil.class.getName());
 
     static {
         httpClient = createHttpClient();
@@ -122,18 +125,14 @@ public class HttpUtil {
                 request.setEntity(HttpEntities.create((File) body, bodyType));
             }
         }
-        //TODO: For test, remove this
-        System.out.println("""
-                #method: #url
+        log.log(Level.FINE, """
+                {0}: {1}
                 ============================
-                #body
+                {2}
                 ============================
                 
                 
-                """.replace("#method", method.name())
-                .replace("#url", url).replace("#body", body == null ? "null" : body.toString()));
-
-
+                """, new Object[]{method.name(), url, body == null ? "null" : body.toString()});
         ClassicHttpResponse res = httpClient.execute(request);
         Response response = new Response(res.getCode(), new String(res.getEntity().getContent().readAllBytes()));
         checkAndWrapHttpError(response);

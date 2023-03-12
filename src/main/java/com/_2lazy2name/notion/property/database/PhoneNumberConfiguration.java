@@ -31,7 +31,7 @@ public class PhoneNumberConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getPhoneNumber() {
-        return phoneNumber;
+    private Object getPhoneNumber() {
+        return null;
     }
 }

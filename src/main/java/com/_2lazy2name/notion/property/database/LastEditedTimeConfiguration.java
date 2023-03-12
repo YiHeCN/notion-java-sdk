@@ -32,7 +32,7 @@ public class LastEditedTimeConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getLastEditedTime() {
-        return lastEditedTime;
+    private Object getLastEditedTime() {
+        return null;
     }
 }

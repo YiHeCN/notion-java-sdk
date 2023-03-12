@@ -30,7 +30,7 @@ public class EmailConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getEmail() {
-        return email;
+    private Object getEmail() {
+        return null;
     }
 }

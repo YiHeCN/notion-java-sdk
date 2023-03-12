@@ -14,7 +14,7 @@ import java.io.IOException;
 class HeadingBlockTest extends NotionTest {
     private final String testPageId = "bb5580f5ecfc4a379110a0455a7010d3";
 
-    private static HeadingOneBlock createHeadingOneBlock() throws IOException {
+    private static HeadingOneBlock createHeadingOneBlock() {
         return new HeadingOneBlock.Builder()
                 .richText("Test Heading 1")
                 .randomColor()

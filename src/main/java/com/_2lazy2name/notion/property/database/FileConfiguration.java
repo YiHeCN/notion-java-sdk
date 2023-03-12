@@ -31,7 +31,7 @@ public class FileConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getFiles() {
-        return files;
+    private Object getFiles() {
+        return null;
     }
 }

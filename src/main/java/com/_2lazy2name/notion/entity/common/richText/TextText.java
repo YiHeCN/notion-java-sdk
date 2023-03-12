@@ -3,7 +3,6 @@ package com._2lazy2name.notion.entity.common.richText;
 import com._2lazy2name.notion.enumeration.type.TextTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

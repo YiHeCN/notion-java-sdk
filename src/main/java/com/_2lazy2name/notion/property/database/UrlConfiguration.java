@@ -30,7 +30,7 @@ public class UrlConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getUrl() {
-        return url;
+    private Object getUrl() {
+        return null;
     }
 }

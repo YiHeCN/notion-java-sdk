@@ -29,7 +29,7 @@ Jackson, Lombok, and Apache Http Client5.
 
 # Issue and Contact
 
-I dont check GitHub very often. For any issues or commit, there are some ways to quicker notices and solutions:
+I don't check GitHub very often. For any issues or commit, there are some ways to quicker notices and solutions:
 
 1. E-mail **yi@2lazy2name.com**
 2. [Notion Page](https://www.notion.so/Notion-java-sdk-acbfd949a35646079264d0bb71a77f14) - Check the test cases for usage.

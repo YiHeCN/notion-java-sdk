@@ -1,5 +1,6 @@
 package com._2lazy2name.notion;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import org.junit.jupiter.api.AfterAll;
@@ -7,6 +8,7 @@ import org.junit.jupiter.api.AfterAll;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -43,5 +45,24 @@ public class NotionTest {
             }
         }
         createdBlock.clear();
+    }
+
+    // Compare two Json is equals without order
+    public static boolean isEquals(String json1, String json2) {
+        try {
+            Object obj1 = objectMapper.readValue(json1, Object.class);
+            Object obj2 = objectMapper.readValue(json2, Object.class);
+            return Objects.equals(obj1, obj2);
+        } catch (JsonProcessingException e) {
+            return false;
+        }
+    }
+
+    public static Date formatDate(String date) {
+        try {
+            return objectMapper.getDateFormat().parse(date);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

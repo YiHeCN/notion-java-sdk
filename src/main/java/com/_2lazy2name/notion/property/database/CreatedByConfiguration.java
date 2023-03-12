@@ -32,7 +32,7 @@ public class CreatedByConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getCreatedBy() {
-        return createdBy;
+    private Object getCreatedBy() {
+        return null;
     }
 }

@@ -4,7 +4,6 @@ import com._2lazy2name.notion.NotionTest;
 import com._2lazy2name.notion.entity.block.table.TableBlock;
 import com._2lazy2name.notion.entity.block.table.TableRow;
 import com._2lazy2name.notion.entity.common.PaginationResult;
-import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.common.richText.TextText;
 import org.junit.jupiter.api.Test;
 

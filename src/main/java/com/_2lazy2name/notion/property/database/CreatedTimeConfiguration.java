@@ -32,7 +32,7 @@ public class CreatedTimeConfiguration extends AbstractDatabaseProperty{
         return type;
     }
 
-    public Object getCreatedTime() {
-        return createdTime;
+    private Object getCreatedTime() {
+        return null;
     }
 }

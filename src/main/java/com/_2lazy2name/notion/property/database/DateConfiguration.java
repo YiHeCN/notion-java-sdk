@@ -35,7 +35,7 @@ public class DateConfiguration extends AbstractDatabaseProperty {
         return this;
     }
 
-    public Object getDate() {
-        return date;
+    private Object getDate() {
+        return null;
     }
 }

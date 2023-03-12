@@ -1,12 +1,9 @@
 package com._2lazy2name.notion.property.database;
 
-import com._2lazy2name.notion.enumeration.NumberFormatEnum;
 import com._2lazy2name.notion.enumeration.ObjectEnum;
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.property.AbstractProperty;
 import com.fasterxml.jackson.annotation.*;
-
-import java.util.List;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type")
 @JsonInclude(JsonInclude.Include.NON_NULL)

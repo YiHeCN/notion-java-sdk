@@ -30,7 +30,7 @@ public class TitleConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getTitle() {
-        return title;
+    private Object getTitle() {
+        return null;
     }
 }

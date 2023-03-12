@@ -1,15 +1,8 @@
 package com._2lazy2name.notion.property.page;
 
-import com._2lazy2name.notion.entity.User;
-import com._2lazy2name.notion.entity.common.Date;
-import com._2lazy2name.notion.entity.common.file.AbstractFile;
-import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.property.AbstractProperty;
-import com._2lazy2name.notion.property.database.SelectOption;
 import com.fasterxml.jackson.annotation.*;
-
-import java.util.List;
 
 /***
  * @author Yi

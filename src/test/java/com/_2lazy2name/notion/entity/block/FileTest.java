@@ -7,7 +7,6 @@ import com._2lazy2name.notion.entity.block.fileRelated.PdfBlock;
 import com._2lazy2name.notion.entity.block.fileRelated.VideoBlock;
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.entity.common.file.ExternalFile;
-import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.common.richText.TextText;
 import org.junit.jupiter.api.Test;
 

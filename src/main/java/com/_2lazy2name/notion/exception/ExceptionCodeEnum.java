@@ -1,7 +1,5 @@
 package com._2lazy2name.notion.exception;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-
 public enum ExceptionCodeEnum {
     INVALID_JSON("invalid_json", 400),
     INVALID_REQUEST_URL("invalid_request_url", 400),
@@ -18,8 +16,8 @@ public enum ExceptionCodeEnum {
     DATABASE_CONNECTION_UNAVAILABLE("database_connection_unavailable", 503),
     GATEWAY_TIMEOUT("gateway_timeout", 504);
 
-    private String code;
-    private int statusCode;
+    private final String code;
+    private final int statusCode;
 
     ExceptionCodeEnum(String code, int statusCode) {
         this.code = code;

@@ -17,7 +17,7 @@ public class SinglePropertyRelation extends AbstractRelation {
         return this;
     }
 
-    public Object getSingleProperty() {
-        return singleProperty;
+    private Object getSingleProperty() {
+        return null;
     }
 }

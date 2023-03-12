@@ -39,14 +39,13 @@ public class NotionException extends RuntimeException {
 
     @Override
     public String getMessage() {
-        String template = """
+        return """
                 
                 NotionException:
                 Code %d: %s
                 =================================
                 %s
                 """.formatted(status, code, message);
-        return template;
     }
 
     public NotionException setMessage(String message) {

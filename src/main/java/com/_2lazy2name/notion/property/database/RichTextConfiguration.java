@@ -32,7 +32,7 @@ public class RichTextConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getRichText() {
-        return richText;
+    private Object getRichText() {
+        return null;
     }
 }

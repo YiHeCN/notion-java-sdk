@@ -58,4 +58,13 @@ public abstract class AbstractFile {
         this.caption = caption;
         return this;
     }
+
+    @Override
+    public String toString() {
+        return "AbstractFile{" +
+                "type=" + type +
+                ", name='" + name + '\'' +
+                ", caption=" + caption +
+                '}';
+    }
 }

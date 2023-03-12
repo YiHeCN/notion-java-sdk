@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
 // TODO: Validate emoji
 public class EmojiIcon extends AbstractIcon{
-    private final static IconTypeEnum type = IconTypeEnum.EMOJI;
+    private final IconTypeEnum type = IconTypeEnum.EMOJI;
     @JsonUnwrapped
     private Emoji emoji;
 
@@ -18,7 +18,7 @@ public class EmojiIcon extends AbstractIcon{
 
     @Override
     public IconTypeEnum getType() {
-        return this.type;
+        return type;
     }
 
     public Emoji getEmoji() {

@@ -31,7 +31,7 @@ public class CheckboxConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getCheckbox() {
-        return checkbox;
+    private Object getCheckbox() {
+        return null;
     }
 }

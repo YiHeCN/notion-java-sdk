@@ -31,7 +31,7 @@ public class LastEditedByConfiguration extends AbstractDatabaseProperty {
         return type;
     }
 
-    public Object getLastEditedBy() {
-        return lastEditedBy;
+    private Object getLastEditedBy() {
+        return null;
     }
 }
