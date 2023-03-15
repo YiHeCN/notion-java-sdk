@@ -1,9 +1,3 @@
-# README.md
-
-# CAUTION
-
-Until 2023-02-22, this Lib is still under testing.
-
 # Introduction
 
 Notion-java-sdk is a java version of [Notion API](https://developers.notion.com/).
@@ -25,7 +19,7 @@ The project is written on the source level of **Java 17**. Since enhanced switch
 
 # Lib used
 
-Jackson, Lombok, and Apache Http Client5.
+Jackson, and Apache Http Client5.
 
 # Issue and Contact
 
