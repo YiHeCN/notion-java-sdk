@@ -5,7 +5,8 @@ import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 import com._2lazy2name.notion.property.AbstractProperty;
 import com.fasterxml.jackson.annotation.*;
 
-@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type")
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type", include = JsonTypeInfo.As.EXISTING_PROPERTY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = CheckboxConfiguration.class, name = "checkbox"),

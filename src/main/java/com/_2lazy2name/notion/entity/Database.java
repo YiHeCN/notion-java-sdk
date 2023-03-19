@@ -157,11 +157,11 @@ public class Database extends PageOrDatabase {
         return this;
     }
 
-    public Boolean getInline() {
+    public Boolean isInline() {
         return isInline;
     }
 
-    private Database setInline(Boolean inline) {
+    public Database setIsInline(Boolean inline) {
         isInline = inline;
         return this;
     }
