@@ -19,6 +19,10 @@ public class DateValue extends AbstractPagePropertyValue {
         this.date = date;
     }
 
+    public DateValue(java.util.Date date) {
+        this.date = new Date(date);
+    }
+
     @Override
     public PropertyTypeEnum getType() {
         return type;

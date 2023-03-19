@@ -2,6 +2,8 @@ package com._2lazy2name.notion.entity.common;
 
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.text.SimpleDateFormat;
 
 /**
@@ -11,6 +13,7 @@ import java.text.SimpleDateFormat;
  * @since 2023-02-01
  * @see <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO_8601</a>
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Date {
     private String start;
     private String end;
@@ -18,6 +21,14 @@ public class Date {
     public static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
 
     private Date() {
+    }
+
+    public Date(String start) {
+        this.start = start;
+    }
+
+    public Date(java.util.Date start) {
+        this.start = DATE_FORMAT.format(start);
     }
 
     public Date(String start, String end, String timeZone) {
