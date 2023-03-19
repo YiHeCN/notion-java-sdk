@@ -1,6 +1,7 @@
 package com._2lazy2name.notion.property.page;
 
 import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
+import com._2lazy2name.notion.entity.common.richText.TextText;
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
 
 
@@ -21,6 +22,14 @@ public class RichTextValue extends AbstractPagePropertyValue {
 
     public RichTextValue(List<AbstractRichText> richText) {
         this.richText = richText;
+    }
+
+    public RichTextValue(AbstractRichText richText) {
+        this.richText = List.of(richText);
+    }
+
+    public RichTextValue(String text) {
+        this.richText = List.of(new TextText(text));
     }
 
     @Override
