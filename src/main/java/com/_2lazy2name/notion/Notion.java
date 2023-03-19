@@ -559,8 +559,16 @@ public class Notion {
     public Map<String, SelectOption> getOptionsMap(String databaseId, String selectPropertyName) throws IOException {
         Database database = retrieveDatabase(databaseId);
         LinkedHashMap<String, AbstractDatabaseProperty> map = database.getProperties();
+        AbstractDatabaseProperty property = map.get(selectPropertyName);
+        List<SelectOption> options = null;
+        if (property instanceof SelectConfiguration) {
+            options = ((SelectConfiguration) property).getOptions();
+        } else if (property instanceof MultiSelectConfiguration) {
+            options = ((MultiSelectConfiguration) property).getOptions();
+        } else {
+            throw new IllegalArgumentException("The property is not a select property.");
+        }
         SelectConfiguration selectConfiguration = (SelectConfiguration) map.get(selectPropertyName);
-        List<SelectOption> options = selectConfiguration.getOptions();
         return options.stream().collect(Collectors.toMap(SelectOption::getName, Function.identity()));
     }
 
