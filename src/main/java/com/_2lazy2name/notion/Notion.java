@@ -13,9 +13,7 @@ import com._2lazy2name.notion.entity.common.richText.AbstractRichText;
 import com._2lazy2name.notion.entity.common.filter.AbstractFilter;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.common.richText.TextText;
-import com._2lazy2name.notion.property.database.AbstractDatabaseProperty;
-import com._2lazy2name.notion.property.database.RenamingProperty;
-import com._2lazy2name.notion.property.database.TitleConfiguration;
+import com._2lazy2name.notion.property.database.*;
 import com._2lazy2name.notion.property.page.AbstractPagePropertyValue;
 import com._2lazy2name.notion.entity.common.sort.AbstractSort;
 import com._2lazy2name.notion.entity.common.icon.AbstractIcon;
@@ -30,6 +28,8 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * The main class of the Notion API. Contains all the methods in the page.
@@ -457,7 +457,6 @@ public class Notion {
      * @return The pagination result of user objects.
      * @see <a href="https://developers.notion.com/reference/get-users">List all users</a>
      */
-
     public PaginationResult<User> listAllUsers(int pageSize, String startCursor) throws IOException {
         String listAllUsersUrl = API_URL + "users";
         PaginationParam paginationParams = new PaginationParam();
@@ -471,7 +470,6 @@ public class Notion {
      * @return bot.
      * @see <a href="https://developers.notion.com/reference/get-self">Retrieve your token's bot user</a>
      */
-
     public User retrieveBotInfo() throws IOException {
         String retrieveBotInfoUrl = API_URL + "users/me";
         String response = httpUtil.get(retrieveBotInfoUrl).getBody();
@@ -486,7 +484,6 @@ public class Notion {
      * @param filter The filter to apply to the search.
      * @param sort The sort to apply to the search.
      */
-
     public PaginationResult<PageOrDatabase> search(String query, int pageSize, String startCursor, AbstractFilter filter, AbstractSort sort) throws IOException {
         String searchUrl = API_URL + "search";
         SearchBodyParma searchParam = new SearchBodyParma();
@@ -503,7 +500,6 @@ public class Notion {
      * @return comments list.
      * @see <a href="https://developers.notion.com/reference/retrieve-a-comment">Retrieve comments</a>
      */
-
     public PaginationResult<Comments> retrieveComments(String blockId, int pageSize, String startCursor) throws IOException {
         String retrieveCommentsUrl = API_URL + "comments/";
         PaginationParam paginationParams = new PaginationParam();
@@ -524,7 +520,6 @@ public class Notion {
      * @return comment created.
      * @see <a href="https://developers.notion.com/reference/create-a-comment">Create comment</a>
      */
-
     public Comments createComment(AbstractParent parent, List<AbstractRichText> richText) throws IOException {
         String createCommentUrl = API_URL + "comments";
         CreateCommentBodyParam params = new CreateCommentBodyParam();
@@ -551,6 +546,22 @@ public class Notion {
         List<AbstractRichText> richText = new ArrayList<>();
         richText.add(new TextText(text));
         return createComment(discussionId, richText);
+    }
+
+    /**
+     * This is not an official notion endpoint.
+     * Useful it when you work with {@link SelectOption}.
+     * @param databaseId The ID of the database to retrieve.
+     * @param selectPropertyName The name of the select property to retrieve.
+     *                           <b>CAUTION:</b> This param is CASE-SENSITIVE. Fail to exactly match will cause {@link IOException}.
+     * @return A map of select options.
+     */
+    public Map<String, SelectOption> getOptionsMap(String databaseId, String selectPropertyName) throws IOException {
+        Database database = retrieveDatabase(databaseId);
+        LinkedHashMap<String, AbstractDatabaseProperty> map = database.getProperties();
+        SelectConfiguration selectConfiguration = (SelectConfiguration) map.get(selectPropertyName);
+        List<SelectOption> options = selectConfiguration.getOptions();
+        return options.stream().collect(Collectors.toMap(SelectOption::getName, Function.identity()));
     }
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
