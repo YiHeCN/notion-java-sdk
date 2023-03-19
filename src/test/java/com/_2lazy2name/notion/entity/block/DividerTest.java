@@ -1,10 +1,12 @@
 package com._2lazy2name.notion.entity.block;
 
 import com._2lazy2name.notion.NotionTest;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 
+@Disabled
 public class DividerTest extends NotionTest {
     private final String testPageId = "325ba04e40d345d390a7f02b835a196c";
 

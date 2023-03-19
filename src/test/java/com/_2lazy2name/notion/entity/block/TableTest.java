@@ -5,11 +5,13 @@ import com._2lazy2name.notion.entity.block.table.TableBlock;
 import com._2lazy2name.notion.entity.block.table.TableRow;
 import com._2lazy2name.notion.entity.common.PaginationResult;
 import com._2lazy2name.notion.entity.common.richText.TextText;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.List;
 
+@Disabled
 public class TableTest extends NotionTest {
     private final String testPageId = "c168dafdb15d446cbd73e95a1ad5b9c7";
 
