@@ -568,7 +568,6 @@ public class Notion {
         } else {
             throw new IllegalArgumentException("The property is not a select property.");
         }
-        SelectConfiguration selectConfiguration = (SelectConfiguration) map.get(selectPropertyName);
         return options.stream().collect(Collectors.toMap(SelectOption::getName, Function.identity()));
     }
 
