@@ -25,6 +25,10 @@ public class MultiselectValue extends AbstractPagePropertyValue {
         this.multiSelect = multiSelect;
     }
 
+    public MultiselectValue(SelectOption multiSelect) {
+        this.multiSelect = List.of(multiSelect);
+    }
+
     @Override
     public PropertyTypeEnum getType() {
         return type;
