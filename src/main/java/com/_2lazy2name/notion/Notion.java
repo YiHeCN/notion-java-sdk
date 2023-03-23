@@ -19,6 +19,7 @@ import com._2lazy2name.notion.entity.common.sort.AbstractSort;
 import com._2lazy2name.notion.entity.common.icon.AbstractIcon;
 import com._2lazy2name.notion.property.page.TitleValue;
 import com._2lazy2name.util.HttpUtil;
+import com._2lazy2name.util.NotionHttpUtil;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
@@ -45,7 +46,7 @@ public class Notion {
     private final static String API_VERSION = "2022-06-28";
     private final static String API_URL = "https://api.notion.com/v1/";
     private final static ObjectMapper objectMapper;
-    private final HttpUtil httpUtil;
+    private final NotionHttpUtil httpUtil;
 
     /**
      * Get pages contained in the database. Overloaded methods are provided for convenience.
@@ -133,7 +134,7 @@ public class Notion {
      */
 
     public Database updateDatabase(String databaseId,
-                                   List<AbstractRichText> title,
+                                   List <AbstractRichText> title,
                                    List<AbstractRichText> description,
                                    Map<String, AbstractDatabaseProperty> properties) throws IOException {
         String patchDatabaseUrl = API_URL + "databases/" + databaseId;
@@ -157,6 +158,9 @@ public class Notion {
     }
     public Database updateDatabaseProperties(String databaseId, Map<String, AbstractDatabaseProperty> properties) throws IOException {
         return updateDatabase(databaseId, null, null, properties);
+    }
+    public Database updateDatabaseProperty(String databaseId, String propertyName, AbstractDatabaseProperty property) throws IOException {
+        return updateDatabaseProperties(databaseId, Map.of(propertyName, property));
     }
     public Database removeDatabaseProperty(String databaseId, String propertyIdOrName) throws IOException {
         Map<String, AbstractDatabaseProperty> properties = new HashMap<>();
@@ -975,8 +979,8 @@ public class Notion {
         this.httpUtil = createHttp(token);
     }
 
-    private HttpUtil createHttp(String token) {
-        HttpUtil httpUtil = new HttpUtil();
+    private NotionHttpUtil createHttp(String token) {
+        NotionHttpUtil httpUtil = new NotionHttpUtil();
         httpUtil.addDefaultHeader("Authorization", "Bearer " + token);
         httpUtil.addDefaultHeader("Notion-Version", API_VERSION);
         return httpUtil;

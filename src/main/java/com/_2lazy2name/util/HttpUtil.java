@@ -32,7 +32,6 @@ import java.util.logging.Logger;
 public class HttpUtil {
     private final Map<String, String> defaultHeaders = new HashMap<>();
     private static final CloseableHttpClient httpClient;
-    private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final Logger log = Logger.getLogger(HttpUtil.class.getName());
 
     static {
@@ -59,7 +58,7 @@ public class HttpUtil {
         return execute(Method.GET, url, null, null, null);
     }
 
-    public Response get(String url, Map<String, String> params) throws IOException{
+    public Response get(String url, Map<String, String> params) throws IOException {
         return execute(Method.GET, url, params, null, null);
     }
 
@@ -155,19 +154,9 @@ public class HttpUtil {
                 .build();
     }
 
-    private static void checkAndWrapHttpError(Response response) throws NotionException {
-        if (!(response.getStatusCode() >= 400)) {
-            return;
-        }
-
-        String message = response.getBody();
-
-        try {
-            throw objectMapper.readValue(message, NotionException.class);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
+    public void checkAndWrapHttpError(Response response){
+        // return your own exception.
+    };
 
     private static SSLConnectionSocketFactory createSSLFactory()  {
         X509ExtendedTrustManager manager = new X509ExtendedTrustManager() {
