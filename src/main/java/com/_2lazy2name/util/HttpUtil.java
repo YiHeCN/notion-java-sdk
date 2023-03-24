@@ -54,39 +54,39 @@ public class HttpUtil {
         defaultHeaders.clear();
     }
 
-    public Response get(String url) throws IOException {
+    public Response get(String url) {
         return execute(Method.GET, url, null, null, null);
     }
 
-    public Response get(String url, Map<String, String> params) throws IOException {
+    public Response get(String url, Map<String, String> params) {
         return execute(Method.GET, url, params, null, null);
     }
 
-    public Response post(String url) throws IOException {
+    public Response post(String url) {
         return execute(Method.POST, url, null, null, null);
     }
 
-    public Response post(String url, String body) throws IOException {
+    public Response post(String url, String body) {
         return execute(Method.POST, url, null, body, null);
     }
 
-    public Response post(String url, Map<String, String> params, String body) throws IOException {
+    public Response post(String url, Map<String, String> params, String body) {
         return execute(Method.POST, url, params, body, null);
     }
 
-    public Response patch(String url, String body) throws IOException {
+    public Response patch(String url, String body) {
         return execute(Method.PATCH, url, null, body, null);
     }
 
-    public Response patch(String url, Map<String, String> params, String body) throws IOException {
+    public Response patch(String url, Map<String, String> params, String body) {
         return execute(Method.PATCH, url, params, body, null);
     }
 
-    public Response patch(String url, Map<String, String> params) throws IOException {
+    public Response patch(String url, Map<String, String> params) {
         return execute(Method.PATCH, url, params, null, null);
     }
 
-    public Response delete(String url) throws IOException {
+    public Response delete(String url) {
         return execute(Method.DELETE, url, null, null, null);
     }
 
@@ -95,50 +95,48 @@ public class HttpUtil {
                                     Map<String, String> urlParams,
                                     Object body,
                                     ContentType bodyType
-    ) throws IOException {
-        BasicClassicHttpRequest request;
+    ) {
         try {
             URIBuilder uriBuilder = new URIBuilder(url);
             if (urlParams != null) {
                 urlParams.forEach(uriBuilder::addParameter);
             }
-            request = new BasicClassicHttpRequest(method.name(), uriBuilder.build());
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-            return null;
-        }
+            BasicClassicHttpRequest request = new BasicClassicHttpRequest(method.name(), uriBuilder.build());
 
-        defaultHeaders.forEach(request::addHeader);
+            defaultHeaders.forEach(request::addHeader);
 
-        if (body != null) {
-            if (body instanceof String) {
-                if (bodyType == null) {
-                    bodyType = ContentType.APPLICATION_JSON;
+            if (body != null) {
+                if (body instanceof String) {
+                    if (bodyType == null) {
+                        bodyType = ContentType.APPLICATION_JSON;
+                    }
+                    request.setEntity(HttpEntities.create((String) body, bodyType));
                 }
-                request.setEntity(HttpEntities.create((String) body, bodyType));
-            }
-            if (body instanceof File) {
-                if (bodyType == null) {
-                    bodyType = ContentType.APPLICATION_OCTET_STREAM;
+                if (body instanceof File) {
+                    if (bodyType == null) {
+                        bodyType = ContentType.APPLICATION_OCTET_STREAM;
+                    }
+                    request.setEntity(HttpEntities.create((File) body, bodyType));
                 }
-                request.setEntity(HttpEntities.create((File) body, bodyType));
             }
+            log.log(Level.FINE, """
+                    {0}: {1}
+                    ============================
+                    {2}
+                    ============================
+                                    
+                                    
+                    """, new Object[]{method.name(), url, body == null ? "null" : body.toString()});
+            ClassicHttpResponse res = httpClient.execute(request);
+            Response response = new Response(res.getCode(), new String(res.getEntity().getContent().readAllBytes()));
+            checkAndWrapHttpError(response);
+            res.getEntity().getContent().close();
+            res.getEntity().close();
+            res.close();
+            return response;
+        } catch (URISyntaxException | IOException e) {
+            throw new HttpException(e.getMessage(), e);
         }
-        log.log(Level.FINE, """
-                {0}: {1}
-                ============================
-                {2}
-                ============================
-                
-                
-                """, new Object[]{method.name(), url, body == null ? "null" : body.toString()});
-        ClassicHttpResponse res = httpClient.execute(request);
-        Response response = new Response(res.getCode(), new String(res.getEntity().getContent().readAllBytes()));
-        checkAndWrapHttpError(response);
-        res.getEntity().getContent().close();
-        res.getEntity().close();
-        res.close();
-        return response;
     }
 
     private static CloseableHttpClient createHttpClient() {
@@ -239,4 +237,9 @@ public class HttpUtil {
         }
     }
 
+    public static class HttpException extends RuntimeException {
+        public HttpException(String msg, Throwable cause) {
+            super(msg, cause);
+        }
+    }
 }
