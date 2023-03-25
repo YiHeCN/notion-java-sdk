@@ -32,10 +32,6 @@ public class FilterSerializer extends StdSerializer<AbstractFilter> {
         }
     }
 
-    public static String wrapInFilterObject(String filter) {
-        return String.format("\"filter\": %s", filter);
-    }
-
     private static void processTimestampFilter(AbstractFilter val, JsonGenerator gen, SerializerProvider provider) throws IOException {
         gen.writeStartObject();
         TimestampFilter filter = (TimestampFilter) val;
@@ -103,6 +99,7 @@ public class FilterSerializer extends StdSerializer<AbstractFilter> {
                 }
             }
         }
+        gen.writeEndObject();
         gen.writeEndObject();
     }
 }
