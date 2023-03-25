@@ -1,8 +1,5 @@
 package com._2lazy2name.util;
 
-import com._2lazy2name.notion.exception.NotionException;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClientBuilder;
 import org.apache.hc.client5.http.impl.io.PoolingHttpClientConnectionManagerBuilder;
@@ -154,7 +151,7 @@ public class HttpUtil {
 
     public void checkAndWrapHttpError(Response response){
         // return your own exception.
-    };
+    }
 
     private static SSLConnectionSocketFactory createSSLFactory()  {
         X509ExtendedTrustManager manager = new X509ExtendedTrustManager() {
