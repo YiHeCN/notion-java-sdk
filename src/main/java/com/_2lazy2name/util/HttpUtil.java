@@ -30,9 +30,14 @@ public class HttpUtil {
     private final Map<String, String> defaultHeaders = new HashMap<>();
     private static final CloseableHttpClient httpClient;
     private static final Logger log = Logger.getLogger(HttpUtil.class.getName());
+    public static boolean isDebugEnabled = false;
 
     static {
         httpClient = createHttpClient();
+    }
+
+    public void setDebugEnabled(boolean debugEnabled) {
+        isDebugEnabled = debugEnabled;
     }
 
     public void addDefaultHeaders(Map<String, String> headers) {
@@ -116,7 +121,8 @@ public class HttpUtil {
                     request.setEntity(HttpEntities.create((File) body, bodyType));
                 }
             }
-            log.log(Level.FINE, """
+            if (isDebugEnabled) {
+                log.log(Level.INFO, """
                     {0}: {1}
                     ============================
                     {2}
@@ -124,6 +130,7 @@ public class HttpUtil {
                                     
                                     
                     """, new Object[]{method.name(), url, body == null ? "null" : body.toString()});
+            }
             ClassicHttpResponse res = httpClient.execute(request);
             Response response = new Response(res.getCode(), new String(res.getEntity().getContent().readAllBytes()));
             checkAndWrapHttpError(response);

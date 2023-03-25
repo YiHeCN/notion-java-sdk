@@ -990,6 +990,11 @@ public class Notion {
         return httpUtil;
     }
 
+    // For Debug.
+    public void setDebugEnabled(boolean debugEnabled) {
+        httpUtil.setDebugEnabled(debugEnabled);
+    }
+
     static {
         objectMapper = createObjectMapper();
     }
