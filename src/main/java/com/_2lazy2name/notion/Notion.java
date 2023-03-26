@@ -212,7 +212,7 @@ public class Notion {
      * @see <a href="https://developers.notion.com/reference/post-page">Create a page</a>
      */
     public Page createPage(AbstractParent parent, String pageTitle,
-                           Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children,
+                           Map<String, AbstractPagePropertyValue> properties, List<? extends AbstractBlock> children,
                            AbstractIcon icon, AbstractFile cover
     ) throws IOException {
         if (pageTitle == null) {
@@ -230,7 +230,7 @@ public class Notion {
         String response = httpUtil.post(createPageUrl, body).getBody();
         return objectMapper.readValue(response, Page.class);
     }
-    public Page createPage(AbstractParent parent, String pageTitle, Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children) throws IOException {
+    public Page createPage(AbstractParent parent, String pageTitle, Map<String, AbstractPagePropertyValue> properties, List<? extends AbstractBlock> children) throws IOException {
         return createPage(parent, pageTitle, properties, children, null, null);
     }
     public Page createPage(AbstractParent parent, String pageTitle, Map<String, AbstractPagePropertyValue> properties) throws IOException {
@@ -239,7 +239,7 @@ public class Notion {
     public Page createPage(AbstractParent parent, String pageTitle) throws IOException {
         return createPage(parent, pageTitle, null, null, null, null);
     }
-    public Page createPage(String databaseId, String pageTitle, Map<String, AbstractPagePropertyValue> properties, List<AbstractBlock> children) throws IOException {
+    public Page createPage(String databaseId, String pageTitle, Map<String, AbstractPagePropertyValue> properties, List<? extends AbstractBlock> children) throws IOException {
         return createPage(new DatabaseParent(databaseId), pageTitle, properties, children, null, null);
     }
     public Page createPage(String databaseId, String pageTitle, Map<String, AbstractPagePropertyValue> properties) throws IOException {
@@ -395,7 +395,7 @@ public class Notion {
      * @return block children list.
      * @see <a href="https://developers.notion.com/reference/append-block-children">Append block children</a>
      */
-    public PaginationResult<AbstractBlock> appendBlockChildren(String blockId, List<AbstractBlock> children) throws IOException {
+    public PaginationResult<AbstractBlock> appendBlockChildren(String blockId, List<? extends AbstractBlock> children) throws IOException {
         String appendBlockChildrenUrl = API_URL + "blocks/" + blockId + "/children";
         AppendBlockBodyParam params = new AppendBlockBodyParam();
         params.setChildren(children);
@@ -556,7 +556,7 @@ public class Notion {
         Database database = retrieveDatabase(databaseId);
         LinkedHashMap<String, AbstractDatabaseProperty> map = database.getProperties();
         AbstractDatabaseProperty property = map.get(selectPropertyName);
-        List<SelectOption> options = null;
+        List<SelectOption> options;
         if (property instanceof SelectConfiguration) {
             options = ((SelectConfiguration) property).getOptions();
         } else if (property instanceof MultiSelectConfiguration) {
@@ -696,7 +696,7 @@ public class Notion {
     private static class CreatePageBodyParam {
         private AbstractParent parent;
         private Map<String, AbstractPagePropertyValue> properties;
-        private List<AbstractBlock> children;
+        private List<? extends AbstractBlock> children;
         private AbstractIcon icon;
         private AbstractFile cover;
 
@@ -710,7 +710,7 @@ public class Notion {
             return this;
         }
 
-        public CreatePageBodyParam setChildren(List<AbstractBlock> children) {
+        public CreatePageBodyParam setChildren(List<? extends AbstractBlock> children) {
             this.children = children;
             return this;
         }
@@ -733,7 +733,7 @@ public class Notion {
             return properties;
         }
 
-        public List<AbstractBlock> getChildren() {
+        public List<? extends AbstractBlock> getChildren() {
             return children;
         }
 
@@ -816,14 +816,14 @@ public class Notion {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class AppendBlockBodyParam {
-        private List<AbstractBlock> children;
+        private List<? extends AbstractBlock> children;
 
-        public AppendBlockBodyParam setChildren(List<AbstractBlock> children) {
+        public AppendBlockBodyParam setChildren(List<? extends AbstractBlock> children) {
             this.children = children;
             return this;
         }
 
-        public List<AbstractBlock> getChildren() {
+        public List<? extends AbstractBlock> getChildren() {
             return children;
         }
     }
