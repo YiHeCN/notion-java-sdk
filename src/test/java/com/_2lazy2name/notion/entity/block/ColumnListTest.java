@@ -11,12 +11,12 @@ public class ColumnListTest extends NotionTest {
 
     @Test
     public void testCreate() throws IOException {
-       ColumnBlock columnBlock = ColumnBlock.ofChildren(
+       ColumnBlock columnBlock = new ColumnBlock(
                new HeadingOneBlock.Builder().richText("This is a text").build(),
                new HeadingOneBlock.Builder().richText("This is a text").build(),
                new HeadingOneBlock.Builder().richText("This is a text").build()
        );
-       ColumnListBlock columnListBlock = ColumnListBlock.ofColumns(columnBlock, columnBlock);
+       ColumnListBlock columnListBlock = new ColumnListBlock(columnBlock, columnBlock);
        createdBlock.add(notion.appendBlockChild(testPageId, columnListBlock).getResult().getId());
     }
 

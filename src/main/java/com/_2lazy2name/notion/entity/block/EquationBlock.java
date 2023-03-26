@@ -11,10 +11,6 @@ public class EquationBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.EQUATION;
     private Equation equation;
 
-    public static EquationBlock ofExpression(String expression) {
-        return new EquationBlock(expression);
-    }
-
     @JsonIgnore
     public String getExpression() {
         return this.equation.expression;
@@ -31,7 +27,7 @@ public class EquationBlock extends AbstractBlock {
 
     private EquationBlock() {}
 
-    private EquationBlock(String expression) {
+    public EquationBlock(String expression) {
         this.equation = new Equation();
         this.equation.expression = expression;
     }

@@ -2,6 +2,7 @@ package com._2lazy2name.notion.entity.block.fileRelated;
 
 import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
+import com._2lazy2name.notion.entity.common.file.ExternalFile;
 import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 
@@ -26,6 +27,10 @@ public class ImageBlock extends AbstractBlock {
 
     public ImageBlock(AbstractFile image) {
         this.image = image;
+    }
+
+    public ImageBlock(String url) {
+        this.image = new ExternalFile(url);
     }
 
     public AbstractFile getImage() {

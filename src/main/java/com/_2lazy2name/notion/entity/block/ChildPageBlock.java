@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
+// This class is not allowed to create. Use createPage endpoint instead.
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class ChildPageBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.CHILD_PAGE;

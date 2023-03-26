@@ -16,19 +16,15 @@ public class ColumnListBlock extends AbstractBlock {
 
     private ColumnList columnList;
 
-    public static ColumnListBlock ofColumns(ColumnBlock... columns) {
-        ColumnListBlock columnListBlock = new ColumnListBlock();
-        columnListBlock.columnList = new ColumnList();
-        columnListBlock.columnList.children = new ArrayList<>();
-        Collections.addAll(columnListBlock.columnList.children, columns);
-        return columnListBlock;
+    public ColumnListBlock(ColumnBlock... columns) {
+        this.columnList = new ColumnList();
+        this.columnList.children = new ArrayList<>();
+        Collections.addAll(this.columnList.children, columns);
     }
 
-    public static ColumnListBlock ofColumns(List<ColumnBlock> columns) {
-        ColumnListBlock columnListBlock = new ColumnListBlock();
-        columnListBlock.columnList = new ColumnList();
-        columnListBlock.columnList.children = columns;
-        return columnListBlock;
+    public ColumnListBlock(List<ColumnBlock> columns) {
+        this.columnList = new ColumnList();
+        this.columnList.children = columns;
     }
 
     @JsonIgnore

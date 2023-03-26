@@ -11,19 +11,17 @@ public class ColumnBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.COLUMN;
     private Column column;
 
-    public static ColumnBlock ofChildren(List<AbstractBlock> children) {
-        ColumnBlock columnBlock = new ColumnBlock();
-        columnBlock.column = new Column();
-        columnBlock.column.children = children;
-        return columnBlock;
+    public ColumnBlock(List<AbstractBlock> children) {
+        this.column = new Column();
+        this.column.children = children;
     }
 
-    public static ColumnBlock ofChildren(AbstractBlock... children) {
-        return ofChildren(List.of(children));
+    public ColumnBlock(AbstractBlock... children) {
+        this(List.of(children));
     }
 
-    public static ColumnBlock ofChild(AbstractBlock child) {
-        return ofChildren(List.of(child));
+    public ColumnBlock(AbstractBlock child) {
+        this(List.of(child));
     }
 
     @JsonIgnore

@@ -4,7 +4,7 @@ import com._2lazy2name.notion.enumeration.type.BlockTypeEnum;
 
 import java.util.List;
 
-// TODO: test
+// TODO: not supported yet
 public class SyncedBlockBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.SYNCED_BLOCK;
     private SyncedBlock syncedBlock;

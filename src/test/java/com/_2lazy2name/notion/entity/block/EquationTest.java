@@ -10,7 +10,7 @@ import java.io.IOException;
 
     @Test
     public void testCreate() throws IOException {
-        EquationBlock equationBlock = EquationBlock.ofExpression("2+2");
+        EquationBlock equationBlock = new EquationBlock("2+2");
         createdBlock.add(notion.appendBlockChild(testPageId, equationBlock).getResult().getId());
     }
 

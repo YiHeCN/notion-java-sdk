@@ -10,10 +10,6 @@ public class TableOfContentsBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.TABLE_OF_CONTENTS;
     private TableOfContents tableOfContents;
 
-    public static TableOfContentsBlock ofColor(ColorEnum color) {
-        return new TableOfContentsBlock(color);
-    }
-
     @JsonIgnore
     public ColorEnum getColor() {
         return this.tableOfContents.color;
@@ -31,7 +27,7 @@ public class TableOfContentsBlock extends AbstractBlock {
 
     private TableOfContentsBlock() {}
 
-    private TableOfContentsBlock(ColorEnum color) {
+    public TableOfContentsBlock(ColorEnum color) {
         this.tableOfContents = new TableOfContents();
         this.tableOfContents.color = color;
     }

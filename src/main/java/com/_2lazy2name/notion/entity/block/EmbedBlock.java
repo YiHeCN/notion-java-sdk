@@ -10,6 +10,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class EmbedBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.EMBED;
     private Embed embed;
+
+    public static EmbedBlock ofUrl(String url) {
+        return new EmbedBlock(url);
+    }
+
     @JsonIgnore
     public String getUrl() {
         return this.embed.url;

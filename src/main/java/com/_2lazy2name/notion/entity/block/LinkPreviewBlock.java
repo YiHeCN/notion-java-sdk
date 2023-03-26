@@ -10,18 +10,16 @@ public class LinkPreviewBlock extends AbstractBlock {
     private static final BlockTypeEnum type = BlockTypeEnum.LINK_PREVIEW;
     private LinkPreview linkPreview;
 
-    // The link_preview block can only be returned as part of a response.
-    // The API does not support creating or appending link_preview blocks.
-    // See: https://developers.notion.com/reference/block#link-preview
-    private static LinkPreviewBlock ofUrl(String url) {
-        return new LinkPreviewBlock(LinkPreview.ofUrl(url));
-    }
+
 
     @JsonIgnore
     public String getUrl() {
         return linkPreview.getUrl();
     }
 
+    // The link_preview block can only be returned as part of a response.
+    // The API does not support creating or appending link_preview blocks.
+    // See: https://developers.notion.com/reference/block#link-preview
     public LinkPreviewBlock setUrl(String url) {
         this.linkPreview = linkPreview.setUrl(url);
         return this;
