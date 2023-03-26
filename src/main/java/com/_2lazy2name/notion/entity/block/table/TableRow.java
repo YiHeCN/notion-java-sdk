@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
@@ -30,6 +31,10 @@ public class TableRow extends AbstractBlock {
     }
     public TableRow addCells(List<List<AbstractRichText>> cells) {
         this.tableRow.cells.addAll(cells);
+        return this;
+    }
+    public TableRow addCells(String... cells) {
+        Arrays.stream(cells).forEach(cell -> this.tableRow.cells.add(List.of(new TextText(cell))));
         return this;
     }
     public TableRow removeAllCells() {
