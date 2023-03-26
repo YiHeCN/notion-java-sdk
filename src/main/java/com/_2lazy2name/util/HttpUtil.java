@@ -106,7 +106,8 @@ public class HttpUtil {
             if (urlParams != null) {
                 urlParams.forEach(uriBuilder::addParameter);
             }
-            BasicClassicHttpRequest request = new BasicClassicHttpRequest(method.name(), uriBuilder.build());
+            url = uriBuilder.build().toString();
+            BasicClassicHttpRequest request = new BasicClassicHttpRequest(method.name(), url);
 
             defaultHeaders.forEach(request::addHeader);
 
