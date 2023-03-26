@@ -10,7 +10,7 @@ import java.io.IOException;
 
     @Test
     public void testCreate() throws IOException  {
-        EmbedBlock embedBlock = EmbedBlock.ofUrl("google.com");
+        EmbedBlock embedBlock = new EmbedBlock("google.com");
         createdBlock.add(notion.appendBlockChild(testPageId, embedBlock).getResult().getId());
     }
 }
