@@ -16,7 +16,6 @@ public class CreatedByValue extends AbstractPagePropertyValue {
     private final PropertyTypeEnum type = PropertyTypeEnum.CREATED_BY;
     private User createdBy;
 
-    @JsonIgnore
     private CreatedByValue() {
     }
 
