@@ -236,6 +236,9 @@ public class Notion {
     public Page createPage(AbstractParent parent, String pageTitle, Map<String, AbstractPagePropertyValue> properties) throws IOException {
         return createPage(parent, pageTitle, properties, null, null, null);
     }
+    public Page createPage(AbstractParent parent, String pageTitle, List<? extends AbstractBlock> children) throws IOException {
+        return createPage(parent, pageTitle, null, children, null, null);
+    }
     public Page createPage(AbstractParent parent, String pageTitle) throws IOException {
         return createPage(parent, pageTitle, null, null, null, null);
     }
@@ -244,6 +247,9 @@ public class Notion {
     }
     public Page createPage(String databaseId, String pageTitle, Map<String, AbstractPagePropertyValue> properties) throws IOException {
         return createPage(new DatabaseParent(databaseId), pageTitle, properties, null, null, null);
+    }
+    public Page createPage(String databaseId, String pageTitle, List<? extends AbstractBlock> children) throws IOException {
+        return createPage(new DatabaseParent(databaseId), pageTitle, null, children, null, null);
     }
     public Page createPage(String databaseId, String pageTitle) throws IOException {
         return createPage(new DatabaseParent(databaseId), pageTitle, null, null, null, null);
