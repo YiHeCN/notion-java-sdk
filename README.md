@@ -1,10 +1,10 @@
 # Notion Java SDK
 
 ![https://img.shields.io/badge/license-MIT-blue](https://img.shields.io/badge/license-MIT-blue)
+![https://img.shields.io/github/commit-activity/m/YiHeCN/notion-java-sdk](https://img.shields.io/github/commit-activity/m/YiHeCN/notion-java-sdk)
 ![https://img.shields.io/badge/Maven-0.0.1--SNAPSHOT-lightgrey](https://img.shields.io/badge/Maven-0.0.1--SNAPSHOT-lightgrey)
 ![https://img.shields.io/github/forks/YiHeCN/notion-java-sdk?style=social](https://img.shields.io/github/forks/YiHeCN/notion-java-sdk?style=social)
 ![https://img.shields.io/github/stars/YiHeCN/notion-java-sdk?style=social](https://img.shields.io/github/stars/YiHeCN/notion-java-sdk?style=social)
-![https://img.shields.io/github/commit-activity/m/YiHeCN/notion-java-sdk](https://img.shields.io/github/commit-activity/m/YiHeCN/notion-java-sdk)
 
 Notion-java-sdk is a java version of [Notion API](https://developers.notion.com/).
 
