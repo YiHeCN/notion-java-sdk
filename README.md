@@ -60,6 +60,11 @@ The project is written on the source level of **Java 17**. Since enhanced switch
 
 [Jackson](https://github.com/FasterXML/jackson) and [Apache Http Client5](https://github.com/apache/httpcomponents-client).
 
+# Future Plan
+1. Make it compatible to Java 8.
+2. Add more tests. (Well, maybe when I encounter some bugs.)
+3. Update to the latest version of Notion API.
+
 # Issue and Contact
 
 I don’t check GitHub very often. For any issues or commit, there are some ways to quicker notices and solutions:
