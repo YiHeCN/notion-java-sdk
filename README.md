@@ -66,7 +66,7 @@ I don’t check GitHub very often. For any issues or commit, there are some ways
 
 1.  E-mail **yi@2lazy2name.com**
 2. [Notion Page](https://www.notion.so/Notion-java-sdk-bc362b42ae3f40179962425be015962f) - Check the test cases for usage.
-3.  Telegram Group  [https://t.me/+35eZF98AgogxMjJl](https://t.me/+35eZF98AgogxMjJl)
+3.  [Telegram Group](https://t.me/+35eZF98AgogxMjJl)
 
 Suggestions in code styles and implementation with optimization advice are highly welcomed.
 
