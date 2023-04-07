@@ -55,7 +55,7 @@ public class Notion {
      * @param filter The filter to apply to the query.
      * @param sorts The sort to apply to the query.
      * @param pageSize The number of results to return per page. Set any number between 1 and 100.
-     *                 <0 means no limit. >100 causes an exception.
+     *                 smaller than 0 means no limit. greater than 100 causes an exception.
      * @param startCursor The cursor to use to retrieve the next page of results.
      *                    At the first page, this should be set to null.
      * @return PaginationResult contains next cursor and pages.
