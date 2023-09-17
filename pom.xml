@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.2lazy2name</groupId>
     <artifactId>notion-java-sdk</artifactId>
-    <version>v0.1.0-alpha</version>
+    <version>v0.1.1-SNAPSHOT</version>
     <name>${project.groupId}:${project.artifactId}</name>
     <description>An Unofficial Java SDK for Notion</description>
     <url>https://github.com/YiHeCN/notion-java-sdk</url>
