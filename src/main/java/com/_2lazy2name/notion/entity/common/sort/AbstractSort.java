@@ -2,6 +2,8 @@ package com._2lazy2name.notion.entity.common.sort;
 
 import com._2lazy2name.notion.enumeration.SortDirectionEnum;
 import com._2lazy2name.notion.enumeration.TimeStampEnum;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 
 /***
@@ -10,6 +12,11 @@ import com._2lazy2name.notion.enumeration.TimeStampEnum;
  * @version 1.0
  * @see <a href="https://developers.notion.com/reference/post-database-query-sort">Sort</a>
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.DEDUCTION, property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = EntryTimestampSort.class, name = "created_time"),
+        @JsonSubTypes.Type(value = PropertyValueSort.class, name = "property")
+})
 public abstract class AbstractSort {
     protected SortDirectionEnum direction;
 

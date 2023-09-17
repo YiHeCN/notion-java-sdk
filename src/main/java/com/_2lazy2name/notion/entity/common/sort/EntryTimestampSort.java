@@ -17,9 +17,8 @@ public class EntryTimestampSort extends AbstractSort {
     }
 
     public EntryTimestampSort(TimeStampEnum timestamp, SortDirectionEnum direction) {
-        EntryTimestampSort entryTimestampSort = new EntryTimestampSort();
-        entryTimestampSort.setTimestamp(timestamp);
-        entryTimestampSort.setDirection(direction);
+        this.timestamp = timestamp;
+        this.direction = direction;
     }
 
     public TimeStampEnum getTimestamp() {
