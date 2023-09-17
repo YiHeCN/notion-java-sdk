@@ -20,11 +20,11 @@ public class SyncedBlockBlock extends AbstractBlock {
     }
 
     private SyncedBlockBlock() {}
-    private SyncedBlockBlock(SyncedFrom syncedFrom, List<AbstractBlock> children) {
 
-    }
-
-    public static SyncedBlockBlock from(SyncedFrom syncedFrom) {
-        return new SyncedBlockBlock(syncedFrom, null);
+    public SyncedBlockBlock(String syncedFromId) {
+        this.syncedBlock = new SyncedBlock();
+        this.syncedBlock.syncedFrom = new SyncedFrom();
+        this.syncedBlock.syncedFrom.type = "block_id";
+        this.syncedBlock.syncedFrom.blockId = syncedFromId;
     }
 }
