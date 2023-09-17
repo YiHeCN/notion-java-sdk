@@ -61,7 +61,7 @@ public class Notion {
      * @return PaginationResult contains next cursor and pages.
      * @see <a href="https://developers.notion.com/reference/post-database-query">Query a database</a>
      */
-    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, AbstractSort sorts,
+    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, List<AbstractSort> sorts,
                                                 int pageSize, String startCursor) throws IOException {
         String queryDatabaseUrl = API_URL + "databases/" + databaseId + "/query";
         QueryDatabaseBodyParam bodyParams = new QueryDatabaseBodyParam();
@@ -77,18 +77,28 @@ public class Notion {
         return queryDatabase(databaseId, filter, null, -1, null);
     }
     public PaginationResult<Page> queryDatabase(String databaseId, AbstractSort sorts) throws IOException {
+        return queryDatabase(databaseId, null, List.of(sorts), -1, null);
+    }
+    // I have no god-damn idea why sort can be more than one :) Fuck this :)
+    public PaginationResult<Page> queryDatabase(String databaseId, List<AbstractSort> sorts) throws IOException {
         return queryDatabase(databaseId, null, sorts, -1, null);
     }
     public PaginationResult<Page> queryDatabase(String databaseId, int pageSize, String startCursor) throws IOException {
         return queryDatabase(databaseId, null, null, pageSize, startCursor);
     }
     public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, AbstractSort sorts) throws IOException {
+        return queryDatabase(databaseId, filter, List.of(sorts), -1, null);
+    }
+    public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, List<AbstractSort> sorts) throws IOException {
         return queryDatabase(databaseId, filter, sorts, -1, null);
     }
     public PaginationResult<Page> queryDatabase(String databaseId, AbstractFilter filter, int pageSize, String startCursor) throws IOException {
         return queryDatabase(databaseId, filter, null, pageSize, startCursor);
     }
     public PaginationResult<Page> queryDatabase(String databaseId, AbstractSort sorts, int pageSize, String startCursor) throws IOException {
+        return queryDatabase(databaseId, null, List.of(sorts), pageSize, startCursor);
+    }
+    public PaginationResult<Page> queryDatabase(String databaseId, List<AbstractSort> sorts, int pageSize, String startCursor) throws IOException {
         return queryDatabase(databaseId, null, sorts, pageSize, startCursor);
     }
 
@@ -576,7 +586,7 @@ public class Notion {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class QueryDatabaseBodyParam {
         private AbstractFilter filter;
-        private AbstractSort sorts;
+        private List<AbstractSort> sorts;
         @JsonUnwrapped
         private final PaginationParam pagination = new PaginationParam();
 
@@ -589,7 +599,7 @@ public class Notion {
             return this;
         }
 
-        public QueryDatabaseBodyParam setSorts(AbstractSort sorts) {
+        public QueryDatabaseBodyParam setSorts(List<AbstractSort> sorts) {
             this.sorts = sorts;
             return this;
         }
@@ -608,7 +618,7 @@ public class Notion {
             return filter;
         }
 
-        public AbstractSort getSorts() {
+        public List<AbstractSort> getSorts() {
             return sorts;
         }
     }
