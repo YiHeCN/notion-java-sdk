@@ -6,6 +6,7 @@ import com._2lazy2name.notion.entity.common.icon.AbstractIcon;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.property.page.AbstractPagePropertyValue;
 import com._2lazy2name.notion.enumeration.ObjectEnum;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Page extends PageOrDatabase {
     private final ObjectEnum object = ObjectEnum.PAGE;
     private String id;
@@ -28,6 +30,17 @@ public class Page extends PageOrDatabase {
     private String url;
     private String nextCursor;
     private Boolean hasMore;
+
+    public String getPublicUrl() {
+        return publicUrl;
+    }
+
+    public Page setPublicUrl(String publicUrl) {
+        this.publicUrl = publicUrl;
+        return this;
+    }
+
+    private String publicUrl;
 
     private Page() {}
 
