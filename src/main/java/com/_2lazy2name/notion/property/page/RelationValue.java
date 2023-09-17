@@ -1,11 +1,12 @@
 package com._2lazy2name.notion.property.page;
 
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This object cannot be updated.
  * @author Yi
  * @since 1.0
  * @version 1.0
@@ -15,6 +16,59 @@ public class RelationValue extends AbstractPagePropertyValue {
     private final PropertyTypeEnum type = PropertyTypeEnum.RELATION;
     private Boolean hasMore;
     private List<PageReference> relation;
+
+
+    public RelationValue addRelation(String relatedToPageId) {
+        this.relation.add(new PageReference().setId(relatedToPageId));
+        return this;
+    }
+
+    public RelationValue addRelation(List<String> relatedToPageIds) {
+        for (String relatedToPageId : relatedToPageIds) {
+            this.relation.add(new PageReference().setId(relatedToPageId));
+        }
+        return this;
+    }
+
+    public RelationValue addRelation(String... relatedToPageIds) {
+        for (String relatedToPageId : relatedToPageIds) {
+            this.relation.add(new PageReference().setId(relatedToPageId));
+        }
+        return this;
+    }
+
+    public RelationValue removeRelation(String relatedToPageId) {
+        for (PageReference pageReference : this.relation) {
+            if (pageReference.getId().equals(relatedToPageId)) {
+                this.relation.remove(pageReference);
+                break;
+            }
+        }
+        return this;
+    }
+
+    public RelationValue() {
+        this.relation = new ArrayList<>();
+    }
+
+    public RelationValue(String relatedToPageId) {
+        this();
+        this.relation.add(new PageReference().setId(relatedToPageId));
+    }
+
+    public RelationValue(List<String> relatedToPageIds) {
+        this();
+        for (String relatedToPageId : relatedToPageIds) {
+            this.relation.add(new PageReference().setId(relatedToPageId));
+        }
+    }
+
+    public RelationValue(String... relatedToPageIds) {
+        this();
+        for (String relatedToPageId : relatedToPageIds) {
+            this.relation.add(new PageReference().setId(relatedToPageId));
+        }
+    }
 
     public static class PageReference {
         private String id;
