@@ -2,12 +2,7 @@ package com._2lazy2name.notion.entity.common.sort;
 
 import com._2lazy2name.notion.enumeration.SortDirectionEnum;
 
-/***
- * @author Yi
- * @since 1.0
- * @version 1.0
- * @see <a href="https://developers.notion.com/reference/post-database-query-sort#property-value-sort">Property Value Sort</a>
- */
+
 public class PropertyValueSort extends AbstractSort {
     private String property;
 
@@ -15,9 +10,8 @@ public class PropertyValueSort extends AbstractSort {
     }
 
     public PropertyValueSort(String property, SortDirectionEnum direction) {
-        PropertyValueSort propertyValueSort = new PropertyValueSort();
-        propertyValueSort.setProperty(property);
-        propertyValueSort.setDirection(direction);
+        this.property = property;
+        this.direction = direction;
     }
 
     public String getProperty() {
