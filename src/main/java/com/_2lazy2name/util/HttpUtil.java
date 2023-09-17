@@ -19,6 +19,7 @@ import javax.net.ssl.X509ExtendedTrustManager;
 import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
@@ -106,7 +107,7 @@ public class HttpUtil {
                 urlParams.forEach(uriBuilder::addParameter);
             }
             url = uriBuilder.build().toString();
-            BasicClassicHttpRequest request = new BasicClassicHttpRequest(method.name(), url);
+            BasicClassicHttpRequest request = new BasicClassicHttpRequest(method.name(), new URI(url));
 
             defaultHeaders.forEach(request::addHeader);
 
