@@ -50,6 +50,10 @@ public class Notion {
     private final static ObjectMapper objectMapper;
     private final NotionHttpUtil httpUtil;
 
+    private void createToken(String code, String redirectURL) {
+
+    }
+
     /**
      * Get pages contained in the database. Overloaded methods are provided for convenience.
      * @param databaseId The ID of the database to retrieve.
@@ -323,7 +327,12 @@ public class Notion {
 
     /**
      * Retrieve a page property value.
-     * TODO: There should be something I missed.
+     * !!TODO: I still didn't figure out how Notion design this API.
+     * Sometimes, it returns a pagination result, for example, RelationValue.
+     * Sometimes, it returns a PropertyValue result, for example, MultipleSelect.
+     * Maybe in future I will add a customer serializer for PropertyItemResult.
+     * Currently, the solution is choose one of the method that suits the case.
+     * I know it's not the best way ;)
      * @param pageId The ID of the page to retrieve.
      * @param propertyId The ID of the property to retrieve.
      * @return page property.
@@ -333,6 +342,12 @@ public class Notion {
         String retrievePagePropertyUrl = API_URL + "pages/" + pageId + "/properties/" + propertyId;
         String response = httpUtil.get(retrievePagePropertyUrl).getBody();
         return objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(PropertyItemResult.class, AbstractPagePropertyValue.class));
+    }
+
+    public AbstractPagePropertyValue _retrievePageProperty(String pageId, String propertyId) throws IOException {
+        String retrievePagePropertyUrl = API_URL + "pages/" + pageId + "/properties/" + propertyId;
+        String response = httpUtil.get(retrievePagePropertyUrl).getBody();
+        return objectMapper.readValue(response, AbstractPagePropertyValue.class);
     }
 
     /**
