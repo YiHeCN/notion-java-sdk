@@ -2,6 +2,7 @@ package com._2lazy2name.notion.property.page;
 
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  */
 public class FilesValue extends AbstractPagePropertyValue {
     private final PropertyTypeEnum type = PropertyTypeEnum.FILES;
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT, with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<AbstractFile> files;
 
     private FilesValue() {

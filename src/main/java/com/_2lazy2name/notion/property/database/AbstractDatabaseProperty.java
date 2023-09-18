@@ -34,6 +34,7 @@ public abstract class AbstractDatabaseProperty extends AbstractProperty {
     private ObjectEnum object;
     protected PropertyTypeEnum type;
     private String name;
+    private String nextUrl;
 
     public ObjectEnum getObject() {
         return object;
@@ -45,5 +46,9 @@ public abstract class AbstractDatabaseProperty extends AbstractProperty {
 
     public String getName() {
         return name;
+    }
+
+    public String getNextUrl() {
+        return nextUrl;
     }
 }

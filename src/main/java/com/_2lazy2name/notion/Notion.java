@@ -7,6 +7,7 @@ import com._2lazy2name.notion.entity.User;
 import com._2lazy2name.notion.entity.block.AbstractBlock;
 import com._2lazy2name.notion.entity.common.Date;
 import com._2lazy2name.notion.entity.common.PageOrDatabase;
+import com._2lazy2name.notion.entity.common.PropertyItemResult;
 import com._2lazy2name.notion.entity.common.file.AbstractFile;
 import com._2lazy2name.notion.entity.common.parent.AbstractParent;
 import com._2lazy2name.notion.entity.common.parent.DatabaseParent;
@@ -328,10 +329,10 @@ public class Notion {
      * @return page property.
      * @see <a href="https://developers.notion.com/reference/retrieve-a-page-property">Retrieve a page property</a>
      */
-    public AbstractPagePropertyValue retrievePageProperty(String pageId, String propertyId) throws IOException {
+    public PropertyItemResult<? extends AbstractPagePropertyValue> retrievePageProperty(String pageId, String propertyId) throws IOException {
         String retrievePagePropertyUrl = API_URL + "pages/" + pageId + "/properties/" + propertyId;
         String response = httpUtil.get(retrievePagePropertyUrl).getBody();
-        return objectMapper.readValue(response, AbstractPagePropertyValue.class);
+        return objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(PropertyItemResult.class, AbstractPagePropertyValue.class));
     }
 
     /**
@@ -408,13 +409,15 @@ public class Notion {
      * Append block children.
      * @param blockId The ID of the block to append.
      * @param children The children to append.
+     * @param after The ID of the existing block that the new block should be appended after.
      * @return block children list.
      * @see <a href="https://developers.notion.com/reference/append-block-children">Append block children</a>
      */
-    public PaginationResult<AbstractBlock> appendBlockChildren(String blockId, List<? extends AbstractBlock> children) throws IOException {
+    public PaginationResult<AbstractBlock> appendBlockChildren(String blockId, List<? extends AbstractBlock> children, String after) throws IOException {
         String appendBlockChildrenUrl = API_URL + "blocks/" + blockId + "/children";
         AppendBlockBodyParam params = new AppendBlockBodyParam();
         params.setChildren(children);
+        params.setAfter(after);
         String body = objectMapper.writeValueAsString(params);
         String response = httpUtil.patch(appendBlockChildrenUrl, body).getBody();
         return objectMapper.readValue(response, objectMapper.getTypeFactory().constructParametricType(PaginationResult.class, AbstractBlock.class));
@@ -422,7 +425,12 @@ public class Notion {
     public PaginationResult<AbstractBlock> appendBlockChild(String blockId, AbstractBlock child) throws IOException {
         return appendBlockChildren(blockId, Collections.singletonList(child));
     }
-
+    public PaginationResult<AbstractBlock> appendBlockChildren(String blockId, List<? extends AbstractBlock> children) throws IOException {
+        return appendBlockChildren(blockId, children, null);
+    }
+    public PaginationResult<AbstractBlock> appendBlockChild(String blockId, AbstractBlock child, String after) throws IOException {
+        return appendBlockChildren(blockId, Collections.singletonList(child), after);
+    }
     /**
      * Delete a block.
      * @param blockId The ID of the block to delete.
@@ -833,6 +841,7 @@ public class Notion {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private static class AppendBlockBodyParam {
         private List<? extends AbstractBlock> children;
+        private String after;
 
         public AppendBlockBodyParam setChildren(List<? extends AbstractBlock> children) {
             this.children = children;
@@ -841,6 +850,15 @@ public class Notion {
 
         public List<? extends AbstractBlock> getChildren() {
             return children;
+        }
+
+        public String getAfter() {
+            return after;
+        }
+
+        public AppendBlockBodyParam setAfter(String after) {
+            this.after = after;
+            return this;
         }
     }
 

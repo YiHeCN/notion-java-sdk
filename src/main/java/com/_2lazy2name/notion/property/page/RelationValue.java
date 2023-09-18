@@ -1,7 +1,7 @@
 package com._2lazy2name.notion.property.page;
 
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ import java.util.List;
 public class RelationValue extends AbstractPagePropertyValue {
     private final PropertyTypeEnum type = PropertyTypeEnum.RELATION;
     private Boolean hasMore;
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT, with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<PageReference> relation;
-
 
     public RelationValue addRelation(String relatedToPageId) {
         this.relation.add(new PageReference().setId(relatedToPageId));

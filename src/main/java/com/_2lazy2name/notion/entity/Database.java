@@ -8,12 +8,15 @@ import com._2lazy2name.notion.enumeration.ObjectEnum;
 import com._2lazy2name.notion.property.database.AbstractDatabaseProperty;
 import com._2lazy2name.notion.entity.common.icon.AbstractIcon;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Database extends PageOrDatabase {
     private final ObjectEnum object = ObjectEnum.DATABASE;
@@ -33,6 +36,7 @@ public class Database extends PageOrDatabase {
     private Boolean isInline;
     private String nextCursor;
     private Boolean hasMore;
+    private String publicUrl;
 
     private Database() {}
 
@@ -181,6 +185,15 @@ public class Database extends PageOrDatabase {
 
     private Database setHasMore(Boolean hasMore) {
         this.hasMore = hasMore;
+        return this;
+    }
+
+    public String getPublicUrl() {
+        return publicUrl;
+    }
+
+    public Database setPublicUrl(String publicUrl) {
+        this.publicUrl = publicUrl;
         return this;
     }
 }

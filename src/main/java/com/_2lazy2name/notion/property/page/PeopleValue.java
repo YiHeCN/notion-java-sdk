@@ -2,6 +2,7 @@ package com._2lazy2name.notion.property.page;
 
 import com._2lazy2name.notion.entity.User;
 import com._2lazy2name.notion.enumeration.type.PropertyTypeEnum;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  */
 public class PeopleValue extends AbstractPagePropertyValue {
     private final PropertyTypeEnum type = PropertyTypeEnum.PEOPLE;
+    @JsonFormat(shape = JsonFormat.Shape.OBJECT, with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private List<User> people;
 
     private PeopleValue() {
